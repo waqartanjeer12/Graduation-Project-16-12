@@ -1,0 +1,17 @@
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\bin\Debug\net8.0\ECommerceInfrastructure.deps.json
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\bin\Debug\net8.0\ECommerceInfrastructure.runtimeconfig.json
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\bin\Debug\net8.0\ECommerceInfrastructure.dll
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\bin\Debug\net8.0\ECommerceInfrastructure.pdb
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\bin\Debug\net8.0\ECommerceCore.dll
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\bin\Debug\net8.0\ECommerceCore.pdb
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.csproj.AssemblyReference.cache
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.AssemblyInfoInputs.cache
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.AssemblyInfo.cs
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.csproj.CoreCompileInputs.cache
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerc.92B5F261.Up2Date
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.dll
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\refint\ECommerceInfrastructure.dll
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.pdb
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.genruntimeconfig.cache
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ref\ECommerceInfrastructure.dll

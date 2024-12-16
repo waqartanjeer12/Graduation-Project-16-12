@@ -1,0 +1,35 @@
+2024-12-16 03:37:06.209 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-16 03:37:06.851 +02:00 [INF] Fetching all categories for user.
+2024-12-16 03:37:38.471 +02:00 [INF] Fetching all categories for user.
+2024-12-16 03:38:39.590 +02:00 [INF] Creating a new category.
+2024-12-16 03:38:56.399 +02:00 [INF] Fetching all categories for user.
+2024-12-16 03:39:38.304 +02:00 [INF] Fetching all categories for user.
+2024-12-16 03:40:22.635 +02:00 [INF] Fetching all categories for admin.
+2024-12-16 03:40:39.513 +02:00 [INF] Deleting category with ID 7.
+2024-12-16 03:41:29.669 +02:00 [INF] Updating category with ID 1.
+2024-12-16 03:43:13.371 +02:00 [INF] Updating category with ID 2.
+2024-12-16 03:44:03.549 +02:00 [INF] Updating category with ID 3.
+2024-12-16 03:46:06.111 +02:00 [INF] Updating category with ID 3.
+2024-12-16 14:24:11.433 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-16 14:24:14.545 +02:00 [INF] Updating category with ID 1.
+2024-12-16 14:24:19.463 +02:00 [INF] Fetching all categories for user.
+2024-12-16 14:25:07.133 +02:00 [INF] Updating category with ID 1.
+2024-12-16 14:26:31.415 +02:00 [INF] Updating category with ID 3.
+2024-12-16 14:26:35.328 +02:00 [INF] Updating category with ID 3.
+2024-12-16 14:27:25.821 +02:00 [INF] Updating category with ID 5.
+2024-12-16 14:28:07.701 +02:00 [INF] Updating category with ID 6.
+2024-12-16 14:28:12.712 +02:00 [INF] Updating category with ID 6.
+2024-12-16 14:28:16.367 +02:00 [INF] Fetching all categories for admin.
+2024-12-16 14:29:29.710 +02:00 [INF] Updating category with ID 4.
+2024-12-16 14:29:34.820 +02:00 [INF] Fetching all categories for admin.
+2024-12-16 14:31:34.807 +02:00 [INF] Fetching all categories for user.
+2024-12-16 14:32:47.147 +02:00 [INF] Searching categories with name containing 'مزنون'.
+2024-12-16 14:33:07.589 +02:00 [INF] Creating a new category.
+2024-12-16 14:33:15.532 +02:00 [INF] Deleting category with ID 8.
+2024-12-16 14:34:37.452 +02:00 [INF] Updating category with ID 1.
+2024-12-16 15:11:43.880 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-16 15:11:44.538 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.
+2024-12-16 15:12:05.879 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.
+2024-12-16 15:43:23.076 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-16 15:43:23.673 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.
+2024-12-16 15:46:40.767 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.

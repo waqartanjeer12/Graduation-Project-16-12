@@ -1,0 +1,8 @@
+2024-11-25 00:06:57.788 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-11-25 00:06:58.101 +02:00 [INF] Fetching all categories for user.
+2024-11-25 00:11:10.753 +02:00 [INF] Fetching all categories for admin.
+2024-11-25 01:09:19.075 +02:00 [INF] Fetching all categories for user.
+2024-11-25 01:13:26.273 +02:00 [INF] Fetching all categories for user.
+2024-11-25 11:33:21.287 +02:00 [INF] Fetching all categories for admin.
+2024-11-25 11:37:54.391 +02:00 [INF] Fetching all categories for admin.
+2024-11-25 16:06:20.284 +02:00 [INF] Fetching all categories for user.
