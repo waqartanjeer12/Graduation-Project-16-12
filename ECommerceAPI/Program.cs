@@ -112,19 +112,22 @@ app.UseAuthorization();
 
 var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "files", "images");
 
+// Ensure the folder exists
 if (!Directory.Exists(folderPath))
 {
     Directory.CreateDirectory(folderPath);
 }
-Console.WriteLine(folderPath);
+
+// Log the folder path for debugging
+Console.WriteLine($"Image folder path: {folderPath}");
+
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "files", "images")
+        Path.Combine(Directory.GetCurrentDirectory(), "files")  // Pointing to the "files" directory, not "images"
     ),
-    RequestPath = "/files"  // الصور ستكون متاحة عبر /files
+    RequestPath = "/files"  // This will make images accessible via /files/{fileName}
 });
-
 
 
 

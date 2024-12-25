@@ -15,3 +15,4 @@ C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Deb
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.pdb
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.genruntimeconfig.cache
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ref\ECommerceInfrastructure.dll
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\obj\Debug\net8.0\ECommerceInfrastructure.sourcelink.json

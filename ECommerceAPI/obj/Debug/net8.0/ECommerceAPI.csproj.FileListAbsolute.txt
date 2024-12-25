@@ -192,3 +192,4 @@ C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\r
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.pdb
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.genruntimeconfig.cache
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ref\ECommerceAPI.dll
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.sourcelink.json

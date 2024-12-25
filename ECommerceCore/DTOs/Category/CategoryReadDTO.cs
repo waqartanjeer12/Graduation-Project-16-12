@@ -10,11 +10,11 @@ namespace ECommerceCore.DTOs.Category
 {
     public class CategoryReadDTO
     {
-        [Required(ErrorMessage = "الصورة مطلوبة")]
+        [Required(ErrorMessage = "يرجى تحميل صورة للفئة")]
         public string Img { get; set; }
 
-        [Required(ErrorMessage = "اسم الفئة مطلوب")]
-        [MaxLength(100, ErrorMessage = "يجب ألا يزيد اسم الفئة عن 100 حرف.")]
+        [Required(ErrorMessage = "يرجى ادخال اسم للفئة")]
+        [MaxLength(100, ErrorMessage = "يرجى ادخال اسم لا يتجاوز 100 حرف")]
         public string Name { get; set; }
 
 

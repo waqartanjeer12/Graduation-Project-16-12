@@ -4,15 +4,20 @@ namespace ECommerceCore.Models
 {
     public class Category
     {
+        [Key]
+
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "رابط الصورة مطلوب")]
-        public string Img { get; set; } 
+        [Required(ErrorMessage = "يرجى تحميل صورة للفئة")]
+        public string Img { get; set; }
 
-        [Required(ErrorMessage = "اسم الفئة مطلوب")]
-        [MaxLength(100, ErrorMessage = "يجب ألا يزيد اسم الفئة عن 100 حرف.")]
+        [Required(ErrorMessage = "يرجى ادخال اسم للفئة")]
+        [MaxLength(100, ErrorMessage = "يرجى ادخال اسم لا يتجاوز 100 حرف")]
         public string Name { get; set; }
 
-      
+        // Navigation property for related products
+        public ICollection<Product> Products { get; set; }
     }
+
+  
 }

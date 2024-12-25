@@ -1,0 +1,46 @@
+2024-12-23 10:26:18.860 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-23 10:26:19.787 +02:00 [INF] جارِ جلب الفئات باستخدام المعرف: 1.
+2024-12-23 10:26:19.827 +02:00 [INF] جارِ جلب الفئات بالمعرف: 1
+2024-12-23 10:26:21.954 +02:00 [WRN] No store type was specified for the decimal property 'OriginalPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-23 10:26:21.960 +02:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-23 10:26:28.356 +02:00 [INF] تم العثور على 1 فئة للمعرف: 1
+2024-12-23 10:27:25.994 +02:00 [INF] جارِ جلب الفئات باستخدام المعرف: 2.
+2024-12-23 10:27:26.026 +02:00 [INF] جارِ جلب الفئات بالمعرف: 2
+2024-12-23 10:27:27.016 +02:00 [INF] تم العثور على 1 فئة للمعرف: 2
+2024-12-23 10:27:33.827 +02:00 [INF] جارِ جلب الفئات باستخدام المعرف: 6.
+2024-12-23 10:27:34.015 +02:00 [INF] جارِ جلب الفئات بالمعرف: 6
+2024-12-23 10:27:34.228 +02:00 [INF] تم العثور على 1 فئة للمعرف: 6
+2024-12-23 10:27:39.333 +02:00 [INF] جارِ جلب الفئات باستخدام المعرف: 8.
+2024-12-23 10:27:39.348 +02:00 [INF] جارِ جلب الفئات بالمعرف: 8
+2024-12-23 10:27:39.394 +02:00 [INF] تم العثور على 0 فئة للمعرف: 8
+2024-12-23 20:05:00.403 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-23 20:05:01.544 +02:00 [INF] جارِ جلب الفئات باستخدام المعرف: 1.
+2024-12-23 20:05:01.578 +02:00 [INF] جارِ جلب الفئات بالمعرف: 1
+2024-12-23 20:05:02.803 +02:00 [WRN] No store type was specified for the decimal property 'OriginalPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-23 20:05:02.805 +02:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-23 20:05:05.269 +02:00 [INF] تم العثور على 1 فئة للمعرف: 1
+2024-12-23 20:10:36.114 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-23 20:10:36.705 +02:00 [INF] جارِ جلب الفئات باستخدام المعرف: 1.
+2024-12-23 20:10:36.740 +02:00 [INF] جارِ جلب الفئات بالمعرف: 1
+2024-12-23 20:10:37.981 +02:00 [WRN] No store type was specified for the decimal property 'OriginalPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-23 20:10:37.984 +02:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-23 20:10:40.438 +02:00 [INF] تم العثور على 1 فئة للمعرف: 1
+2024-12-23 20:23:13.637 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-23 20:23:14.260 +02:00 [INF] جارِ جلب الفئة باستخدام المعرف: 2.
+2024-12-23 20:23:14.299 +02:00 [INF] جارِ جلب الفئة بالمعرف: 2
+2024-12-23 20:23:15.830 +02:00 [WRN] No store type was specified for the decimal property 'OriginalPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-23 20:23:15.832 +02:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-23 20:23:28.332 +02:00 [INF] جارِ جلب الفئة باستخدام المعرف: 1.
+2024-12-23 20:23:28.334 +02:00 [INF] جارِ جلب الفئة بالمعرف: 1
+2024-12-23 20:52:52.040 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-23 20:52:52.803 +02:00 [INF] بداية تحديث الفئة للـ ID: 1
+2024-12-23 20:52:54.275 +02:00 [WRN] No store type was specified for the decimal property 'OriginalPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-23 20:52:54.278 +02:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-23 20:52:56.324 +02:00 [INF] تم حذف الصورة القديمة للـ ID: 1
+2024-12-23 20:52:56.735 +02:00 [ERR] حدث خطأ أثناء تحديث الفئة للـ ID: 1
+System.InvalidOperationException: يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط.
+   at ECommerceCore.Interfaces.FileService.SaveFileAsync(IFormFile file, String folderName) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\Interfaces\IFileService.cs:line 25
+   at ECommerceInfrastructure.Repositories.CategoryRepository.UpdateCategoryAsync(Int32 id, CategoryCreateUpdateDTO categoryDto) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\CategoryRepository.cs:line 131
+2024-12-23 20:53:38.831 +02:00 [INF] بداية تحديث الفئة للـ ID: 1
+2024-12-23 20:53:38.916 +02:00 [INF] تم تحميل صورة جديدة للـ ID: 1
+2024-12-23 20:53:39.330 +02:00 [INF] تم تحديث الفئة بنجاح للـ ID: 1

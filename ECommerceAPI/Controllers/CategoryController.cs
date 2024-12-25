@@ -50,8 +50,31 @@ namespace ECommerceAPI.Controllers
             }
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCategoryById([FromRoute] int id)
+        {
+            try
+            {
+                Log.Information("جارِ جلب الفئة باستخدام المعرف: {Id}.", id);
+                var category = await _repository.GetCategoryByIdAsync(id);
+
+                if (category == null)
+                    return NotFound(new { Message = "لم يتم العثور على الفئة." });
+
+                return Ok(new { Message = "تم العثور على الفئة.", Category = category });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "حدث خطأ أثناء جلب الفئة باستخدام المعرف: {Id}.", id);
+                return StatusCode(500, new { Message = "حدث خطأ أثناء استرداد الفئة." });
+            }
+        }
+
+
+
+
         [HttpPost]
-        public async Task<IActionResult> CreateCategory([FromForm] CategoryCreateUpdateDTO categoryDto)
+        public async Task<IActionResult> CreateCategory([FromForm] CategoryCreateDTO categoryDto)
         {
             try
             {
@@ -66,20 +89,30 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateCategory([FromRoute] int id, [FromForm] CategoryCreateUpdateDTO categoryDto)
+        public async Task<IActionResult> UpdateCategory([FromRoute] int id, [FromForm] CategoryUpdateDTO categoryDto)
         {
             try
             {
-                var success = await _repository.UpdateCategoryAsync(id, categoryDto);
-                if (!success) return NotFound("لم يتم العثور على الفئة.");
-                return Ok(new { Message = "تم تحديث الفئة بنجاح" });
+                // Call the repository to update the category and get the updated category object
+                var category = await _repository.UpdateCategoryAsync(id, categoryDto);
+
+                if (category == null)
+                {
+                    return NotFound("لم يتم العثور على الفئة."); // Category not found
+                }
+
+                return Ok(new { Message = "تم تحديث الفئة بنجاح", Category = category }); // Return the updated category
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "حدث خطأ أثناء تحديث الفئة.");
-                return StatusCode(500, "حدث خطأ أثناء تحديث الفئة.");
+                
+                return StatusCode(500, "حدث خطأ أثناء تحديث الفئة."); // Internal server error
             }
         }
+
+
+
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory([FromRoute] int id)

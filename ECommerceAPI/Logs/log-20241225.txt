@@ -1,0 +1,46 @@
+2024-12-25 01:09:52.601 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-25 01:09:55.297 +02:00 [INF] بدء عملية تحديث الفئة للـ ID: 12
+2024-12-25 01:09:57.422 +02:00 [WRN] No store type was specified for the decimal property 'OriginalPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-25 01:09:57.426 +02:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-25 01:10:02.024 +02:00 [INF] تم تحديث الفئة بنجاح للـ ID: 12
+2024-12-25 01:10:34.423 +02:00 [INF] بدء عملية تحديث الفئة للـ ID: 12
+2024-12-25 01:10:34.530 +02:00 [INF] تم تحديث الاسم من 'ممممممممممممممممممممممممممممممممممم' إلى 'كنب' للـ ID: 12
+2024-12-25 01:10:34.837 +02:00 [INF] تم تحديث الفئة بنجاح للـ ID: 12
+2024-12-25 01:11:15.425 +02:00 [INF] بدء عملية تحديث الفئة للـ ID: 12
+2024-12-25 01:11:15.615 +02:00 [INF] تم حذف الصورة القديمة '/files/images/431eaba2-bc0c-4c96-98a5-4a78538610a6_أثاث.حدائق.jpg' للـ ID: 12
+2024-12-25 01:11:15.649 +02:00 [INF] تم تغيير الصورة من '/files/images/431eaba2-bc0c-4c96-98a5-4a78538610a6_أثاث.حدائق.jpg' إلى '/files/images/e3f8beba-81ae-40b1-8f07-28cdcad678ce_كنب.jpg' للـ ID: 12
+2024-12-25 01:11:15.858 +02:00 [INF] تم تحديث الفئة بنجاح للـ ID: 12
+2024-12-25 01:17:40.893 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-25 01:17:41.733 +02:00 [INF] بدء عملية تحديث الفئة للـ ID: 12
+2024-12-25 01:17:43.324 +02:00 [WRN] No store type was specified for the decimal property 'OriginalPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-25 01:17:43.353 +02:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-25 01:17:45.615 +02:00 [INF] تم حذف الصورة القديمة '/files/images/e3f8beba-81ae-40b1-8f07-28cdcad678ce_كنب.jpg' للـ ID: 12
+2024-12-25 01:17:45.907 +02:00 [INF] تم تغيير الصورة من '/files/images/e3f8beba-81ae-40b1-8f07-28cdcad678ce_كنب.jpg' إلى '/files/images/49b13670-ddbf-4804-9076-442d97837b49_كنب.jpg' للـ ID: 12
+2024-12-25 01:17:46.238 +02:00 [INF] تم تحديث الفئة بنجاح للـ ID: 12
+2024-12-25 01:19:33.111 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-25 01:19:33.501 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.
+2024-12-25 01:19:34.820 +02:00 [WRN] No store type was specified for the decimal property 'OriginalPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-25 01:19:34.827 +02:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-25 01:21:46.512 +02:00 [INF] بدء عملية تحديث الفئة للـ ID: 12
+2024-12-25 01:21:46.830 +02:00 [INF] تم تحديث الاسم من 'كنب' إلى 'kkkkkkkkkkkkkkkkkkkkk' للـ ID: 12
+2024-12-25 01:21:47.110 +02:00 [INF] تم تحديث الفئة بنجاح للـ ID: 12
+2024-12-25 01:21:53.428 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.
+2024-12-25 14:02:15.670 +02:00 [WRN] No store type was specified for the decimal property 'OriginalPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-25 14:02:15.733 +02:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-12-25 14:23:14.520 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-25 14:23:15.255 +02:00 [INF] بدء عملية تحديث الفئة للـ ID: 12
+2024-12-25 14:23:18.625 +02:00 [INF] تم تحديث الاسم للـ ID: 12
+2024-12-25 14:23:19.013 +02:00 [INF] تم تحديث الفئة بنجاح للـ ID: 12
+2024-12-25 17:18:13.842 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-25 17:18:14.640 +02:00 [INF] بدء عملية تحديث الفئة للـ ID: 12
+2024-12-25 17:18:18.994 +02:00 [INF] تم تحديث الاسم للـ ID: 12
+2024-12-25 17:18:19.008 +02:00 [INF] تم حذف الصورة القديمة للـ ID: 12
+2024-12-25 17:18:19.035 +02:00 [INF] تم تحديث الصورة للـ ID: 12
+2024-12-25 17:18:19.280 +02:00 [INF] تم تحديث الفئة بنجاح للـ ID: 12
+2024-12-25 17:18:44.496 +02:00 [INF] بدء عملية تحديث الفئة للـ ID: 12
+2024-12-25 17:18:44.585 +02:00 [INF] تم تحديث الاسم للـ ID: 12
+2024-12-25 17:18:44.740 +02:00 [ERR] حدث خطأ أثناء تحديث الفئة للـ ID: 12
+System.IO.IOException: The process cannot access the file 'C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\files\images\415915c7-7f6b-4159-8ae4-5e65cdaee5cd_غرف.أطفال.jpg' because it is being used by another process.
+   at System.IO.FileSystem.DeleteFile(String fullPath)
+   at ECommerceCore.Interfaces.FileService.DeleteFile(String fileName, String folderName) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\Interfaces\IFileService.cs:line 49
+   at ECommerceInfrastructure.Repositories.CategoryRepository.UpdateCategoryAsync(Int32 id, CategoryUpdateDTO categoryDto) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\CategoryRepository.cs:line 133

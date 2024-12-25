@@ -6,18 +6,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-    
+
 
 namespace ECommerceInfrastructure.Repositories
+{
+    public interface ICategoryRepository
     {
-        public interface ICategoryRepository
-        {
-            Task<List<CategoryReadDTO>> GetAllCategoriesForUserAsync();
-            Task<List<Category>> GetAllCategoriesForAdminAsync();
-            Task<Category> CreateCategoryAsync(CategoryCreateUpdateDTO categoryDto);
-            Task<bool> UpdateCategoryAsync(int id, CategoryCreateUpdateDTO categoryDto);
-            Task<bool> DeleteCategoryAsync(int id);
-            Task<List<CategoryReadDTO>> SearchCategoriesByNameAsync(string name);
-        }
+        Task<List<CategoryReadDTO>> GetAllCategoriesForUserAsync();
+        Task<List<Category>> GetAllCategoriesForAdminAsync();
+        Task<CategoryReadDTO> GetCategoryByIdAsync(int id);
+
+        Task<Category> CreateCategoryAsync(CategoryCreateDTO categoryDto);
+        Task<CategoryReadDTO> UpdateCategoryAsync(int id, CategoryUpdateDTO categoryDto); // Update an existing category
+        Task<bool> DeleteCategoryAsync(int id);
+        Task<List<CategoryReadDTO>> SearchCategoriesByNameAsync(string name);
+
     }
+}
 

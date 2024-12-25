@@ -85,6 +85,22 @@
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.CategoryController",
+    "Method": "GetCategoryById",
+    "RelativePath": "api/Category/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.CategoryController",
     "Method": "UpdateCategory",
     "RelativePath": "api/Category/{id}",
     "HttpMethod": "PUT",
@@ -95,6 +111,11 @@
         "Name": "id",
         "Type": "System.Int32",
         "IsRequired": true
+      },
+      {
+        "Name": "ImgUrl",
+        "Type": "System.String",
+        "IsRequired": false
       },
       {
         "Name": "Img",

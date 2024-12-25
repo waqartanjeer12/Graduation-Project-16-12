@@ -12,3 +12,4 @@ C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\obj\Debug\net8.0\
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\obj\Debug\net8.0\ECommerceCore.pdb
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\obj\Debug\net8.0\ECommerceCore.genruntimeconfig.cache
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\obj\Debug\net8.0\ref\ECommerceCore.dll
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\obj\Debug\net8.0\ECommerceCore.sourcelink.json
