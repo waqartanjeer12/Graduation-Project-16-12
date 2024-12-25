@@ -13,7 +13,7 @@ namespace ECommerceInfrastructure.Repositories
     public interface ICategoryRepository
     {
         Task<List<CategoryReadDTO>> GetAllCategoriesForUserAsync();
-        Task<List<Category>> GetAllCategoriesForAdminAsync();
+        Task<List<CategoryReadForAdminDTO>> GetAllCategoriesForAdminAsync();
         Task<CategoryReadDTO> GetCategoryByIdAsync(int id);
 
         Task<Category> CreateCategoryAsync(CategoryCreateDTO categoryDto);

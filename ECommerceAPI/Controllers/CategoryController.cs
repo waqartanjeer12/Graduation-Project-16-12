@@ -40,7 +40,10 @@ namespace ECommerceAPI.Controllers
             try
             {
                 Log.Information("جارِ جلب جميع الفئات للمشرف.");
+
+                // Retrieve the categories as CategoryReadForAdminDTO
                 var categories = await _repository.GetAllCategoriesForAdminAsync();
+
                 return Ok(categories);
             }
             catch (Exception ex)
@@ -49,6 +52,7 @@ namespace ECommerceAPI.Controllers
                 return StatusCode(500, "حدث خطأ أثناء استرداد الفئات.");
             }
         }
+
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoryById([FromRoute] int id)

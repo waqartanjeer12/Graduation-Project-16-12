@@ -44,3 +44,26 @@ System.IO.IOException: The process cannot access the file 'C:\Users\XPRISTO\sour
    at System.IO.FileSystem.DeleteFile(String fullPath)
    at ECommerceCore.Interfaces.FileService.DeleteFile(String fileName, String folderName) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\Interfaces\IFileService.cs:line 49
    at ECommerceInfrastructure.Repositories.CategoryRepository.UpdateCategoryAsync(Int32 id, CategoryUpdateDTO categoryDto) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\CategoryRepository.cs:line 133
+2024-12-25 18:31:52.988 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-25 18:31:53.866 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.
+2024-12-25 18:32:31.447 +02:00 [INF] بدء عملية تحديث الفئة للـ ID: 12
+2024-12-25 18:32:32.081 +02:00 [INF] تم تحديث الاسم للـ ID: 12
+2024-12-25 18:32:32.494 +02:00 [INF] تم تحديث الفئة بنجاح للـ ID: 12
+2024-12-25 18:33:14.227 +02:00 [INF] بدء عملية تحديث الفئة للـ ID: 12
+2024-12-25 18:33:14.505 +02:00 [INF] تم تحديث الاسم للـ ID: 12
+2024-12-25 18:33:14.551 +02:00 [INF] تم حذف الصورة القديمة للـ ID: 12
+2024-12-25 18:33:14.684 +02:00 [INF] تم تحديث الصورة للـ ID: 12
+2024-12-25 18:33:14.738 +02:00 [INF] تم تحديث الفئة بنجاح للـ ID: 12
+2024-12-25 18:56:45.913 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-25 18:56:46.479 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.
+2024-12-25 18:57:02.579 +02:00 [INF] جارِ جلب جميع الفئات للمشرف.
+2024-12-25 18:57:32.193 +02:00 [INF] جارِ جلب الفئة باستخدام المعرف: 1.
+2024-12-25 18:57:32.209 +02:00 [INF] جارِ جلب الفئة بالمعرف: 1
+2024-12-25 18:58:05.994 +02:00 [INF] جارِ جلب جميع الفئات للمشرف.
+2024-12-25 19:42:07.832 +02:00 [WRN] Failed to determine the https port for redirect.
+2024-12-25 19:42:08.406 +02:00 [INF] جارِ جلب جميع الفئات للمشرف.
+2024-12-25 19:42:38.083 +02:00 [INF] بداية حذف الفئة للـ ID: 12
+2024-12-25 19:42:38.441 +02:00 [INF] تم حذف الصورة الخاصة بالفئة ID: 12
+2024-12-25 19:42:38.662 +02:00 [INF] تم حذف الفئة بنجاح للـ ID: 12
+2024-12-25 19:43:07.099 +02:00 [INF] جارِ جلب جميع الفئات للمشرف.
+2024-12-25 19:43:27.727 +02:00 [INF] جارِ جلب جميع الفئات للمشرف.

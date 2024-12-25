@@ -31,11 +31,18 @@ namespace ECommerceInfrastructure.Repositories
                 .Select(c => new CategoryReadDTO { Img = c.Img, Name = c.Name })
                 .ToListAsync();
         }
-
-        public async Task<List<Category>> GetAllCategoriesForAdminAsync()
+        public async Task<List<CategoryReadForAdminDTO>> GetAllCategoriesForAdminAsync()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Categories
+                .Select(c => new CategoryReadForAdminDTO
+                {
+                    Id = c.Id,
+                    Img = c.Img,
+                    Name = c.Name
+                })
+                .ToListAsync();
         }
+
 
         public async Task<CategoryReadDTO> GetCategoryByIdAsync(int id)
 {
