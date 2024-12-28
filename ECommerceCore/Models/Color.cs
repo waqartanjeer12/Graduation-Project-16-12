@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using ECommerceCore.Models;
+using Microsoft.EntityFrameworkCore;
 
 public class Color
 {
@@ -9,6 +10,7 @@ public class Color
 
     [Required(ErrorMessage = "اسم اللون مطلوب")]
     [MaxLength(100, ErrorMessage = "يجب ألا يزيد اسم اللون عن 100 حرف.")]
+    
     public string Name { get; set; }
 
     [Required(ErrorMessage = "رابط صورة اللون مطلوب")]

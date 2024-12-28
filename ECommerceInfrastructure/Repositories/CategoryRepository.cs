@@ -89,7 +89,7 @@ namespace ECommerceInfrastructure.Repositories
                     return null;  // Return null or a specific failure value
                 }
 
-                var fileName = await _fileService.SaveFileAsync(categoryDto.Img, "images");
+                var fileName = await _fileService.UploadFileAsync(categoryDto.Img, "images");
                 var category = new Category
                 {
                     Img = $"/files/images/{fileName}",
@@ -110,75 +110,62 @@ namespace ECommerceInfrastructure.Repositories
             }
         }
 
+
         public async Task<CategoryReadDTO> UpdateCategoryAsync(int id, CategoryUpdateDTO categoryDto)
         {
-            _logger.LogInformation("بدء عملية تحديث الفئة للـ ID: {Id}", id);
+            _logger.LogInformation("Starting update for category ID: {Id}", id);
 
             try
             {
-                // العثور على الفئة حسب ID
                 var category = await _context.Categories.FindAsync(id);
                 if (category == null)
                 {
-                    _logger.LogWarning("لم يتم العثور على الفئة للـ ID: {Id}", id);
-                    return null; // لم يتم العثور على الفئة
+                    _logger.LogWarning("Category not found for ID: {Id}", id);
+                    return null;
                 }
 
-                // تحقق إذا تم تعديل الاسم
+                // Update name if provided
                 if (!string.IsNullOrEmpty(categoryDto.Name) && category.Name != categoryDto.Name)
                 {
-                    _logger.LogInformation("تم تحديث الاسم للـ ID: {Id}", id);
                     category.Name = categoryDto.Name;
                 }
 
-                // تحقق إذا تم تعديل الصورة
+                // Update image if provided
                 if (categoryDto.Img != null && categoryDto.Img.Length > 0)
                 {
-                    // حذف الصورة القديمة إن وجدت
+                    // Delete old image if exists
                     if (!string.IsNullOrEmpty(category.Img))
                     {
                         _fileService.DeleteFile(Path.GetFileName(category.Img), "images");
-                        _logger.LogInformation("تم حذف الصورة القديمة للـ ID: {Id}", id);
+                        _logger.LogInformation("Deleted old image for category ID: {Id}", id);
                     }
 
-                    // حفظ الصورة الجديدة
-                    var fileName = await _fileService.SaveFileAsync(categoryDto.Img, "images");
+                    // Save new image
+                    var fileName = await _fileService.UploadFileAsync(categoryDto.Img, "images");
                     category.Img = $"/files/images/{fileName}";
-                    _logger.LogInformation("تم تحديث الصورة للـ ID: {Id}", id);
-                }
-                else if (!string.IsNullOrEmpty(categoryDto.ImgUrl) && category.Img != categoryDto.ImgUrl)
-                {
-                    _logger.LogInformation("تم تحديث الصورة باستخدام رابط للـ ID: {Id}", id);
-                    category.Img = categoryDto.ImgUrl;
                 }
 
-                // حفظ التغييرات في قاعدة البيانات
                 await _context.SaveChangesAsync();
-                _logger.LogInformation("تم تحديث الفئة بنجاح للـ ID: {Id}", id);
 
-                // Map the updated category entity to CategoryReadDTO
-                var categoryReadDto = new CategoryReadDTO
+                _logger.LogInformation("Category updated successfully for ID: {Id}", id);
+
+                return new CategoryReadDTO
                 {
                     Img = category.Img,
                     Name = category.Name
                 };
-
-                // إرجاع البيانات المحدثة كـ CategoryReadDTO
-                return categoryReadDto;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "حدث خطأ أثناء تحديث الفئة للـ ID: {Id}", id);
-                return null; // حدث خطأ أثناء التحديث
+                _logger.LogError(ex, "Error occurred while updating category ID: {Id}", id);
+                return null;
             }
         }
+    
 
 
 
-
-
-
-        public async Task<bool> DeleteCategoryAsync(int id)
+    public async Task<bool> DeleteCategoryAsync(int id)
         {
             _logger.LogInformation("بداية حذف الفئة للـ ID: {Id}", id);
 

@@ -97,28 +97,27 @@ namespace ECommerceAPI.Controllers
         {
             try
             {
-                // Call the repository to update the category and get the updated category object
                 var category = await _repository.UpdateCategoryAsync(id, categoryDto);
 
                 if (category == null)
                 {
-                    return NotFound("لم يتم العثور على الفئة."); // Category not found
+                    return NotFound("لم يتم العثور على الفئة.");
                 }
 
-                return Ok(new { Message = "تم تحديث الفئة بنجاح", Category = category }); // Return the updated category
+                return Ok(new { Message = "تم تحديث الفئة بنجاح", Category = category });
             }
             catch (Exception ex)
             {
-                
-                return StatusCode(500, "حدث خطأ أثناء تحديث الفئة."); // Internal server error
+                return StatusCode(500, "حدث خطأ أثناء تحديث الفئة.");
             }
         }
+    
 
 
 
 
 
-        [HttpDelete("{id}")]
+    [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory([FromRoute] int id)
         {
             try

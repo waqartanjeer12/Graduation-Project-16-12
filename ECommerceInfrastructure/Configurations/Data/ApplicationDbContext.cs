@@ -26,7 +26,19 @@ namespace ECommerceInfrastructure.Configurations.Data
        new Category { Id = 6, Img = "https://st.hzcdn.com/fimgs/65a1489406b3edfc_8174-w186-h135-b1-p10--.jpg", Name = "مزنون" }
          );
 
-            modelBuilder.Entity<Product>()
+            // Define the unique index on the Name property For Category
+            modelBuilder.Entity<Category>()
+                .HasIndex(p => p.Name)
+                .IsUnique();
+
+
+            // Define the unique index on the Name property For Products
+            modelBuilder.Entity<Color>()
+                .HasIndex(p => p.Name)
+                .IsUnique();
+        
+
+        modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId)

@@ -39,7 +39,7 @@
 2024-12-23 20:52:56.324 +02:00 [INF] تم حذف الصورة القديمة للـ ID: 1
 2024-12-23 20:52:56.735 +02:00 [ERR] حدث خطأ أثناء تحديث الفئة للـ ID: 1
 System.InvalidOperationException: يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط.
-   at ECommerceCore.Interfaces.FileService.SaveFileAsync(IFormFile file, String folderName) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\Interfaces\IFileService.cs:line 25
+   at ECommerceCore.Interfaces.FileService.UploadFileAsync(IFormFile file, String folderName) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\Interfaces\IFileService.cs:line 25
    at ECommerceInfrastructure.Repositories.CategoryRepository.UpdateCategoryAsync(Int32 id, CategoryCreateUpdateDTO categoryDto) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\CategoryRepository.cs:line 131
 2024-12-23 20:53:38.831 +02:00 [INF] بداية تحديث الفئة للـ ID: 1
 2024-12-23 20:53:38.916 +02:00 [INF] تم تحميل صورة جديدة للـ ID: 1
