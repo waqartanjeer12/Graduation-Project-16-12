@@ -1,10 +1,3 @@
-C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.csproj.AssemblyReference.cache
-C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.AssemblyInfoInputs.cache
-C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.AssemblyInfo.cs
-C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.csproj.CoreCompileInputs.cache
-C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.sourcelink.json
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\bin\Debug\net8.0\appsettings.json
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\bin\Debug\net8.0\ECommerceAPI.exe
@@ -178,7 +171,14 @@ C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\bin\Debug\net8.0\E
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\bin\Debug\net8.0\ECommerceInfrastructure.dll
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\bin\Debug\net8.0\ECommerceCore.pdb
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\bin\Debug\net8.0\ECommerceInfrastructure.pdb
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.csproj.AssemblyReference.cache
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.AssemblyInfoInputs.cache
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.AssemblyInfo.cs
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.csproj.CoreCompileInputs.cache
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\ECommerceAPI.sourcelink.json
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\obj\Debug\net8.0\staticwebassets\msbuild.ECommerceAPI.Microsoft.AspNetCore.StaticWebAssets.props

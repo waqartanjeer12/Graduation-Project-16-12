@@ -85,7 +85,7 @@ namespace ECommerceInfrastructure.Migrations.ApplicationDb
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ImagePath = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

@@ -8,7 +8,7 @@ public class ProductImage
 
     [Required(ErrorMessage = "رابط الصورة مطلوب")]
     [MaxLength(500, ErrorMessage = "رابط الصورة لا يمكن أن يتجاوز 500 حرف.")]
-    public string ImagePath { get; set; }
+    public string ImageUrl { get; set; }
 
     // Foreign key for Product
     [ForeignKey("Product")]

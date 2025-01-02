@@ -8,7 +8,8 @@ using ECommerceCore.Models;
 using ECommerceInfrastructure.Configurations.Data;
 using ECommerceCore.Interfaces;  // Add this for IFileService
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;  // Add this for ILogger
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;  // Add this for ILogger
 
 namespace ECommerceInfrastructure.Repositories
 {
@@ -74,7 +75,19 @@ namespace ECommerceInfrastructure.Repositories
     }
 }
 
-
+        public async Task<CategoryReadForIdName> GetCategoryReadForIdName(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return null;
+            }
+            return new CategoryReadForIdName
+            {
+                Id = category.Id,
+                Name = category.Name
+            };
+        }
 
 
         public async Task<Category> CreateCategoryAsync(CategoryCreateDTO categoryDto)
@@ -113,14 +126,14 @@ namespace ECommerceInfrastructure.Repositories
 
         public async Task<CategoryReadDTO> UpdateCategoryAsync(int id, CategoryUpdateDTO categoryDto)
         {
-            _logger.LogInformation("Starting update for category ID: {Id}", id);
+            _logger.LogInformation("البدء بالتعديل باستخدام المعرف: {Id}", id);
 
             try
             {
                 var category = await _context.Categories.FindAsync(id);
                 if (category == null)
                 {
-                    _logger.LogWarning("Category not found for ID: {Id}", id);
+                    _logger.LogWarning("الفئة غير موجودة بالنسبة للمعرف: {Id}", id);
                     return null;
                 }
 
@@ -137,7 +150,7 @@ namespace ECommerceInfrastructure.Repositories
                     if (!string.IsNullOrEmpty(category.Img))
                     {
                         _fileService.DeleteFile(Path.GetFileName(category.Img), "images");
-                        _logger.LogInformation("Deleted old image for category ID: {Id}", id);
+                        _logger.LogInformation("حذف الصورة القديمة حسب المعرف: {Id}", id);
                     }
 
                     // Save new image
@@ -147,7 +160,7 @@ namespace ECommerceInfrastructure.Repositories
 
                 await _context.SaveChangesAsync();
 
-                _logger.LogInformation("Category updated successfully for ID: {Id}", id);
+                _logger.LogInformation("تم التعديل على الفئة بنجاح: {Id}", id);
 
                 return new CategoryReadDTO
                 {
@@ -157,7 +170,7 @@ namespace ECommerceInfrastructure.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while updating category ID: {Id}", id);
+                _logger.LogError(ex, "حدث خطأ أثناء العديل على الفئة: {Id}", id);
                 return null;
             }
         }

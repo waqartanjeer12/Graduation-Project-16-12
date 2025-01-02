@@ -20,6 +20,7 @@ namespace ECommerceInfrastructure.Repositories
         Task<CategoryReadDTO> UpdateCategoryAsync(int id, CategoryUpdateDTO categoryDto); // Update an existing category
         Task<bool> DeleteCategoryAsync(int id);
         Task<List<CategoryReadDTO>> SearchCategoriesByNameAsync(string name);
+        Task<CategoryReadForIdName> GetCategoryReadForIdName(int id);
 
     }
 }

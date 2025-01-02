@@ -40,10 +40,7 @@ namespace ECommerceAPI.Controllers
             try
             {
                 Log.Information("جارِ جلب جميع الفئات للمشرف.");
-
-                // Retrieve the categories as CategoryReadForAdminDTO
                 var categories = await _repository.GetAllCategoriesForAdminAsync();
-
                 return Ok(categories);
             }
             catch (Exception ex)
@@ -52,7 +49,6 @@ namespace ECommerceAPI.Controllers
                 return StatusCode(500, "حدث خطأ أثناء استرداد الفئات.");
             }
         }
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoryById([FromRoute] int id)
@@ -74,8 +70,22 @@ namespace ECommerceAPI.Controllers
             }
         }
 
-
-
+        [HttpGet("name/{id}")]
+        public async Task<IActionResult> GetCategoryReadForIdName([FromRoute] int id)
+        {
+            try
+            {
+                var category = await _repository.GetCategoryReadForIdName(id);
+                if (category == null)
+                    return NotFound(new { Message = "لم يتم العثور على الفئة." });
+                return Ok(new { Message = "تم العثور على الفئة.", Category = category });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "حدث خطأ أثناء جلب الفئة باستخدام المعرف: {Id}.", id);
+                return StatusCode(500, new { Message = "حدث خطأ أثناء استرداد الفئة." });
+            }
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateCategory([FromForm] CategoryCreateDTO categoryDto)
@@ -108,16 +118,12 @@ namespace ECommerceAPI.Controllers
             }
             catch (Exception ex)
             {
+                Log.Error(ex, "حدث خطأ أثناء تحديث الفئة.");
                 return StatusCode(500, "حدث خطأ أثناء تحديث الفئة.");
             }
         }
-    
 
-
-
-
-
-    [HttpDelete("{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory([FromRoute] int id)
         {
             try

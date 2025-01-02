@@ -8,13 +8,13 @@ public class Color
     [Key]
     public int Id { get; set; }
 
-    [Required(ErrorMessage = "اسم اللون مطلوب")]
+    [Required(ErrorMessage = "يرجى إدخال اسم اللون")]
     [MaxLength(100, ErrorMessage = "يجب ألا يزيد اسم اللون عن 100 حرف.")]
     
     public string Name { get; set; }
 
     [Required(ErrorMessage = "رابط صورة اللون مطلوب")]
-    [MaxLength(500, ErrorMessage = "رابط الصورة لا يمكن أن يتجاوز 500 حرف.")]
+    
     public string Image { get; set; }
 
     // Navigation property

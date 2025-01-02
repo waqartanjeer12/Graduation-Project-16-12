@@ -41,6 +41,9 @@ namespace ECommerceInfrastructure.Migrations.ApplicationDb
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Name")
+                        .IsUnique();
+
                     b.ToTable("Colors");
                 });
 
@@ -63,45 +66,10 @@ namespace ECommerceInfrastructure.Migrations.ApplicationDb
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.HasIndex("Name")
+                        .IsUnique();
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Img = "https://still.az/wp-content/uploads/2021/04/1500-300x300.jpg",
-                            Name = "كنب"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Img = "https://st.hzcdn.com/fimgs/e4718fea03ad2931_6592-w186-h135-b1-p10--.jpg",
-                            Name = "غرف نوم"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Img = "https://www.shutterstock.com/image-photo/wooden-table-chairs-on-white-600nw-2168176325.jpg",
-                            Name = "سفرة"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Img = "https://st.hzcdn.com/fimgs/1cf15b22065759cb_3954-w186-h135-b1-p10--.jpg",
-                            Name = "اثاث حدائق"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Img = "https://png.pngtree.com/background/20231117/original/pngtree-vibrant-wooden-educational-toys-on-white-background-perfect-for-kids-picture-image_6297092.jpg",
-                            Name = "غرف اطفال"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Img = "https://st.hzcdn.com/fimgs/65a1489406b3edfc_8174-w186-h135-b1-p10--.jpg",
-                            Name = "مزنون"
-                        });
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("ECommerceCore.Models.ProductColor", b =>
@@ -131,7 +99,6 @@ namespace ECommerceInfrastructure.Migrations.ApplicationDb
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
@@ -176,7 +143,7 @@ namespace ECommerceInfrastructure.Migrations.ApplicationDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ImagePath")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");

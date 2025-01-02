@@ -11,9 +11,9 @@ namespace ECommerceCore.DTOs.Color
     public class ColorCreateDTO
     {
         [Required(ErrorMessage = "يرجى ادخال اسم اللون")]
-        public string Name { get; set; } 
+        public string Name { get; set; }
 
-        [Required (ErrorMessage ="يرجى ادخال صورة اللون")]
+        [Required(ErrorMessage = "يرجى تحميل صورة اللون")]
         public IFormFile ColorImage { get; set; }
     }
 }

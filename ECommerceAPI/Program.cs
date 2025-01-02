@@ -48,15 +48,15 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequireDigit = true;
-     
+
     //password setting
     // Allow Arabic letters and spaces
-   
+
 }).AddEntityFrameworkStores<AppIdentityDbContext>()
 //.AddEntityFrameworkStores<AppIdentityDbContext>(); it contain interface and implmentation
 .AddDefaultTokenProviders();
 
-builder.Services.AddScoped<IAuthRepository,AuthRepository>();
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IFileService, FileService>();

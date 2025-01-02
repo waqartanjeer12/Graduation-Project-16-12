@@ -3,80 +3,83 @@
   "WorkspaceRootPath": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\interfaces\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadforcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\category\\categorycreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadforadmindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\color\\colorreaddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\color\\colorreadforuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadforuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceapi\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|solutionrelative:controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\color\\colorreadfordisplaydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\interfaces\\iproductrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\color\\colorreadforuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadforsearchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\configurations\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadbyoriginalprice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadforuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadforupdatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadforcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadforadmindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadbyproductiddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadbycategoryiddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\color.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\color\\colorreadfordisplaydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\color\\colorreaddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\color\\colorcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceapi\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|solutionrelative:controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\color.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\color\\colorcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\interfaces\\ifileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\interfaces\\icategoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
-      "VerticalTabListWidth": 300,
+      "VerticalTabListWidth": 181,
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 21,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -84,46 +87,125 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ProductReadForCreateDTO.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForCreateDTO.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForCreateDTO.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForCreateDTO.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForCreateDTO.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAqwBwAAAAzAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "ProductRepository.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
+              "RelativeToolTip": "..\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
+              "ViewState": "AgIAAGUCAAAAAAAAAAA4wHwCAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-28T12:10:41.886Z",
+              "WhenOpened": "2024-12-26T00:13:45.37Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ProductReadForAdminDTO.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForAdminDTO.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForAdminDTO.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForAdminDTO.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForAdminDTO.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAIwCoAAAABAAAAAAAAAA==",
+              "Title": "ProductReadForSearchDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForSearchDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForSearchDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForSearchDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForSearchDTO.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAQwCIAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-28T11:21:02.306Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ColorReadForDisplayDTO.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadForDisplayDTO.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorReadForDisplayDTO.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadForDisplayDTO.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Color\\ColorReadForDisplayDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-28T11:06:16.327Z",
+              "WhenOpened": "2025-01-02T21:06:17.953Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
+              "Title": "ProductReadByOriginalPrice.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadByOriginalPrice.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadByOriginalPrice.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadByOriginalPrice.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadByOriginalPrice.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAcwA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T16:52:14.824Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Product.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\Models\\Product.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAADwvy8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T15:36:50.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ProductUpdateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductUpdateDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductUpdateDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductUpdateDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductUpdateDTO.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAA4wBYAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T15:35:42.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ProductReadForUserDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForUserDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForUserDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForUserDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForUserDTO.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwB4AAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T15:35:28.53Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ProductReadForUpdateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForUpdateDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForUpdateDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForUpdateDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForUpdateDTO.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAowBMAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T15:34:29.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ProductReadForAdminDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForAdminDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForAdminDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForAdminDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForAdminDTO.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA9wCQAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T15:33:47.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ProductCreateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductCreateDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductCreateDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductCreateDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductCreateDTO.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAwwCQAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T15:31:29.469Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "ColorReadForUser.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadForUser.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorReadForUser.cs",
@@ -131,20 +213,46 @@
               "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Color\\ColorReadForUser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-27T23:10:38.721Z",
+              "WhenOpened": "2025-01-02T14:58:14.26Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Configurations\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Configurations\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Configurations\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "..\\ECommerceInfrastructure\\Configurations\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAmwEcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 17,
+              "Title": "ColorReadDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorReadDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Color\\ColorReadDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-27T18:06:03.883Z",
+              "WhenOpened": "2025-01-02T14:58:00.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ColorCreateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorCreateDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorCreateDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorCreateDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Color\\ColorCreateDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T14:57:44.83Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ColorReadForDisplayDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadForDisplayDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorReadForDisplayDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadForDisplayDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Color\\ColorReadForDisplayDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T14:37:22.708Z",
               "EditorCaption": ""
             },
             {
@@ -155,202 +263,113 @@
               "RelativeDocumentMoniker": "..\\ECommerceCore\\Models\\Color.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Color.cs",
               "RelativeToolTip": "..\\ECommerceCore\\Models\\Color.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-27T18:03:01.284Z",
+              "WhenOpened": "2025-01-02T14:36:29.165Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ProductReadForUserDTO.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForUserDTO.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForUserDTO.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForUserDTO.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForUserDTO.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAwwB4AAAAFAAAAAAAAAA==",
+              "DocumentIndex": 20,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AgIAAP4aAAAAAAAAAKCRPakTAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-01-02T14:35:33.95Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ProductReadByCategoryIdDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadByCategoryIdDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadByCategoryIdDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadByCategoryIdDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadByCategoryIdDTO.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAowCcAAABLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-27T14:03:13.768Z",
+              "WhenOpened": "2025-01-02T00:27:25.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ProductReadForCreateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForCreateDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForCreateDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForCreateDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForCreateDTO.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAowB8AAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T00:11:10.055Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "Product.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Product.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\Models\\Product.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Product.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\Models\\Product.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAiwC4AAAAAAAAAAAAAAA==",
+              "Title": "ProductReadByProductIdDTO.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadByProductIdDTO.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadByProductIdDTO.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadByProductIdDTO.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductReadByProductIdDTO.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCMAAABLAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-27T00:35:15.804Z",
+              "WhenOpened": "2025-01-02T00:10:58.085Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ProductCreateDTO.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductCreateDTO.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductCreateDTO.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductCreateDTO.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Product\\ProductCreateDTO.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAowCEAAAAzAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "IProductRepository.cs",
+              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Interfaces\\IProductRepository.cs",
+              "RelativeDocumentMoniker": "..\\ECommerceCore\\Interfaces\\IProductRepository.cs",
+              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Interfaces\\IProductRepository.cs",
+              "RelativeToolTip": "..\\ECommerceCore\\Interfaces\\IProductRepository.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAxwBcAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-27T00:28:41.839Z",
+              "WhenOpened": "2025-01-02T00:08:00.464Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 19,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "Controllers\\CategoryController.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Controllers\\CategoryController.cs",
               "RelativeToolTip": "Controllers\\CategoryController.cs",
-              "ViewState": "AgIAAJIAAAAAAAAAAAAAwFoAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAAwJ0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T23:49:30.583Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Category.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Category.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\Models\\Category.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Category.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\Models\\Category.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T23:32:16.877Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CategoryCreateDTO.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Category\\CategoryCreateDTO.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Category\\CategoryCreateDTO.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Category\\CategoryCreateDTO.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Category\\CategoryCreateDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T23:31:03.053Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "IFileService.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Interfaces\\IFileService.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\Interfaces\\IFileService.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Interfaces\\IFileService.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\Interfaces\\IFileService.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAUwDYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T21:14:11.589Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "CategoryRepository.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\CategoryRepository.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Repositories\\CategoryRepository.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\CategoryRepository.cs",
-              "RelativeToolTip": "..\\ECommerceInfrastructure\\Repositories\\CategoryRepository.cs",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAIwMwAAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T21:04:30.704Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 1,
               "Title": "ProductController.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductController.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Controllers\\ProductController.cs",
               "RelativeToolTip": "Controllers\\ProductController.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAYwGIAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAM0AAAAAAAAAAAAmwOMAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T20:57:02.563Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ColorReadDTO.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadDTO.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorReadDTO.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadDTO.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Color\\ColorReadDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T20:55:08.579Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ColorCreateDTO.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorCreateDTO.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorCreateDTO.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorCreateDTO.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Color\\ColorCreateDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T20:46:57.035Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAHwAAAAAAAAAAAAEwIsAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAH0AAAAAAAAAAAAgwIsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T00:14:40.003Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProductRepository.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
-              "RelativeToolTip": "..\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA3AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T00:13:45.37Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "ICategoryRepository.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Interfaces\\ICategoryRepository.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\Interfaces\\ICategoryRepository.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Interfaces\\ICategoryRepository.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\Interfaces\\ICategoryRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T00:10:12.681Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "IProductRepository.cs",
-              "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Interfaces\\IProductRepository.cs",
-              "RelativeDocumentMoniker": "..\\ECommerceCore\\Interfaces\\IProductRepository.cs",
-              "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Interfaces\\IProductRepository.cs",
-              "RelativeToolTip": "..\\ECommerceCore\\Interfaces\\IProductRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T00:09:06.676Z",
               "EditorCaption": ""
             }
           ]

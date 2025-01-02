@@ -179,7 +179,7 @@ namespace ECommerceInfrastructure.Migrations.ApplicationDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ImagePath")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");

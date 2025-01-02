@@ -9,7 +9,7 @@ namespace ECommerceCore.DTOs.Color
 {
     public class ColorReadForDisplayDTO
     {
-        [Required(ErrorMessage = "يرجى إدخال اللون")]
+        [Required(ErrorMessage = "يرجى تحميل صورة اللون")]
         public string ColorImage { get; set; }
     }
 }

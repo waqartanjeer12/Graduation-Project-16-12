@@ -13,22 +13,24 @@ namespace ECommerceCore.DTOs.Product
         [Required(ErrorMessage = "يرجى ادخال وصف المنتج")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "يرجى ادخال فئة المنتج")]
+        [Required(ErrorMessage = "يرجى اختيار فئة المنتج")]
         public string CategoryName { get; set; }
-
+        [Required(ErrorMessage = "يرجى تحميل الصورة الرئيسية للمنتج")]
         public string MainImageUrl { get; set; }
         public List<string> AdditionalImageUrls { get; set; }
 
-        [Required(ErrorMessage = "السعر مطلوب")]
-        [Range(0, double.MaxValue, ErrorMessage = "يجب أن يكون السعر أكبر من أو يساوي 0.")]
+        [Required(ErrorMessage = "يرجى إدخال السعر الخاص بالمنتج")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "يجب أن يكون السعر قيمة موجبة")]
         [Precision(18, 2)] // Specify precision and scale for Price
+
         public decimal Price { get; set; }
 
-        [Range(0, double.MaxValue, ErrorMessage = "يجب أن يكون السعر الأصلي أكبر من أو يساوي 0.")]
+        [Range(0, double.MaxValue, ErrorMessage = "يرجى إدخال سعر لا يقل عن 0")]
         [Precision(18, 2)] // Specify precision and scale for Price
         public decimal? OriginalPrice { get; set; }
 
-        [Required(ErrorMessage = "يرجى ادخال مخزون المنتج")]
+        [Required(ErrorMessage = "يرجى تحديد كمية المخزون المتاحة للمنتج")]
+        [Range(0, int.MaxValue, ErrorMessage = "يجب أن تكون كمية المخزون 0 أو أكبر")]
         public int Inventory { get; set; }
 
 

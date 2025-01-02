@@ -14,10 +14,10 @@ namespace ECommerceCore.DTOs.Color
         [Required]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="يرجى إدخال اسم اللون")]
+        [Required(ErrorMessage = "يرجى إدخال اسم اللون")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "يرجى إدخال اللون")]
+        [Required(ErrorMessage = "يرجى تحميل صورة اللون")]
         public string ColorImage { get; set; }
     }
 }
