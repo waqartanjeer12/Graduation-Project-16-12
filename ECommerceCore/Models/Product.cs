@@ -41,7 +41,8 @@ public class Product
     public string MainImage { get; set; }
 
     // Navigation properties
-    public ICollection<Product> Products { get; set; }
-    public ICollection<ProductImage> AdditionalImages { get; set; } = new List<ProductImage>();
-    public ICollection<ProductColor> Colors { get; set; } 
+   
+    public ICollection<ProductImage> AdditionalImages { get; set; } 
+    public ICollection<ProductColor> Colors { get; set; }
+    public ICollection<CartItem> CartItem { get; set; }
 }

@@ -5,10 +5,6 @@ using ECommerceCore.Models;
 using ECommerceInfrastructure.Configurations.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ECommerceInfrastructure.Repositories
 {
@@ -24,6 +20,7 @@ namespace ECommerceInfrastructure.Repositories
             _fileService = fileService;
             _logger = logger;
         }
+       
 
         // Method to create a new color
         public async Task<Color> CreateColorAsync(ColorCreateDTO colorCreateDTO)
@@ -174,14 +171,17 @@ namespace ECommerceInfrastructure.Repositories
                 // Upload additional images and get URLs
                 var additionalImageFiles = new List<ProductImage>();
                 var additionalImageUrls = new List<string>();
-                foreach (var additionalImage in productCreateDTO.AdditionalImages)
+                if (productCreateDTO.AdditionalImages != null)
                 {
-                    var fileName = await _fileService.UploadFileAsync(additionalImage, "images");
-                    additionalImageFiles.Add(new ProductImage
+                    foreach (var additionalImage in productCreateDTO.AdditionalImages)
                     {
-                        ImageUrl = $"/files/images/{fileName}"
-                    });
-                    additionalImageUrls.Add($"/files/images/{fileName}");
+                        var fileName = await _fileService.UploadFileAsync(additionalImage, "images");
+                        additionalImageFiles.Add(new ProductImage
+                        {
+                            ImageUrl = $"/files/images/{fileName}"
+                        });
+                        additionalImageUrls.Add($"/files/images/{fileName}");
+                    }
                 }
 
                 // Retrieve the category by name
@@ -258,7 +258,6 @@ namespace ECommerceInfrastructure.Repositories
                 throw;
             }
         }
-
         // Method to get all products for admin
         public async Task<List<ProductReadForUserDTO>> GetAllProductsForUserAsync()
         {
@@ -273,6 +272,7 @@ namespace ECommerceInfrastructure.Repositories
                     .Include(p => p.AdditionalImages)
                     .Select(p => new ProductReadForUserDTO
                     {
+                        ProductId = p.Id,
                         Name = p.Name,
                         Description = p.Description,
                         CategoryName = p.Category.Name,
@@ -349,7 +349,12 @@ namespace ECommerceInfrastructure.Repositories
                         AdditionalImageUrls = p.AdditionalImages.Select(ai => ai.ImageUrl).ToList(),
                         Price = p.Price,
                         OriginalPrice = p.OriginalPrice,
-
+                        ColorDetails = p.Colors.Select(c => new ColorReadForUserDTO
+                        {
+                           
+                            Name = c.Color.Name,
+                            ColorImage = c.Color.Image
+                        }).ToList()
                     })
                     .ToListAsync();
                 return products;
@@ -426,16 +431,17 @@ namespace ECommerceInfrastructure.Repositories
 
                 if (product == null)
                 {
-                    _logger.LogWarning("حدث خطأ أثناء جلب المنتجات ");
+                    _logger.LogWarning("Product not found");
                     return null;
                 }
 
                 // Update basic properties
                 if (!string.IsNullOrEmpty(productUpdateDTO.Name))
+                {
                     product.Name = productUpdateDTO.Name;
+                }
 
-                if (!string.IsNullOrEmpty(productUpdateDTO.Description))
-                    product.Description = productUpdateDTO.Description;
+                product.Description = productUpdateDTO.Description;
 
                 if (!string.IsNullOrEmpty(productUpdateDTO.CategoryName))
                 {
@@ -445,41 +451,48 @@ namespace ECommerceInfrastructure.Repositories
                 }
 
                 if (productUpdateDTO.Price.HasValue)
+                {
                     product.Price = productUpdateDTO.Price.Value;
+                }
 
-                if (productUpdateDTO.OriginalPrice.HasValue)
-                    product.OriginalPrice = productUpdateDTO.OriginalPrice.Value;
+                product.OriginalPrice = productUpdateDTO.OriginalPrice;
 
                 if (productUpdateDTO.Inventory.HasValue)
+                {
                     product.Inventory = productUpdateDTO.Inventory.Value;
+                }
 
                 // Handle MainImage update
                 if (productUpdateDTO.MainImage != null)
                 {
-                    // Delete old MainImage
-                    if (!string.IsNullOrEmpty(product.MainImage))
-                        _fileService.DeleteFile(Path.GetFileName(product.MainImage), "images");
-
-                    // Upload new MainImage
                     var mainImageFileName = await _fileService.UploadFileAsync(productUpdateDTO.MainImage, "images");
                     product.MainImage = $"/files/images/{mainImageFileName}";
                 }
 
                 // Handle AdditionalImages update
+                if (productUpdateDTO.AdditionalImageUrlsToDelete != null)
+                {
+                    foreach (var imageUrl in productUpdateDTO.AdditionalImageUrlsToDelete)
+                    {
+                        var image = product.AdditionalImages.FirstOrDefault(ai => ai.ImageUrl == imageUrl);
+                        if (image != null)
+                        {
+                            _fileService.DeleteFile(Path.GetFileName(image.ImageUrl), "images");
+                            product.AdditionalImages.Remove(image);
+                        }
+                    }
+                }
+
                 if (productUpdateDTO.AdditionalImages != null && productUpdateDTO.AdditionalImages.Any())
                 {
-                    // Delete old AdditionalImages
-                    foreach (var additionalImage in product.AdditionalImages)
-                        _fileService.DeleteFile(Path.GetFileName(additionalImage.ImageUrl), "images");
-
-                    // Upload and add new AdditionalImages
-                    product.AdditionalImages.Clear();
                     foreach (var additionalImage in productUpdateDTO.AdditionalImages)
                     {
                         var fileName = await _fileService.UploadFileAsync(additionalImage, "images");
                         product.AdditionalImages.Add(new ProductImage { ImageUrl = $"/files/images/{fileName}" });
                     }
                 }
+
+                // Handle Colors update
                 var productColors = new List<ProductColor>();
                 var colorDetails = new List<ColorReadDTO>();
                 if (productUpdateDTO.ColorNames != null && productUpdateDTO.ColorNames.Any())
@@ -496,13 +509,14 @@ namespace ECommerceInfrastructure.Repositories
                         }
                         else
                         {
-                            _logger.LogWarning("اللون غير موجود");
+                            _logger.LogWarning("Color not found");
                         }
                     }
                 }
+
                 await _context.SaveChangesAsync();
 
-                // Map to ProductReadForCreateDTO
+                // Map to ProductReadForUpdateDTO
                 var productReadForUpdateDTO = new ProductReadForUpdateDTO
                 {
                     Name = product.Name,
@@ -514,15 +528,14 @@ namespace ECommerceInfrastructure.Repositories
                     OriginalPrice = product.OriginalPrice,
                     Inventory = product.Inventory,
                     ColorDetails = colorDetails
-
                 };
 
-                _logger.LogInformation("تم تحديث المنتج بنجاح");
+                _logger.LogInformation("Product updated successfully");
                 return productReadForUpdateDTO;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "حدث خطأ أثناء تحديث المنتج");
+                _logger.LogError(ex, "An error occurred while updating the product");
                 return null;
             }
         }

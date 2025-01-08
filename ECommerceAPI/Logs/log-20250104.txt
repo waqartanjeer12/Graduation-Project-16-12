@@ -1,0 +1,45 @@
+2025-01-04 00:36:58.660 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-04 00:36:59.609 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-04 00:41:42.402 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-04 00:41:42.856 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-04 00:41:46.181 +02:00 [INF] تم إضافة المنتج بنجاح : string
+2025-01-04 00:42:01.721 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-04 00:47:25.974 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-04 00:47:26.401 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-04 00:47:29.278 +02:00 [INF] تم إضافة المنتج بنجاح : string
+2025-01-04 00:58:00.035 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-04 00:58:00.173 +02:00 [INF] تم تحديث المنتج بنجاح
+2025-01-04 18:44:20.819 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-04 18:44:21.408 +02:00 [INF] Adding additional images for product with ID: 3
+2025-01-04 18:44:37.245 +02:00 [INF] بداية جلب منتجات المستخدم
+2025-01-04 18:44:37.327 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-04 18:44:37.377 +02:00 [INF] تم جلب المنتجات للمستخدم بنجاح.
+2025-01-04 18:44:52.806 +02:00 [INF] بداية جلب المنتجات للأدمن
+2025-01-04 18:44:52.912 +02:00 [INF] تم جلب منتجات الأدمن بنجاح
+2025-01-04 18:45:31.669 +02:00 [INF] بداية جلب المنتجات للأدمن
+2025-01-04 18:45:31.694 +02:00 [INF] تم جلب منتجات الأدمن بنجاح
+2025-01-04 20:23:06.491 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-04 20:23:06.956 +02:00 [INF] بداية جلب منتجات المستخدم
+2025-01-04 20:23:08.603 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-04 20:23:09.516 +02:00 [INF] تم جلب المنتجات للمستخدم بنجاح.
+2025-01-04 20:25:17.799 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-04 20:25:18.728 +02:00 [INF] Product updated successfully
+2025-01-04 20:27:04.464 +02:00 [INF] Product updated successfully
+2025-01-04 20:27:58.764 +02:00 [INF] Product updated successfully
+2025-01-04 20:28:56.809 +02:00 [INF] Product updated successfully
+2025-01-04 20:29:18.993 +02:00 [INF] Product updated successfully
+2025-01-04 20:42:27.370 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-04 20:42:29.678 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-04 20:42:30.678 +02:00 [WRN] Color not found
+2025-01-04 20:42:30.867 +02:00 [INF] Product updated successfully
+2025-01-04 20:43:02.249 +02:00 [INF] بداية جلب منتجات المستخدم
+2025-01-04 20:43:02.339 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-04 20:43:02.391 +02:00 [INF] تم جلب المنتجات للمستخدم بنجاح.
+2025-01-04 20:43:56.920 +02:00 [WRN] Color not found
+2025-01-04 20:43:56.924 +02:00 [INF] Product updated successfully
+2025-01-04 20:44:44.430 +02:00 [WRN] Color not found
+2025-01-04 20:44:44.492 +02:00 [INF] Product updated successfully
+2025-01-04 20:44:51.562 +02:00 [WRN] Color not found
+2025-01-04 20:44:51.565 +02:00 [INF] Product updated successfully
+2025-01-04 20:46:09.279 +02:00 [WRN] Color not found
+2025-01-04 20:46:09.414 +02:00 [INF] Product updated successfully

@@ -12,7 +12,7 @@ namespace ECommerceCore.DTOs.Product
     public class ProductReadForUpdateDTO
     {
         
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         
         public string? Description { get; set; }

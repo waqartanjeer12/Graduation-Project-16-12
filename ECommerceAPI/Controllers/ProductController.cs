@@ -1,12 +1,8 @@
 ﻿using ECommerceCore.DTOs.Color;
 using ECommerceCore.DTOs.Product;
 using ECommerceCore.Interfaces;
-using ECommerceInfrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ECommerceAPI.Controllers
 {
@@ -185,7 +181,7 @@ namespace ECommerceAPI.Controllers
                 var result = await _repository.DeleteProductAsync(id);
                 if (result)
                 {
-                    return StatusCode(204, new { Message = "تم عملية الحذف بنجاح" } ); // 204 No Content
+                    return StatusCode(204, new { Message = "تم عملية الحذف بنجاح" }); // 204 No Content
                 }
 
                 return StatusCode(404, new { Message = "المنتج الذي تبحث عنه غير موجود" }); // 404 Not Found
@@ -207,25 +203,31 @@ namespace ECommerceAPI.Controllers
             catch (Exception ex)
             {
                 Log.Error(ex, "حدث خطأ أثناء جلب المنتجات.");
-                return StatusCode(500, new { Message = "حدث خطأ أثناء جلب المنتجات." } );
+                return StatusCode(500, new { Message = "حدث خطأ أثناء جلب المنتجات." });
             }
         }
-            [HttpGet("search")]
-            public async Task<IActionResult> SearchProducts([FromQuery] string query)
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchProducts([FromQuery] string query)
+        {
+            if (string.IsNullOrEmpty(query))
             {
-                if (string.IsNullOrEmpty(query))
-                {
-                    return BadRequest(new { Message = "كلمة البحث لا يجب أن تكون فارغة" });
-                }
-
-                var products = await _repository.SearchProductsAsync(query);
-
-                if (products == null || products.Count == 0)
-                {
-                    return NotFound(new { Message = "لا يوجد منتجات لكلمة البحث هذه" } );
-                }
-
-                return Ok(products);
+                return BadRequest(new { Message = "كلمة البحث لا يجب أن تكون فارغة" });
             }
+
+            var products = await _repository.SearchProductsAsync(query);
+
+            if (products == null || products.Count == 0)
+            {
+                return NotFound(new { Message = "لا يوجد منتجات لكلمة البحث هذه" });
+            }
+
+            return Ok(products);
         }
+
+
+
+
+
+        
     }
+}

@@ -12,13 +12,16 @@ namespace ECommerceInfrastructure.Configurations.Data
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<ProductColor> ProductColors { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-      
 
+            modelBuilder.Entity<CartItem>().ToTable("CartItems");
             // Define the unique index on the Name property For Category
             modelBuilder.Entity<Category>()
                 .HasIndex(p => p.Name)
@@ -46,6 +49,8 @@ namespace ECommerceInfrastructure.Configurations.Data
             modelBuilder.Entity<ProductColor>()
                 .HasKey(pc => new { pc.ProductId, pc.ColorId });
 
+            
+
             modelBuilder.Entity<Product>()
                 .HasMany(p => p.Colors)
                 .WithOne(pc => pc.Product)
@@ -57,6 +62,21 @@ namespace ECommerceInfrastructure.Configurations.Data
                 .WithOne(pc => pc.Color)
                 .HasForeignKey(pc => pc.ColorId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+           /* modelBuilder.Entity<User>()
+               .HasOne(u => u.Cart)
+               .WithOne(c => c.User)
+               .HasForeignKey<Cart>(c => c.UserId);*/
+
+            modelBuilder.Entity<Cart>()
+                .HasMany(c => c.CartItems)
+                .WithOne(ci => ci.Cart)
+                .HasForeignKey(ci => ci.CartId);
+
+            modelBuilder.Entity<CartItem>()
+                .HasOne(ci => ci.Product)
+                .WithMany(p => p.CartItem)
+                .HasForeignKey(ci => ci.ProductId);
 
         }
 

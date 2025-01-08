@@ -1,8 +1,5 @@
 ﻿using ECommerceCore.DTOs.Color;
 using ECommerceCore.DTOs.Product;
-using ECommerceCore.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ECommerceCore.Interfaces
 {
@@ -23,5 +20,9 @@ namespace ECommerceCore.Interfaces
         Task<List<ProductReadByOriginalPrice>> GetAlProductsByComparisionOriginalPrice();
         Task<List<ProductReadForSearchDTO>> SearchProductsAsync(string query);
         Task<bool> DeleteProductAsync(int id);
+
+
+
+        
     }
 }

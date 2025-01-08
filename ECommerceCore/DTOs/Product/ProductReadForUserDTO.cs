@@ -7,6 +7,8 @@ namespace ECommerceCore.DTOs.Product
 {
     public class ProductReadForUserDTO
     {
+        [Required]
+        public int ProductId { get; set; }
         [Required(ErrorMessage = "يرجى ادخال اسم المنتج")]
         public string Name { get; set; }
 

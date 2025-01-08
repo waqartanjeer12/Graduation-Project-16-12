@@ -35,7 +35,11 @@ namespace ECommerceCore.Models
            
             public DateTime createdAt { get; set; } = DateTime.UtcNow;
         public DateTime? EmailConfirmationExpiry { get; set; }
+
+
+        public Cart Cart { get; set; }
+
     }
-    }
+}
 
 

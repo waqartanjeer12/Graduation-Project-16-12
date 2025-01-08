@@ -31,6 +31,7 @@ namespace ECommerceCore.DTOs.Product
         // Optional properties for URLs
         public string? MainImageUrl { get; set; }
         public List<string>? AdditionalImageUrls { get; set; }
+        public List<string>? AdditionalImageUrlsToDelete { get; set; }
         public List<string>? ColorImageUrls { get; set; }
     }
 }

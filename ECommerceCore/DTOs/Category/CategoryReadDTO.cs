@@ -15,6 +15,7 @@ namespace ECommerceCore.DTOs.Category
 
         [Required(ErrorMessage = "يرجى ادخال اسم للفئة")]
         [MaxLength(100, ErrorMessage = "يرجى ادخال اسم لا يتجاوز 100 حرف")]
+
         public string Name { get; set; }
 
 

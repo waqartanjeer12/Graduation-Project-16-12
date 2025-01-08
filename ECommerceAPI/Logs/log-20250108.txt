@@ -1,0 +1,86 @@
+2025-01-08 01:38:59.614 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-08 01:39:01.944 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-08 01:50:25.431 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-08 01:50:25.713 +02:00 [INF] Fetching cart with ID: 2 to clear items.
+2025-01-08 01:50:27.841 +02:00 [WRN] Cart with ID: 2 not found.
+2025-01-08 01:50:32.707 +02:00 [INF] Fetching cart with ID: 1 to clear items.
+2025-01-08 01:50:32.832 +02:00 [INF] Removing 3 items from cart with ID: 1.
+2025-01-08 01:50:33.036 +02:00 [INF] Successfully cleared cart with ID: 1.
+2025-01-08 01:50:37.685 +02:00 [INF] Fetching cart with ID: 1 to clear items.
+2025-01-08 01:50:37.791 +02:00 [INF] Removing 0 items from cart with ID: 1.
+2025-01-08 01:50:37.792 +02:00 [INF] Successfully cleared cart with ID: 1.
+2025-01-08 01:50:38.909 +02:00 [INF] Fetching cart with ID: 1 to clear items.
+2025-01-08 01:50:38.916 +02:00 [INF] Removing 0 items from cart with ID: 1.
+2025-01-08 01:50:38.917 +02:00 [INF] Successfully cleared cart with ID: 1.
+2025-01-08 01:50:41.863 +02:00 [INF] Fetching cart with ID: 1 to clear items.
+2025-01-08 01:50:41.896 +02:00 [INF] Removing 0 items from cart with ID: 1.
+2025-01-08 01:50:41.897 +02:00 [INF] Successfully cleared cart with ID: 1.
+2025-01-08 01:50:42.634 +02:00 [INF] Fetching cart with ID: 1 to clear items.
+2025-01-08 01:50:42.640 +02:00 [INF] Removing 0 items from cart with ID: 1.
+2025-01-08 01:50:42.644 +02:00 [INF] Successfully cleared cart with ID: 1.
+2025-01-08 01:50:54.311 +02:00 [INF] Fetching all carts including related entities.
+2025-01-08 01:50:54.349 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-08 01:50:54.386 +02:00 [INF] Processing cart with ID: 1
+2025-01-08 01:50:54.392 +02:00 [INF] Processed cart with ID: 1, Total Price: 0, Total Original Price: 0
+2025-01-08 01:50:54.394 +02:00 [INF] Finished fetching all carts.
+2025-01-08 01:52:02.742 +02:00 [INF] Received request to add item: ProductId=1, Quantity=2, ColorName=خمري
+2025-01-08 01:52:02.832 +02:00 [INF] Retrieved product: Id=1, Name=كنبيات, Inventory=196
+2025-01-08 01:52:02.836 +02:00 [INF] Selected color: Id=1, Name=خمري
+2025-01-08 01:52:02.841 +02:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2025-01-08 01:52:17.018 +02:00 [INF] Fetching all carts including related entities.
+2025-01-08 01:52:17.107 +02:00 [INF] Processing cart with ID: 1
+2025-01-08 01:52:17.111 +02:00 [INF] Processed cart with ID: 1, Total Price: 16000.00, Total Original Price: 18000.00
+2025-01-08 01:52:17.112 +02:00 [INF] Finished fetching all carts.
+2025-01-08 02:02:03.651 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-08 02:02:03.957 +02:00 [INF] Fetching all carts including related entities.
+2025-01-08 02:02:05.382 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-08 02:02:06.107 +02:00 [INF] Processing cart with ID: 1
+2025-01-08 02:02:06.115 +02:00 [INF] Processed cart with ID: 1, Total Price: 16000.00, Total Original Price: 18000.00
+2025-01-08 02:02:06.117 +02:00 [INF] Finished fetching all carts.
+2025-01-08 02:02:35.232 +02:00 [INF] Received request to add item: ProductId=2, Quantity=7, ColorName=أزرق سماوي
+2025-01-08 02:02:35.353 +02:00 [INF] Retrieved product: Id=2, Name=تحف, Inventory=196
+2025-01-08 02:02:35.356 +02:00 [INF] Selected color: Id=2, Name=أزرق سماوي
+2025-01-08 02:02:35.364 +02:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2025-01-08 02:02:51.127 +02:00 [INF] Received request to add item: ProductId=2, Quantity=7, ColorName=بنفسجي
+2025-01-08 02:02:51.211 +02:00 [INF] Retrieved product: Id=2, Name=تحف, Inventory=189
+2025-01-08 02:02:51.213 +02:00 [INF] Selected color: Id=3, Name=بنفسجي
+2025-01-08 02:03:01.699 +02:00 [INF] Fetching all carts including related entities.
+2025-01-08 02:03:01.722 +02:00 [INF] Processing cart with ID: 1
+2025-01-08 02:03:01.723 +02:00 [INF] Processed cart with ID: 1, Total Price: 115400.00, Total Original Price: 144000.00
+2025-01-08 02:03:01.725 +02:00 [INF] Finished fetching all carts.
+2025-01-08 02:03:31.912 +02:00 [INF] Fetching all carts including related entities.
+2025-01-08 02:03:31.955 +02:00 [INF] Processing cart with ID: 1
+2025-01-08 02:03:31.956 +02:00 [INF] Processed cart with ID: 1, Total Price: 115400.00, Total Original Price: 144000.00
+2025-01-08 02:03:31.957 +02:00 [INF] Finished fetching all carts.
+2025-01-08 02:03:47.232 +02:00 [INF] Received request to add item: ProductId=2, Quantity=7, ColorName=بنفسجي
+2025-01-08 02:03:47.243 +02:00 [INF] Retrieved product: Id=2, Name=تحف, Inventory=182
+2025-01-08 02:03:47.245 +02:00 [INF] Selected color: Id=3, Name=بنفسجي
+2025-01-08 02:03:57.804 +02:00 [INF] Received request to add item: ProductId=2, Quantity=7, ColorName=بنفسجي
+2025-01-08 02:03:57.815 +02:00 [INF] Retrieved product: Id=2, Name=تحف, Inventory=175
+2025-01-08 02:03:57.816 +02:00 [INF] Selected color: Id=3, Name=بنفسجي
+2025-01-08 03:26:33.031 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-08 03:26:34.587 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-08 03:27:08.998 +02:00 [INF] بداية جلب منتجات المستخدم
+2025-01-08 03:27:09.096 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-08 03:27:09.168 +02:00 [INF] تم جلب المنتجات للمستخدم بنجاح.
+2025-01-08 03:27:55.713 +02:00 [INF] Fetching cart with ID: 1 to clear items.
+2025-01-08 03:27:55.899 +02:00 [INF] Removing 2 items from cart with ID: 1.
+2025-01-08 03:27:56.079 +02:00 [INF] Successfully cleared cart with ID: 1.
+2025-01-08 03:28:51.928 +02:00 [INF] Received request to add item: ProductId=1, Quantity=3, ColorName=بنفسجي
+2025-01-08 03:28:51.957 +02:00 [INF] Retrieved product: Id=1, Name=كنبيات, Inventory=194
+2025-01-08 03:28:51.959 +02:00 [ERR] Color بنفسجي not found for product ID 1.
+2025-01-08 03:29:04.402 +02:00 [INF] Received request to add item: ProductId=1, Quantity=3, ColorName=خمري
+2025-01-08 03:29:04.412 +02:00 [INF] Retrieved product: Id=1, Name=كنبيات, Inventory=194
+2025-01-08 03:29:04.413 +02:00 [INF] Selected color: Id=1, Name=خمري
+2025-01-08 03:29:04.419 +02:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2025-01-08 03:30:46.857 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-08 03:30:46.896 +02:00 [WRN] الفئة غير موجودة يرجى البحث عن فئة أخرى
+2025-01-08 03:31:11.560 +02:00 [INF] بداية جلب منتجات المستخدم
+2025-01-08 03:31:11.576 +02:00 [INF] تم جلب المنتجات للمستخدم بنجاح.
+2025-01-08 03:32:07.326 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-08 03:32:07.485 +02:00 [INF] تم إضافة المنتج بنجاح : كنبيات
+2025-01-08 03:32:16.654 +02:00 [INF] بداية جلب منتجات المستخدم
+2025-01-08 03:32:16.682 +02:00 [INF] تم جلب المنتجات للمستخدم بنجاح.
+2025-01-08 03:32:39.565 +02:00 [INF] Received request to add item: ProductId=7, Quantity=3, ColorName=بنفسجي
+2025-01-08 03:32:39.638 +02:00 [INF] Retrieved product: Id=7, Name=كنبيات, Inventory=210
+2025-01-08 03:32:39.645 +02:00 [INF] Selected color: Id=3, Name=بنفسجي
