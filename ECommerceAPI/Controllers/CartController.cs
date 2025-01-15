@@ -31,10 +31,7 @@ namespace ECommerceAPI.Controllers
                 return NotFound(new { message = "Product or color not found" });
             }
 
-            if (!cartReadAddItemsToCartDto.IsInventorySufficient)
-            {
-                return BadRequest(new { message = "Insufficient inventory" });
-            }
+           
 
             return Ok(cartReadAddItemsToCartDto);
         }
@@ -84,6 +81,31 @@ namespace ECommerceAPI.Controllers
             // Return a 204 No Content response if the item was removed successfully
             return NoContent();
         }
+        [HttpPost("increase-quantity")]
+        public async Task<IActionResult> IncreaseQuantity([FromForm] int itemId)
+        {
+           
+            var success = await _repository.IncreaseQuantityAsync(itemId);
+            if (!success)
+            {
+                return BadRequest(new { message = "Failed to increase quantity. Item not found or not enough stock." });
+            }
 
+            return Ok(new { message = "Quantity increased successfully." });
+        }
+
+        [HttpPost("decrease-quantity")]
+        public async Task<IActionResult> DecreaseQuantity([FromForm] int itemId)
+        {
+           
+
+            var success = await _repository.DecreaseQuantityAsync(itemId);
+            if (!success)
+            {
+                return BadRequest(new { message = "Failed to decrease quantity. Item not found or quantity cannot be less than 1." });
+            }
+
+            return Ok(new { message = "Quantity decreased successfully." });
+        }
     }
 }

@@ -37,7 +37,7 @@ namespace ECommerceCore.Models
         public DateTime? EmailConfirmationExpiry { get; set; }
 
 
-        public Cart Cart { get; set; }
+        //public Cart Cart { get; set; }
 
     }
 }

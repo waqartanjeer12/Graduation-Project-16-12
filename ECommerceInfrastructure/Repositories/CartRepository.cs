@@ -46,12 +46,6 @@ namespace ECommerceInfrastructure.Repositories
             // Log the retrieved product details
             _logger.LogInformation($"Retrieved product: Id={product.Id}, Name={product.Name}, Inventory={product.Inventory}");
 
-            if (product.Colors == null || !product.Colors.Any())
-            {
-                _logger.LogError($"No colors found for product ID {addItemDto.ProductId}.");
-                return null;
-            }
-
             var selectedColor = product.Colors.FirstOrDefault(c => c.Color != null && c.Color.Name == addItemDto.ColorName);
 
             if (selectedColor == null)
@@ -66,13 +60,8 @@ namespace ECommerceInfrastructure.Repositories
             if (product.Inventory < addItemDto.Quantity)
             {
                 _logger.LogWarning($"Insufficient inventory for product {addItemDto.ProductId}. Requested: {addItemDto.Quantity}, Available: {product.Inventory}");
-                return new CartReadAddItemsToCartDTO
-                {
-                    IsInventorySufficient = false
-                };
+                return null;
             }
-
-            product.Inventory -= addItemDto.Quantity;  // Decrease inventory
 
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
@@ -81,14 +70,11 @@ namespace ECommerceInfrastructure.Repositories
 
             if (cart == null)
             {
-                cart = new Cart
-                {
-                    CartItems = new List<CartItem>()
-                };
-                _context.Carts.Add(cart);
+                _logger.LogWarning("There is no cart for this user.");
+                return null;
             }
 
-            var existingItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == addItemDto.ProductId);
+            var existingItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == addItemDto.ProductId && ci.ColorName == addItemDto.ColorName);
 
             int updatedQuantity;
             CartItem cartItem;
@@ -100,14 +86,34 @@ namespace ECommerceInfrastructure.Repositories
             }
             else
             {
-                cartItem = new CartItem
+                var existingProductItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == addItemDto.ProductId);
+
+                if (existingProductItem != null)
                 {
-                    ProductId = addItemDto.ProductId,
-                    Quantity = addItemDto.Quantity,
-                    Cart = cart
-                };
-                cart.CartItems.Add(cartItem);
-                updatedQuantity = addItemDto.Quantity;
+                    // Product exists but with a different color, add as a new item
+                    cartItem = new CartItem
+                    {
+                        ProductId = addItemDto.ProductId,
+                        Quantity = addItemDto.Quantity,
+                        Cart = cart,
+                        ColorName = addItemDto.ColorName
+                    };
+                    cart.CartItems.Add(cartItem);
+                    updatedQuantity = addItemDto.Quantity;
+                }
+                else
+                {
+                    // Product does not exist in the cart, add as a new item
+                    cartItem = new CartItem
+                    {
+                        ProductId = addItemDto.ProductId,
+                        Quantity = addItemDto.Quantity,
+                        Cart = cart,
+                        ColorName = addItemDto.ColorName
+                    };
+                    cart.CartItems.Add(cartItem);
+                    updatedQuantity = addItemDto.Quantity;
+                }
             }
 
             await _context.SaveChangesAsync();
@@ -126,29 +132,30 @@ namespace ECommerceInfrastructure.Repositories
                     Name = selectedColor.Color.Name,
                     ColorImage = selectedColor.Color.Image
                 }
-                
             };
 
             var cartReadAddItemsToCartDto = new CartReadAddItemsToCartDTO
             {
-                ItemId = cartItem.CatrItemId,  // Use CartItemId instead of CartId
-                items = cartReadProducts,
-                IsInventorySufficient = true,
+                ItemId = cartItem.CartItemId,  // Use CartItemId instead of CartId
+                products = cartReadProducts,
                 Quantity = updatedQuantity
             };
 
             return cartReadAddItemsToCartDto;
         }
-
         public async Task<List<CartGetAllItemsDTO>> GetAllCartItemsAsync()
         {
             // Fetch all carts including related entities
             var carts = await _context.Carts
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
-                .ThenInclude(p => p.Colors)
-                .ThenInclude(pc => pc.Color)
                 .ToListAsync();
+
+            if (carts == null || !carts.Any())
+            {
+                _logger.LogInformation("Cart is empty");
+                return null;
+            }
 
             // List to store the result
             var result = new List<CartGetAllItemsDTO>();
@@ -157,7 +164,12 @@ namespace ECommerceInfrastructure.Repositories
             foreach (var cart in carts)
             {
                 // Map CartItems to CartReadAddItemsToCartDTO
-                var items = cart.CartItems.Select(ci => {
+                var items = new List<CartReadAddItemsToCartDTO>();
+                foreach (var ci in cart.CartItems)
+                {
+                    // Fetch color details based on color name
+                    var color = await _context.Colors.FirstOrDefaultAsync(c => c.Name == ci.ColorName);
+
                     var cartReadProducts = new CartReadProducts
                     {
                         ProductId = ci.ProductId,
@@ -165,37 +177,26 @@ namespace ECommerceInfrastructure.Repositories
                         Description = ci.Product.Description,
                         MainImageUrl = ci.Product.MainImage,
                         Price = ci.Product.Price,
-                        OriginalPrice = ci.Product.OriginalPrice
-                    };
-
-                    // Set ColorDetails if available
-                    if (ci.Product.Colors != null && ci.Product.Colors.Any())
-                    {
-                        var firstColor = ci.Product.Colors.First().Color;
-                        cartReadProducts.ColorDetails = new ColorReadDTO
+                        OriginalPrice = ci.Product.OriginalPrice,
+                        ColorDetails = new ColorReadDTO
                         {
-                            Id = firstColor.Id,
-                            Name = firstColor.Name,
-                            ColorImage = firstColor.Image
-                        };
-                    }
-                    else
-                    {
-                        cartReadProducts.ColorDetails = null;
-                    }
-
-                    return new CartReadAddItemsToCartDTO
-                    {
-                        ItemId = ci.CatrItemId,
-                        items = cartReadProducts,
-                        IsInventorySufficient = ci.Product.Inventory >= ci.Quantity,
-                        Quantity = ci.Quantity // Set the quantity here
+                            Id = color.Id ,
+                            Name = color.Name ,
+                            ColorImage = color.Image
+                        }
                     };
-                }).ToList();
+
+                    items.Add(new CartReadAddItemsToCartDTO
+                    {
+                        ItemId = ci.CartItemId,
+                        products = cartReadProducts,
+                        Quantity = ci.Quantity
+                    });
+                }
 
                 // Calculate the total price and total original price
-                var totalPrice = items.Sum(item => item.items.Price * item.Quantity);
-                var totalOriginalPrice = items.Sum(item => item.items.OriginalPrice.HasValue ? item.items.OriginalPrice.Value * item.Quantity : 0);
+                var totalPrice = items.Sum(item => item.products.Price * item.Quantity);
+                var totalOriginalPrice = items.Sum(item => item.products.OriginalPrice.HasValue ? item.products.OriginalPrice.Value * item.Quantity : 0);
 
                 // Add the cart details including the list of items and total prices to the result list
                 result.Add(new CartGetAllItemsDTO
@@ -209,7 +210,6 @@ namespace ECommerceInfrastructure.Repositories
 
             return result;
         }
-       
 
         public async Task<bool> ClearCartAsync(int cartId)
         {
@@ -238,26 +238,25 @@ namespace ECommerceInfrastructure.Repositories
             return true;
         }
 
-        public async Task<bool> RemoveItemFromCartAsync(int productId)
+        public async Task<bool> RemoveItemFromCartAsync(int cartItemId)
         {
-            // Fetch the cart that contains the item with the specified productId
+            // Fetch the cart that contains the item with the specified cartItemId
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
-                .ThenInclude(ci => ci.Product)
-                .FirstOrDefaultAsync(c => c.CartItems.Any(ci => ci.ProductId == productId));
+                .FirstOrDefaultAsync(c => c.CartItems.Any(ci => ci.CartItemId == cartItemId));
 
             // If the cart or item is not found, return false
             if (cart == null)
             {
-                _logger.LogWarning($"Cart containing product with ID: {productId} not found.");
+                _logger.LogWarning($"Cart containing item with ID: {cartItemId} not found.");
                 return false;
             }
 
             // Find the cart item to be removed
-            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
+            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.CartItemId == cartItemId);
             if (cartItem == null)
             {
-                _logger.LogWarning($"Cart item with product ID: {productId} not found in the cart.");
+                _logger.LogWarning($"Cart item with ID: {cartItemId} not found in the cart.");
                 return false;
             }
 
@@ -267,8 +266,61 @@ namespace ECommerceInfrastructure.Repositories
             // Save changes to the database
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation($"Successfully removed item with product ID: {productId} from the cart.");
+            _logger.LogInformation($"Successfully removed item with ID: {cartItemId} from the cart.");
             return true;
         }
-    }
+        public async Task<bool> IncreaseQuantityAsync(int itemId)
+        {
+            _logger.LogInformation("Increasing quantity for item ID: {ItemId}", itemId);
+
+            var cartItem = await _context.CartItems
+                .Include(ci => ci.Product)
+                .FirstOrDefaultAsync(ci => ci.CartItemId == itemId);
+            if (cartItem == null)
+            {
+                _logger.LogWarning("Item not found for ID: {ItemId}", itemId);
+                return false;
+            }
+
+            var inventory = cartItem.Product.Inventory;
+            if (cartItem.Quantity >= inventory)
+            {
+                _logger.LogWarning("Not enough stock for item ID: {ItemId}", itemId);
+                return false;
+            }
+
+            cartItem.Quantity++;
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation("Successfully increased quantity for item ID: {ItemId}", itemId);
+            return true;
+        }
+
+        public async Task<bool> DecreaseQuantityAsync(int itemId)
+        {
+            _logger.LogInformation("Decreasing quantity for item ID: {ItemId}", itemId);
+
+            var cartItem = await _context.CartItems
+                .FirstOrDefaultAsync(ci => ci.CartItemId == itemId);
+            if (cartItem == null)
+            {
+                _logger.LogWarning("Item not found for ID: {ItemId}", itemId);
+                return false;
+            }
+
+            if (cartItem.Quantity > 1)
+            {
+                cartItem.Quantity--;
+                await _context.SaveChangesAsync();
+                _logger.LogInformation("Successfully decreased quantity for item ID: {ItemId}", itemId);
+                return true;
+            }
+            else
+            {
+                _logger.LogWarning("Cannot decrease quantity below 1 for item ID: {ItemId}", itemId);
+                return false;
+            }
+        }
+
+        }
 }

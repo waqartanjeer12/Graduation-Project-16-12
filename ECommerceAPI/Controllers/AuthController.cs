@@ -17,7 +17,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDTO model)
+        public async Task<IActionResult> Register([FromForm] RegisterDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -46,7 +46,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] loginDTO model)
+        public async Task<IActionResult> Login([FromForm] loginDTO model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

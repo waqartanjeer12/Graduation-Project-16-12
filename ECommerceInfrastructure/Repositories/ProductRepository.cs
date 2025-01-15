@@ -164,7 +164,7 @@ namespace ECommerceInfrastructure.Repositories
                     return null;
                 }
 
-                // Upload main image and get URL
+                // Upload the main image and get URL
                 var mainImageFileName = await _fileService.UploadFileAsync(productCreateDTO.MainImage, "images");
                 var mainImageUrl = $"/files/images/{mainImageFileName}";
 
@@ -342,6 +342,7 @@ namespace ECommerceInfrastructure.Repositories
                     .Where(p => p.Price < p.OriginalPrice)
                     .Select(p => new ProductReadByOriginalPrice
                     {
+                        ProductId=p.Id,
                         Name = p.Name,
                         Description = p.Description,
                         CategoryName = p.Category.Name,

@@ -1,0 +1,548 @@
+2025-01-14 21:40:42.198 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-14 21:40:46.154 +02:00 [ERR] Failed executing DbCommand (81ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [s].[CartItemId], [s].[CartId], [s].[ColorName], [s].[ProductId], [s].[Quantity], [s].[Id], [s].[CategoryId], [s].[Description], [s].[Inventory], [s].[MainImage], [s].[Name], [s].[OriginalPrice], [s].[Price]
+FROM [Carts] AS [c]
+LEFT JOIN (
+    SELECT [c0].[CartItemId], [c0].[CartId], [c0].[ColorName], [c0].[ProductId], [c0].[Quantity], [p].[Id], [p].[CategoryId], [p].[Description], [p].[Inventory], [p].[MainImage], [p].[Name], [p].[OriginalPrice], [p].[Price]
+    FROM [CartItems] AS [c0]
+    INNER JOIN [Products] AS [p] ON [c0].[ProductId] = [p].[Id]
+) AS [s] ON [c].[Id] = [s].[CartId]
+ORDER BY [c].[Id], [s].[CartItemId]
+2025-01-14 21:40:46.209 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'ECommerceInfrastructure.Configurations.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CartItemId'.
+Invalid column name 'ColorName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__211_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:51e00853-d179-4307-8904-649be4934720
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CartItemId'.
+Invalid column name 'ColorName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__211_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:51e00853-d179-4307-8904-649be4934720
+Error Number:207,State:1,Class:16
+2025-01-14 21:40:46.401 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CartItemId'.
+Invalid column name 'ColorName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__211_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at ECommerceInfrastructure.Repositories.CartRepository.GetAllCartItemsAsync() in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\CartRepository.cs:line 149
+   at ECommerceAPI.Controllers.CartController.GetAllCartItems() in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\CartController.cs:line 43
+   at lambda_method6(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+ClientConnectionId:51e00853-d179-4307-8904-649be4934720
+Error Number:207,State:1,Class:16
+2025-01-14 21:43:48.878 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-14 21:43:52.815 +02:00 [ERR] Failed executing DbCommand (77ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [c].[Id], [s].[CartItemId], [s].[CartId], [s].[ColorName], [s].[ProductId], [s].[Quantity], [s].[Id], [s].[CategoryId], [s].[Description], [s].[Inventory], [s].[MainImage], [s].[Name], [s].[OriginalPrice], [s].[Price]
+FROM [Carts] AS [c]
+LEFT JOIN (
+    SELECT [c0].[CartItemId], [c0].[CartId], [c0].[ColorName], [c0].[ProductId], [c0].[Quantity], [p].[Id], [p].[CategoryId], [p].[Description], [p].[Inventory], [p].[MainImage], [p].[Name], [p].[OriginalPrice], [p].[Price]
+    FROM [CartItems] AS [c0]
+    INNER JOIN [Products] AS [p] ON [c0].[ProductId] = [p].[Id]
+) AS [s] ON [c].[Id] = [s].[CartId]
+ORDER BY [c].[Id], [s].[CartItemId]
+2025-01-14 21:43:52.864 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'ECommerceInfrastructure.Configurations.Data.ApplicationDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CartItemId'.
+Invalid column name 'ColorName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__211_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:a9906935-f48e-43c5-8487-81eb094f13db
+Error Number:207,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CartItemId'.
+Invalid column name 'ColorName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__211_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:a9906935-f48e-43c5-8487-81eb094f13db
+Error Number:207,State:1,Class:16
+2025-01-14 21:43:53.057 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid column name 'CartItemId'.
+Invalid column name 'ColorName'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__211_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at ECommerceInfrastructure.Repositories.CartRepository.GetAllCartItemsAsync() in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\CartRepository.cs:line 149
+   at ECommerceAPI.Controllers.CartController.GetAllCartItems() in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\CartController.cs:line 43
+   at lambda_method6(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+ClientConnectionId:a9906935-f48e-43c5-8487-81eb094f13db
+Error Number:207,State:1,Class:16
+2025-01-14 21:49:03.505 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-14 21:49:59.568 +02:00 [INF] جارِ جلب جميع الألوان
+2025-01-14 21:49:59.578 +02:00 [INF] جارِ جلب جميع الألوان.
+2025-01-14 21:49:59.644 +02:00 [INF] تم جلب جميع الألوان بنجاح.
+2025-01-14 21:50:14.327 +02:00 [INF] Received request to add item: ProductId=4, Quantity=20, ColorName=بنفسجي
+2025-01-14 21:50:14.600 +02:00 [INF] Retrieved product: Id=4, Name=تحففف3, Inventory=200
+2025-01-14 21:50:14.602 +02:00 [ERR] Color بنفسجي not found for product ID 4.
+2025-01-14 21:50:45.999 +02:00 [INF] جارِ جلب جميع الألوان
+2025-01-14 21:50:46.000 +02:00 [INF] جارِ جلب جميع الألوان.
+2025-01-14 21:50:46.015 +02:00 [INF] تم جلب جميع الألوان بنجاح.
+2025-01-14 21:50:58.906 +02:00 [INF] بداية جلب منتجات المستخدم
+2025-01-14 21:50:58.938 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-14 21:50:59.016 +02:00 [INF] تم جلب المنتجات للمستخدم بنجاح.
+2025-01-14 21:51:37.834 +02:00 [INF] Received request to add item: ProductId=7, Quantity=20, ColorName=بنفسجي
+2025-01-14 21:51:37.868 +02:00 [INF] Retrieved product: Id=7, Name=كنبيات, Inventory=207
+2025-01-14 21:51:37.870 +02:00 [INF] Selected color: Id=3, Name=بنفسجي
+2025-01-14 21:51:37.875 +02:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2025-01-14 21:55:22.726 +02:00 [INF] Fetching cart with ID: 1 to clear items.
+2025-01-14 21:55:22.791 +02:00 [INF] Removing 3 items from cart with ID: 1.
+2025-01-14 21:55:22.852 +02:00 [INF] Successfully cleared cart with ID: 1.
+2025-01-14 22:11:43.011 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-14 22:20:16.347 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-14 22:22:40.819 +02:00 [INF] بداية حذف المنتج  
+2025-01-14 22:22:41.099 +02:00 [INF] تم حذف الصورة الرئيسية للمنتج 
+2025-01-14 22:22:41.103 +02:00 [INF] تم حذف الصور الإضافية للمنتج 
+2025-01-14 22:22:41.107 +02:00 [INF] تم حذف الصور الإضافية للمنتج 
+2025-01-14 22:22:41.110 +02:00 [INF] تم حذف الصور الإضافية للمنتج 
+2025-01-14 22:22:41.476 +02:00 [INF] تم حذف المنتج بنجاح  
+2025-01-14 22:22:41.531 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Writing to the response body is invalid for responses with status code 204.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.FirstWriteAsyncInternal(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.WritePipeAsync(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at System.Text.Json.PooledByteBufferWriter.FlushAsync(CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-01-14 22:22:41.593 +02:00 [WRN] The response has already started, the error page middleware will not be executed.
+2025-01-14 22:22:41.609 +02:00 [ERR] Connection id "0HN9KR3APE5LR", Request id "0HN9KR3APE5LR:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Writing to the response body is invalid for responses with status code 204.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.FirstWriteAsyncInternal(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.WritePipeAsync(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at System.Text.Json.PooledByteBufferWriter.FlushAsync(CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2025-01-14 22:22:47.804 +02:00 [INF] بداية حذف المنتج  
+2025-01-14 22:22:47.816 +02:00 [INF] تم حذف الصورة الرئيسية للمنتج 
+2025-01-14 22:22:47.820 +02:00 [INF] تم حذف الصور الإضافية للمنتج 
+2025-01-14 22:22:47.823 +02:00 [INF] تم حذف الصور الإضافية للمنتج 
+2025-01-14 22:22:47.825 +02:00 [INF] تم حذف الصور الإضافية للمنتج 
+2025-01-14 22:22:47.840 +02:00 [INF] تم حذف المنتج بنجاح  
+2025-01-14 22:22:47.844 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Writing to the response body is invalid for responses with status code 204.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.FirstWriteAsyncInternal(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.WritePipeAsync(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at System.Text.Json.PooledByteBufferWriter.FlushAsync(CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-01-14 22:22:47.858 +02:00 [WRN] The response has already started, the error page middleware will not be executed.
+2025-01-14 22:22:47.861 +02:00 [ERR] Connection id "0HN9KR3APE5LT", Request id "0HN9KR3APE5LT:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Writing to the response body is invalid for responses with status code 204.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.FirstWriteAsyncInternal(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.WritePipeAsync(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at System.Text.Json.PooledByteBufferWriter.FlushAsync(CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2025-01-14 22:22:52.766 +02:00 [INF] بداية حذف المنتج  
+2025-01-14 22:22:52.777 +02:00 [WRN] لم يتم العثور على المنتج 
+2025-01-14 22:24:25.617 +02:00 [INF] بداية حذف المنتج  
+2025-01-14 22:24:25.635 +02:00 [INF] تم حذف الصورة الرئيسية للمنتج 
+2025-01-14 22:24:25.654 +02:00 [INF] تم حذف المنتج بنجاح  
+2025-01-14 22:24:25.658 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Writing to the response body is invalid for responses with status code 204.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.FirstWriteAsyncInternal(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.WritePipeAsync(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at System.Text.Json.PooledByteBufferWriter.FlushAsync(CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-01-14 22:24:25.677 +02:00 [WRN] The response has already started, the error page middleware will not be executed.
+2025-01-14 22:24:25.680 +02:00 [ERR] Connection id "0HN9KR3APE5LV", Request id "0HN9KR3APE5LV:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Writing to the response body is invalid for responses with status code 204.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.FirstWriteAsyncInternal(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.WritePipeAsync(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at System.Text.Json.PooledByteBufferWriter.FlushAsync(CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2025-01-14 22:24:32.054 +02:00 [INF] بداية حذف المنتج  
+2025-01-14 22:24:32.080 +02:00 [INF] تم حذف الصورة الرئيسية للمنتج 
+2025-01-14 22:24:32.096 +02:00 [INF] تم حذف المنتج بنجاح  
+2025-01-14 22:24:32.100 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Writing to the response body is invalid for responses with status code 204.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.FirstWriteAsyncInternal(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.WritePipeAsync(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at System.Text.Json.PooledByteBufferWriter.FlushAsync(CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-01-14 22:24:32.169 +02:00 [WRN] The response has already started, the error page middleware will not be executed.
+2025-01-14 22:24:32.180 +02:00 [ERR] Connection id "0HN9KR3APE5M0", Request id "0HN9KR3APE5M0:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Writing to the response body is invalid for responses with status code 204.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.FirstWriteAsyncInternal(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.WritePipeAsync(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at System.Text.Json.PooledByteBufferWriter.FlushAsync(CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2025-01-14 22:24:37.173 +02:00 [INF] بداية حذف المنتج  
+2025-01-14 22:24:37.183 +02:00 [INF] تم حذف الصورة الرئيسية للمنتج 
+2025-01-14 22:24:37.196 +02:00 [INF] تم حذف المنتج بنجاح  
+2025-01-14 22:24:37.200 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Writing to the response body is invalid for responses with status code 204.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.FirstWriteAsyncInternal(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.WritePipeAsync(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at System.Text.Json.PooledByteBufferWriter.FlushAsync(CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-01-14 22:24:37.216 +02:00 [WRN] The response has already started, the error page middleware will not be executed.
+2025-01-14 22:24:37.218 +02:00 [ERR] Connection id "0HN9KR3APE5M1", Request id "0HN9KR3APE5M1:00000001": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Writing to the response body is invalid for responses with status code 204.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.FirstWriteAsyncInternal(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.WritePipeAsync(ReadOnlyMemory`1 data, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at System.Text.Json.PooledByteBufferWriter.FlushAsync(CancellationToken cancellationToken)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.SerializeAsync(PipeWriter pipeWriter, T rootValue, Int32 flushThreshold, CancellationToken cancellationToken, Object rootValueBoxed)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+   at Microsoft.WebTools.BrowserLink.Net.BrowserLinkMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserRefreshMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+2025-01-14 22:24:42.731 +02:00 [INF] بداية حذف المنتج  
+2025-01-14 22:24:42.753 +02:00 [WRN] لم يتم العثور على المنتج 
+2025-01-14 22:35:59.891 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-14 22:59:59.435 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-14 23:00:00.097 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-14 23:00:04.813 +02:00 [INF] تم إضافة المنتج بنجاح : كسثخب
+2025-01-14 23:00:43.199 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-14 23:00:43.323 +02:00 [INF] تم إضافة المنتج بنجاح : كنب
+2025-01-14 23:00:52.597 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-14 23:00:52.722 +02:00 [INF] تم إضافة المنتج بنجاح : كنب
+2025-01-14 23:01:05.972 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-14 23:01:06.009 +02:00 [WRN] يرجى إدخال اسم اللون: بيثيي
+2025-01-14 23:01:06.025 +02:00 [INF] تم إضافة المنتج بنجاح : كنب
+2025-01-14 23:01:11.311 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-14 23:01:11.352 +02:00 [WRN] يرجى إدخال اسم اللون: بيثيي
+2025-01-14 23:01:11.363 +02:00 [INF] تم إضافة المنتج بنجاح : كنب
+2025-01-14 23:01:15.652 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-14 23:01:15.683 +02:00 [WRN] يرجى إدخال اسم اللون: بيثيي
+2025-01-14 23:01:15.702 +02:00 [INF] تم إضافة المنتج بنجاح : كنب
+2025-01-14 23:01:40.398 +02:00 [INF] بداية جلب المنتجات للأدمن
+2025-01-14 23:01:40.653 +02:00 [INF] تم جلب منتجات الأدمن بنجاح
+2025-01-14 23:02:47.381 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-14 23:02:47.405 +02:00 [WRN] يرجى إدخال اسم اللون: بيثيي
+2025-01-14 23:02:47.417 +02:00 [INF] تم إضافة المنتج بنجاح : كنب
+2025-01-14 23:12:37.374 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-14 23:12:37.415 +02:00 [INF] تم إضافة المنتج بنجاح : مزنون 
+2025-01-14 23:12:47.184 +02:00 [INF] بداية جلب المنتجات للأدمن
+2025-01-14 23:12:47.205 +02:00 [INF] تم جلب منتجات الأدمن بنجاح
+2025-01-14 23:14:35.358 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-14 23:14:35.462 +02:00 [INF] Product updated successfully
+2025-01-14 23:15:10.410 +02:00 [INF] Product updated successfully
+2025-01-14 23:15:45.022 +02:00 [INF] بداية جلب منتجات المستخدم
+2025-01-14 23:15:45.033 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-14 23:15:45.072 +02:00 [INF] تم جلب المنتجات للمستخدم بنجاح.
+2025-01-14 23:16:11.869 +02:00 [INF] Received request to add item: ProductId=7, Quantity=21, ColorName=خمري
+2025-01-14 23:16:11.897 +02:00 [INF] Retrieved product: Id=7, Name=كنبيات, Inventory=207
+2025-01-14 23:16:11.900 +02:00 [INF] Selected color: Id=1, Name=خمري
+2025-01-14 23:16:11.905 +02:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2025-01-14 23:16:35.616 +02:00 [INF] Received request to add item: ProductId=7, Quantity=2, ColorName=خمري
+2025-01-14 23:16:35.683 +02:00 [INF] Retrieved product: Id=7, Name=كنبيات, Inventory=207
+2025-01-14 23:16:35.692 +02:00 [INF] Selected color: Id=1, Name=خمري
+2025-01-14 23:16:53.978 +02:00 [INF] Received request to add item: ProductId=8, Quantity=2, ColorName=خمري
+2025-01-14 23:16:53.986 +02:00 [INF] Retrieved product: Id=8, Name=غرف نوم متنوعة, Inventory=214
+2025-01-14 23:16:53.987 +02:00 [INF] Selected color: Id=1, Name=خمري
+2025-01-14 23:17:03.330 +02:00 [INF] Received request to add item: ProductId=8, Quantity=2, ColorName=بنفسجي
+2025-01-14 23:17:03.341 +02:00 [INF] Retrieved product: Id=8, Name=غرف نوم متنوعة, Inventory=214
+2025-01-14 23:17:03.343 +02:00 [ERR] Color بنفسجي not found for product ID 8.
+2025-01-14 23:17:17.096 +02:00 [INF] Received request to add item: ProductId=8, Quantity=2, ColorName=أزرق سماوي
+2025-01-14 23:17:17.105 +02:00 [INF] Retrieved product: Id=8, Name=غرف نوم متنوعة, Inventory=214
+2025-01-14 23:17:17.108 +02:00 [ERR] Color أزرق سماوي not found for product ID 8.
+2025-01-14 23:17:22.471 +02:00 [INF] Received request to add item: ProductId=9, Quantity=2, ColorName=أزرق سماوي
+2025-01-14 23:17:22.487 +02:00 [INF] Retrieved product: Id=9, Name=كنب, Inventory=214
+2025-01-14 23:17:22.488 +02:00 [ERR] Color أزرق سماوي not found for product ID 9.
+2025-01-14 23:17:29.019 +02:00 [INF] Received request to add item: ProductId=10, Quantity=2, ColorName=أزرق سماوي
+2025-01-14 23:17:29.025 +02:00 [INF] Retrieved product: Id=10, Name=كنب, Inventory=214
+2025-01-14 23:17:29.026 +02:00 [ERR] Color أزرق سماوي not found for product ID 10.
+2025-01-14 23:17:34.381 +02:00 [INF] Received request to add item: ProductId=11, Quantity=2, ColorName=أزرق سماوي
+2025-01-14 23:17:34.385 +02:00 [INF] Retrieved product: Id=11, Name=كنب, Inventory=214
+2025-01-14 23:17:34.387 +02:00 [ERR] Color أزرق سماوي not found for product ID 11.
+2025-01-14 23:17:38.716 +02:00 [INF] Received request to add item: ProductId=12, Quantity=2, ColorName=أزرق سماوي
+2025-01-14 23:17:38.722 +02:00 [INF] Retrieved product: Id=12, Name=كنب, Inventory=214
+2025-01-14 23:17:38.723 +02:00 [ERR] Color أزرق سماوي not found for product ID 12.
+2025-01-14 23:17:42.957 +02:00 [INF] Received request to add item: ProductId=13, Quantity=2, ColorName=أزرق سماوي
+2025-01-14 23:17:42.966 +02:00 [INF] Retrieved product: Id=13, Name=كنب, Inventory=214
+2025-01-14 23:17:42.968 +02:00 [ERR] Color أزرق سماوي not found for product ID 13.
+2025-01-14 23:17:49.181 +02:00 [INF] Received request to add item: ProductId=14, Quantity=2, ColorName=أزرق سماوي
+2025-01-14 23:17:49.188 +02:00 [INF] Retrieved product: Id=14, Name=كنب, Inventory=214
+2025-01-14 23:17:49.190 +02:00 [ERR] Color أزرق سماوي not found for product ID 14.
+2025-01-14 23:17:56.216 +02:00 [INF] Received request to add item: ProductId=15, Quantity=2, ColorName=أزرق سماوي
+2025-01-14 23:17:56.222 +02:00 [INF] Retrieved product: Id=15, Name=مزنون , Inventory=214
+2025-01-14 23:17:56.223 +02:00 [INF] Selected color: Id=2, Name=أزرق سماوي
+2025-01-14 23:18:19.992 +02:00 [INF] Received request to add item: ProductId=15, Quantity=2, ColorName=خمري
+2025-01-14 23:18:20.003 +02:00 [INF] Retrieved product: Id=15, Name=مزنون , Inventory=214
+2025-01-14 23:18:20.004 +02:00 [ERR] Color خمري not found for product ID 15.
+2025-01-14 23:18:28.848 +02:00 [INF] Received request to add item: ProductId=15, Quantity=2, ColorName=بنفسجي
+2025-01-14 23:18:28.860 +02:00 [INF] Retrieved product: Id=15, Name=مزنون , Inventory=214
+2025-01-14 23:18:28.934 +02:00 [ERR] Color بنفسجي not found for product ID 15.
+2025-01-14 23:18:31.756 +02:00 [INF] Received request to add item: ProductId=15, Quantity=2, ColorName=بنفسجي
+2025-01-14 23:18:31.761 +02:00 [INF] Retrieved product: Id=15, Name=مزنون , Inventory=214
+2025-01-14 23:18:31.763 +02:00 [ERR] Color بنفسجي not found for product ID 15.
+2025-01-14 23:18:39.449 +02:00 [INF] بداية جلب منتجات المستخدم
+2025-01-14 23:18:39.538 +02:00 [INF] تم جلب المنتجات للمستخدم بنجاح.
+2025-01-14 23:19:53.342 +02:00 [INF] Received request to add item: ProductId=10, Quantity=2, ColorName=بنفسجي
+2025-01-14 23:19:53.367 +02:00 [INF] Retrieved product: Id=10, Name=كنب, Inventory=214
+2025-01-14 23:19:53.369 +02:00 [INF] Selected color: Id=3, Name=بنفسجي
+2025-01-14 23:20:36.285 +02:00 [INF] Received request to add item: ProductId=10, Quantity=2, ColorName=خمري
+2025-01-14 23:20:36.355 +02:00 [INF] Retrieved product: Id=10, Name=كنب, Inventory=214
+2025-01-14 23:20:36.383 +02:00 [INF] Selected color: Id=1, Name=خمري
+2025-01-14 23:39:43.610 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-14 23:59:58.140 +02:00 [WRN] Failed to determine the https port for redirect.

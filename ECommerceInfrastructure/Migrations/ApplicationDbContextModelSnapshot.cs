@@ -61,14 +61,18 @@ namespace ECommerceInfrastructure.Migrations
 
             modelBuilder.Entity("ECommerceCore.Models.CartItem", b =>
                 {
-                    b.Property<int>("CatrItemId")
+                    b.Property<int>("CartItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CatrItemId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"));
 
                     b.Property<int>("CartId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ColorName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -76,7 +80,7 @@ namespace ECommerceInfrastructure.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("CatrItemId");
+                    b.HasKey("CartItemId");
 
                     b.HasIndex("CartId");
 

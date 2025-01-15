@@ -13,9 +13,6 @@ using ECommerceInfrastructure.Configurations.Identity;
 using ECommerceCore.Interfaces;
 using ECommerceInfrastructure.Repositories;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.FileProviders;
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,25 +34,22 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDbContext<AppIdentityDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"))
-           .ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning)));  // تجاهل التحذير
+           .ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning)));
 
-
-
-//there is interfaces and implemintations must addedd in the services to can use methods like createAsync i use the above line
+// Add Identity services
 builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
 {
+    // Customize password settings if needed
     options.Password.RequireUppercase = true;
     options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = true;
+    
     options.Password.RequireDigit = true;
-
-    //password setting
-    // Allow Arabic letters and spaces
-
-}).AddEntityFrameworkStores<AppIdentityDbContext>()
-//.AddEntityFrameworkStores<AppIdentityDbContext>(); it contain interface and implmentation
+   
+})
+.AddEntityFrameworkStores<AppIdentityDbContext>()
 .AddDefaultTokenProviders();
 
+// Register application services
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -68,9 +62,9 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins", policy =>
     {
-        policy.AllowAnyOrigin()    // This allows any origin
-              .AllowAnyHeader()   // Allow any headers
-              .AllowAnyMethod();  // Allow any HTTP method
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
     });
 });
 
@@ -98,10 +92,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-/*IServiceCollection serviceCollection = builder.Services.Configure<IdentityOptions>(options =>
-{
-    options.SignIn.RequireConfirmedEmail = true;
-});*/
 
 app.UseHttpsRedirection();
 
@@ -110,7 +100,6 @@ app.UseCors("AllowAllOrigins");
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 
 var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "files", "images");
 
@@ -130,11 +119,6 @@ app.UseStaticFiles(new StaticFileOptions
     ),
     RequestPath = "/files"  // This will make images accessible via /files/{fileName}
 });
-
-
-
-
-
 
 app.MapControllers();
 

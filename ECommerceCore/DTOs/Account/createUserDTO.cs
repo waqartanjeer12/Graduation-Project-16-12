@@ -6,7 +6,7 @@ namespace ECommerceCore.DTOs.Account
     {
         [Required(ErrorMessage = "الاسم الكامل مطلوب.")]
         [StringLength(100, ErrorMessage = "الاسم الكامل يجب ألا يتجاوز 100 حرف.")]
-        [RegularExpression(@"^[ا-ي\s]*$", ErrorMessage = "اسم المستخدم يجب أن يحتوي على أحرف عربية، أو مسافات فقط.")]
+      
         public string name { get; set; }
 
         [Required(ErrorMessage = "البريد الإلكتروني مطلوب.")]

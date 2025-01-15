@@ -1,0 +1,15 @@
+2025-01-09 19:26:54.661 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-09 19:26:55.344 +02:00 [INF] Received request to add item: ProductId=4, Quantity=2, ColorName=خمري
+2025-01-09 19:26:58.793 +02:00 [INF] Retrieved product: Id=4, Name=تحففف3, Inventory=200
+2025-01-09 19:26:58.794 +02:00 [ERR] No colors found for product ID 4.
+2025-01-09 19:27:14.039 +02:00 [INF] Received request to add item: ProductId=4, Quantity=2, ColorName=أزرق سماوي
+2025-01-09 19:27:14.084 +02:00 [INF] Retrieved product: Id=4, Name=تحففف3, Inventory=200
+2025-01-09 19:27:14.085 +02:00 [ERR] No colors found for product ID 4.
+2025-01-09 19:27:29.706 +02:00 [INF] Received request to add item: ProductId=4, Quantity=2, ColorName=بنفسجي
+2025-01-09 19:27:29.812 +02:00 [INF] Retrieved product: Id=4, Name=تحففف3, Inventory=200
+2025-01-09 19:27:29.826 +02:00 [ERR] No colors found for product ID 4.
+2025-01-09 19:27:45.448 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-09 19:28:25.682 +02:00 [INF] Received request to add item: ProductId=1, Quantity=2, ColorName=خمري
+2025-01-09 19:28:25.699 +02:00 [INF] Retrieved product: Id=1, Name=كنبيات, Inventory=191
+2025-01-09 19:28:25.700 +02:00 [INF] Selected color: Id=1, Name=خمري
+2025-01-09 19:28:25.705 +02:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.

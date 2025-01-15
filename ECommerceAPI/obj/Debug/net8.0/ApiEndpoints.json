@@ -29,9 +29,14 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "model",
-        "Type": "ECommerceCore.DTOs.Account.loginDTO",
-        "IsRequired": true
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -45,9 +50,24 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "model",
-        "Type": "RegisterDTO",
-        "IsRequired": true
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ConfirmPassword",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -113,6 +133,38 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.CartController",
+    "Method": "DecreaseQuantity",
+    "RelativePath": "api/Cart/decrease-quantity",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.CartController",
+    "Method": "IncreaseQuantity",
+    "RelativePath": "api/Cart/increase-quantity",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.CartController",

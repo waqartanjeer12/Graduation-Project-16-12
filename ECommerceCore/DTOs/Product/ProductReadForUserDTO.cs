@@ -30,6 +30,7 @@ namespace ECommerceCore.DTOs.Product
         [Range(0, double.MaxValue, ErrorMessage = "يرجى إدخال سعر لا يقل عن 0")]
         [Precision(18, 2)] // Specify precision and scale for Price
         public decimal? OriginalPrice { get; set; }
+        [Required(ErrorMessage = "يرجى ادخال تفاصيل اللون")]
         public List<ColorReadForUserDTO> ColorDetails { get; set; }
     }
 }

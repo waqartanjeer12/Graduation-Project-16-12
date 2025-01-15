@@ -17,7 +17,7 @@ namespace ECommerceCore.DTOs.Cart
         [Range(1, int.MaxValue, ErrorMessage = "الكمية يجب أن تكون على الأقل 1")]
         public int Quantity { get; set; }
 
-        
+        [Required(ErrorMessage = "يرجى إدخال اسم اللون")]
         public String ColorName { get; set; }
     }
 }

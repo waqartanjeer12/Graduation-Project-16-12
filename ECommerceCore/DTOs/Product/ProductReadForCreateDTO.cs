@@ -33,7 +33,7 @@ namespace ECommerceCore.DTOs.Product
         [Range(0, int.MaxValue, ErrorMessage = "يجب أن تكون كمية المخزون 0 أو أكبر")]
         public int Inventory { get; set; }
 
-
+        [Required(ErrorMessage = "يرجى ادخال تفاصيل اللون")]
         public List<ColorReadForUserDTO> ColorDetails { get; set; }
     }
 }

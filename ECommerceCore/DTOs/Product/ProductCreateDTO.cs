@@ -1,6 +1,5 @@
 ﻿using ECommerceCore.DTOs.Color;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +11,6 @@ namespace ECommerceCore.DTOs.Product
         [Required(ErrorMessage = "يرجى ادخال اسم المنتج")]
         public string Name { get; set; }
 
-        
         public string? Description { get; set; }
 
         [Required(ErrorMessage = "يرجى اختيار فئة المنتج")]
@@ -21,13 +19,11 @@ namespace ECommerceCore.DTOs.Product
         [Required(ErrorMessage = "يرجى تحميل الصورة الرئيسية للمنتج")]
         public IFormFile MainImage { get; set; }
 
-        
         public List<IFormFile>? AdditionalImages { get; set; }
 
         [Required(ErrorMessage = "يرجى إدخال السعر الخاص بالمنتج")]
         [Range(0.01, double.MaxValue, ErrorMessage = "يجب أن يكون السعر قيمة موجبة")]
         [Precision(18, 2)] // Specify precision and scale for Price
-        
         public decimal Price { get; set; }
 
         [Range(0, double.MaxValue, ErrorMessage = "يرجى إدخال سعر لا يقل عن 0")]
@@ -38,9 +34,8 @@ namespace ECommerceCore.DTOs.Product
         [Range(0, int.MaxValue, ErrorMessage = "يجب أن تكون كمية المخزون 0 أو أكبر")]
         public int Inventory { get; set; }
 
-
-
-        public List<string>? ColorNames{ get; set; }
+        [Required(ErrorMessage = "يرجى إدخال أسماء الألوان الخاصة بالمنتج")]
+        public List<string> ColorNames { get; set; }
 
         // Optional properties for URLs
         public string? MainImageUrl { get; set; }

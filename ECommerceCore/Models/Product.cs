@@ -9,7 +9,7 @@ public class Product
     [Key]
     public int Id { get; set; }
 
-    [Required(ErrorMessage = "اسم المنتج مطلوب")]
+    [Required(ErrorMessage = "يرجى ادخال اسم المنتج ")]
     [MaxLength(200, ErrorMessage = "يجب ألا يزيد اسم المنتج عن 200 حرف.")]
     public string Name { get; set; }
 

@@ -1,0 +1,98 @@
+2025-01-15 00:00:31.679 +02:00 [INF] Received request to add item: ProductId=13, Quantity=2, ColorName=خمري
+2025-01-15 00:00:31.815 +02:00 [INF] Retrieved product: Id=13, Name=كنب, Inventory=214
+2025-01-15 00:00:31.818 +02:00 [INF] Selected color: Id=1, Name=خمري
+2025-01-15 00:00:31.832 +02:00 [WRN] The query uses the 'First'/'FirstOrDefault' operator without 'OrderBy' and filter operators. This may lead to unpredictable results.
+2025-01-15 00:02:01.262 +02:00 [INF] Received request to add item: ProductId=13, Quantity=1000, ColorName=خمري
+2025-01-15 00:02:01.318 +02:00 [INF] Retrieved product: Id=13, Name=كنب, Inventory=214
+2025-01-15 00:02:01.320 +02:00 [INF] Selected color: Id=1, Name=خمري
+2025-01-15 00:02:01.335 +02:00 [WRN] Insufficient inventory for product 13. Requested: 1000, Available: 214
+2025-01-15 00:02:11.697 +02:00 [INF] Received request to add item: ProductId=13, Quantity=100, ColorName=خمري
+2025-01-15 00:02:11.738 +02:00 [INF] Retrieved product: Id=13, Name=كنب, Inventory=214
+2025-01-15 00:02:11.740 +02:00 [INF] Selected color: Id=1, Name=خمري
+2025-01-15 01:48:46.728 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-15 01:49:23.052 +02:00 [INF] Decreasing quantity for item ID: 9
+2025-01-15 01:49:23.260 +02:00 [INF] Successfully decreased quantity for item ID: 9
+2025-01-15 01:49:57.266 +02:00 [INF] Decreasing quantity for item ID: 9
+2025-01-15 01:49:57.283 +02:00 [INF] Successfully decreased quantity for item ID: 9
+2025-01-15 01:50:11.336 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:11.377 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:13.502 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:13.524 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:14.413 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:14.485 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:15.089 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:15.101 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:15.660 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:15.677 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:16.231 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:16.254 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:16.745 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:16.765 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:16.983 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:17.003 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:17.201 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:17.289 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:17.486 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:17.533 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:17.744 +02:00 [INF] Increasing quantity for item ID: 9
+2025-01-15 01:50:17.783 +02:00 [INF] Successfully increased quantity for item ID: 9
+2025-01-15 01:50:43.007 +02:00 [INF] Decreasing quantity for item ID: 10
+2025-01-15 01:50:43.027 +02:00 [INF] Successfully decreased quantity for item ID: 10
+2025-01-15 01:50:45.701 +02:00 [INF] Decreasing quantity for item ID: 10
+2025-01-15 01:50:45.713 +02:00 [WRN] Cannot decrease quantity below 1 for item ID: 10
+2025-01-15 01:50:59.818 +02:00 [INF] Increasing quantity for item ID: 10
+2025-01-15 01:50:59.833 +02:00 [INF] Successfully increased quantity for item ID: 10
+2025-01-15 01:51:00.425 +02:00 [INF] Increasing quantity for item ID: 10
+2025-01-15 01:51:00.528 +02:00 [INF] Successfully increased quantity for item ID: 10
+2025-01-15 01:51:01.201 +02:00 [INF] Increasing quantity for item ID: 10
+2025-01-15 01:51:01.242 +02:00 [INF] Successfully increased quantity for item ID: 10
+2025-01-15 01:51:01.793 +02:00 [INF] Increasing quantity for item ID: 10
+2025-01-15 01:51:01.815 +02:00 [INF] Successfully increased quantity for item ID: 10
+2025-01-15 01:51:02.624 +02:00 [INF] Increasing quantity for item ID: 10
+2025-01-15 01:51:02.639 +02:00 [INF] Successfully increased quantity for item ID: 10
+2025-01-15 01:51:02.789 +02:00 [INF] Increasing quantity for item ID: 10
+2025-01-15 01:51:02.817 +02:00 [INF] Successfully increased quantity for item ID: 10
+2025-01-15 01:51:03.382 +02:00 [INF] Increasing quantity for item ID: 10
+2025-01-15 01:51:03.400 +02:00 [INF] Successfully increased quantity for item ID: 10
+2025-01-15 01:51:03.999 +02:00 [INF] Increasing quantity for item ID: 10
+2025-01-15 01:51:04.014 +02:00 [INF] Successfully increased quantity for item ID: 10
+2025-01-15 02:03:42.028 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-15 02:06:05.065 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-15 02:20:28.549 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-15 02:24:06.842 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-15 02:24:10.466 +02:00 [ERR] Failed executing DbCommand (123ms) [Parameters=[@__normalizedUserName_0='?' (Size = 256)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [a].[Id], [a].[AccessFailedCount], [a].[ConcurrencyStamp], [a].[Email], [a].[EmailConfirmationExpiry], [a].[EmailConfirmed], [a].[IsActive], [a].[LockoutEnabled], [a].[LockoutEnd], [a].[NormalizedEmail], [a].[NormalizedUserName], [a].[PasswordHash], [a].[PhoneNumber], [a].[PhoneNumberConfirmed], [a].[SecurityStamp], [a].[TwoFactorEnabled], [a].[UserName], [a].[address], [a].[createdAt], [a].[img]
+FROM [AspNetUsers] AS [a]
+WHERE [a].[NormalizedUserName] = @__normalizedUserName_0
+2025-01-15 02:24:10.529 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'ECommerceInfrastructure.Configurations.Identity.AppIdentityDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'AspNetUsers'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__211_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:f585f36d-f07c-4ac6-b4d7-7dd05027ac7e
+Error Number:208,State:1,Class:16
+Microsoft.Data.SqlClient.SqlException (0x80131904): Invalid object name 'AspNetUsers'.
+   at Microsoft.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__211_0(Task`1 result)
+   at System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+ClientConnectionId:f585f36d-f07c-4ac6-b4d7-7dd05027ac7e
+Error Number:208,State:1,Class:16
+2025-01-15 02:26:44.719 +02:00 [WRN] Failed to determine the https port for redirect.

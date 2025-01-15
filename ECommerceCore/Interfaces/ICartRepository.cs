@@ -8,8 +8,9 @@ namespace ECommerceInfrastructure.Repositories
         Task<CartReadAddItemsToCartDTO> AddItemToCartAsync(CartAddItemsToCartDTO addItemDto);
         Task <List<CartGetAllItemsDTO>> GetAllCartItemsAsync();
         Task<bool> ClearCartAsync(int cartId);
-        Task<bool> RemoveItemFromCartAsync(int productId);
-
+        Task<bool> RemoveItemFromCartAsync(int cartItemId);
+        Task<bool> IncreaseQuantityAsync(int itemId);
+        Task<bool> DecreaseQuantityAsync(int itemId);
 
     }
 }
