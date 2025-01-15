@@ -65,12 +65,17 @@ namespace ECommerceAPI.Controllers
             // Return a 204 No Content response if the cart was cleared successfully
             return NoContent();
         }
+        [HttpDelete("clear-selected/{cartId}/{itemIds}")]
+       /* public async Task<IActionResult>  ClearCartItemsByItemIdsAsync([FromForm]int cartId,[FromForm] int[] itemIds)
+        {
 
+
+        }*/
         [HttpDelete("remove/{productId}")]
-        public async Task<IActionResult> RemoveItemFromCart(int productId)
+        public async Task<IActionResult> RemoveItemFromCart(int itemid)
         {
             // Call the repository method to remove the item from the cart
-            var result = await _repository.RemoveItemFromCartAsync(productId);
+            var result = await _repository.RemoveItemFromCartAsync(itemid);
 
             // If the item was not found or removed, return a 404 Not Found response
             if (!result)

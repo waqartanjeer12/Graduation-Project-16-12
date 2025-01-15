@@ -151,11 +151,7 @@ namespace ECommerceInfrastructure.Repositories
                 .ThenInclude(ci => ci.Product)
                 .ToListAsync();
 
-            if (carts == null || !carts.Any())
-            {
-                _logger.LogInformation("Cart is empty");
-                return null;
-            }
+            
 
             // List to store the result
             var result = new List<CartGetAllItemsDTO>();
@@ -237,7 +233,43 @@ namespace ECommerceInfrastructure.Repositories
             _logger.LogInformation($"Successfully cleared cart with ID: {cartId}.");
             return true;
         }
+        public async Task<bool> ClearCartItemsByItemIdsAsync(int cartId, int[] itemIds)
+        {
+            _logger.LogInformation($"Fetching cart with ID: {cartId} and clearing items with specified item IDs.");
 
+            // Fetch the cart with the specified cartId
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .FirstOrDefaultAsync(c => c.Id == cartId);
+
+            // If the cart is not found, log and return false
+            if (cart == null)
+            {
+                _logger.LogWarning($"Cart with ID: {cartId} not found.");
+                return false;
+            }
+
+            // Filter the cart items to be removed based on the specified item IDs
+            var itemsToRemove = cart.CartItems
+                .Where(ci => itemIds.Contains(ci.CartItemId)) // 
+                .ToList();
+
+            if (itemsToRemove.Count == 0)
+            {
+                _logger.LogWarning($"No items found in cart with ID: {cartId} matching the specified item IDs.");
+                return false;
+            }
+
+            // Remove the filtered cart items
+            _logger.LogInformation($"Removing {itemsToRemove.Count} items from cart with ID: {cartId}.");
+            _context.CartItems.RemoveRange(itemsToRemove);
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation($"Successfully cleared specified items from cart with ID: {cartId}.");
+            return true;
+        }
         public async Task<bool> RemoveItemFromCartAsync(int cartItemId)
         {
             // Fetch the cart that contains the item with the specified cartItemId
