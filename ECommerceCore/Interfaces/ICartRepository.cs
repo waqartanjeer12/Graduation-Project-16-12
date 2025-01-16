@@ -9,7 +9,7 @@ namespace ECommerceInfrastructure.Repositories
         Task <List<CartGetAllItemsDTO>> GetAllCartItemsAsync();
         
        Task<bool> ClearCartItemsByItemIdsAsync(int cartId, int[] itemIds);
-        
+        Task<bool> RemoveItemFromCartAsync(int cartItemId);
         Task<bool> IncreaseQuantityAsync(int itemId);
         Task<bool> DecreaseQuantityAsync(int itemId);
 

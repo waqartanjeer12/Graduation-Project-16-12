@@ -21,6 +21,7 @@ namespace ECommerceInfrastructure.Repositories
             _logger = logger;
         }
 
+
         public async Task<CartReadAddItemsToCartDTO> AddItemToCartAsync(CartAddItemsToCartDTO addItemDto)
         {
             if (addItemDto == null)
@@ -32,9 +33,10 @@ namespace ECommerceInfrastructure.Repositories
             // Log the incoming addItemDto details
             _logger.LogInformation($"Received request to add item: ProductId={addItemDto.ProductId}, Quantity={addItemDto.Quantity}, ColorName={addItemDto.ColorName}");
 
+            // Fetch the product and include its colors
             var product = await _context.Products
                 .Include(p => p.Colors)
-                .ThenInclude(pc => pc.Color)
+                    .ThenInclude(pc => pc.Color)
                 .FirstOrDefaultAsync(p => p.Id == addItemDto.ProductId);
 
             if (product == null)
@@ -46,7 +48,8 @@ namespace ECommerceInfrastructure.Repositories
             // Log the retrieved product details
             _logger.LogInformation($"Retrieved product: Id={product.Id}, Name={product.Name}, Inventory={product.Inventory}");
 
-            var selectedColor = product.Colors.FirstOrDefault(c => c.Color != null && c.Color.Name == addItemDto.ColorName);
+            // Find the selected color (case-insensitive comparison)
+            var selectedColor = product.Colors.FirstOrDefault(c => c.Color != null && c.Color.Name.Equals(addItemDto.ColorName, StringComparison.OrdinalIgnoreCase));
 
             if (selectedColor == null)
             {
@@ -60,9 +63,10 @@ namespace ECommerceInfrastructure.Repositories
             if (product.Inventory < addItemDto.Quantity)
             {
                 _logger.LogWarning($"Insufficient inventory for product {addItemDto.ProductId}. Requested: {addItemDto.Quantity}, Available: {product.Inventory}");
-                return null;
+                return null;  // Return null to indicate failure due to insufficient inventory
             }
 
+            // Fetch or create a cart for the user (assuming user context is available)
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
@@ -70,54 +74,42 @@ namespace ECommerceInfrastructure.Repositories
 
             if (cart == null)
             {
-                _logger.LogWarning("There is no cart for this user.");
-                return null;
+                cart = new Cart
+                {
+                    CartItems = new List<CartItem>()
+                };
+                _context.Carts.Add(cart);
             }
 
-            var existingItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == addItemDto.ProductId && ci.ColorName == addItemDto.ColorName);
+            // Check if the item already exists in the cart with the same product ID and color name
+            var existingItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == addItemDto.ProductId && ci.ColorName.Equals(addItemDto.ColorName, StringComparison.OrdinalIgnoreCase));
 
             int updatedQuantity;
             CartItem cartItem;
             if (existingItem != null)
             {
+                // Update the quantity for the existing item
                 existingItem.Quantity += addItemDto.Quantity;
                 updatedQuantity = existingItem.Quantity;
                 cartItem = existingItem;
             }
             else
             {
-                var existingProductItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == addItemDto.ProductId);
-
-                if (existingProductItem != null)
+                // Add a new item to the cart
+                cartItem = new CartItem
                 {
-                    // Product exists but with a different color, add as a new item
-                    cartItem = new CartItem
-                    {
-                        ProductId = addItemDto.ProductId,
-                        Quantity = addItemDto.Quantity,
-                        Cart = cart,
-                        ColorName = addItemDto.ColorName
-                    };
-                    cart.CartItems.Add(cartItem);
-                    updatedQuantity = addItemDto.Quantity;
-                }
-                else
-                {
-                    // Product does not exist in the cart, add as a new item
-                    cartItem = new CartItem
-                    {
-                        ProductId = addItemDto.ProductId,
-                        Quantity = addItemDto.Quantity,
-                        Cart = cart,
-                        ColorName = addItemDto.ColorName
-                    };
-                    cart.CartItems.Add(cartItem);
-                    updatedQuantity = addItemDto.Quantity;
-                }
+                    ProductId = addItemDto.ProductId,
+                    Quantity = addItemDto.Quantity,
+                    Cart = cart,
+                    ColorName = addItemDto.ColorName
+                };
+                cart.CartItems.Add(cartItem);
+                updatedQuantity = addItemDto.Quantity;
             }
 
             await _context.SaveChangesAsync();
 
+            // Prepare the result DTO
             var cartReadProducts = new CartReadProducts
             {
                 ProductId = product.Id,
@@ -143,7 +135,6 @@ namespace ECommerceInfrastructure.Repositories
 
             return cartReadAddItemsToCartDto;
         }
-
         public async Task<List<CartGetAllItemsDTO>> GetAllCartItemsAsync()
         {
             // Fetch all carts including related entities
@@ -243,7 +234,37 @@ namespace ECommerceInfrastructure.Repositories
             _logger.LogInformation($"Successfully cleared specified items from cart with ID: {cartId}.");
             return true;
         }
-        
+        public async Task<bool> RemoveItemFromCartAsync(int cartItemId)
+        {
+            // Fetch the cart that contains the item with the specified cartItemId
+            var cart = await _context.Carts
+                .Include(c => c.CartItems)
+                .FirstOrDefaultAsync(c => c.CartItems.Any(ci => ci.CartItemId == cartItemId));
+
+            // If the cart or item is not found, return false
+            if (cart == null)
+            {
+                _logger.LogWarning($"Cart containing item with ID: {cartItemId} not found.");
+                return false;
+            }
+
+            // Find the cart item to be removed
+            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.CartItemId == cartItemId);
+            if (cartItem == null)
+            {
+                _logger.LogWarning($"Cart item with ID: {cartItemId} not found in the cart.");
+                return false;
+            }
+
+            // Remove the cart item
+            _context.CartItems.Remove(cartItem);
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            _logger.LogInformation($"Successfully removed item with ID: {cartItemId} from the cart.");
+            return true;
+        }
         public async Task<bool> IncreaseQuantityAsync(int itemId)
         {
             _logger.LogInformation("Increasing quantity for item ID: {ItemId}", itemId);

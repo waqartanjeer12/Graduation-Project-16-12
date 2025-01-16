@@ -66,7 +66,21 @@ namespace ECommerceAPI.Controllers
             return NoContent();
 
         }
-       
+        public async Task<IActionResult> RemoveItemFromCart(int itemid)
+        {
+            // Call the repository method to remove the item from the cart
+            
+            var result = await _repository.RemoveItemFromCartAsync(itemid);
+
+            // If the item was not found or removed, return a 404 Not Found response
+            if (!result)
+            {
+                return NotFound(new { message = "Item not found in the cart" });
+            }
+
+            // Return a 204 No Content response if the item was removed successfully
+            return NoContent();
+        }
         [HttpPost("increase-quantity")]
         public async Task<IActionResult> IncreaseQuantity([FromForm] int itemId)
         {
