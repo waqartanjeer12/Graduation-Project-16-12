@@ -648,11 +648,12 @@ namespace ECommerceInfrastructure.Repositories
                         ColorImage = c.Color.Image
                     }).ToList()
                 })
-                
                 .ToListAsync();
 
-                return products;
+            return products;
         }
+        
+        
 
     }
 

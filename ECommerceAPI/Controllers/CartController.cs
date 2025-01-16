@@ -50,32 +50,11 @@ namespace ECommerceAPI.Controllers
             return Ok(cartItems);
         }
 
-        [HttpDelete("{cartId}/clear")]
-        public async Task<IActionResult> ClearCart(int cartId)
-        {
-            // Call the repository method to clear the cart
-            var result = await _repository.ClearCartAsync(cartId);
-
-            // If the cart was not found, return a 404 Not Found response
-            if (!result)
-            {
-                return NotFound(new { message = "Cart not found" });
-            }
-
-            // Return a 204 No Content response if the cart was cleared successfully
-            return NoContent();
-        }
-        [HttpDelete("clear-selected/{cartId}/{itemIds}")]
-       /* public async Task<IActionResult>  ClearCartItemsByItemIdsAsync([FromForm]int cartId,[FromForm] int[] itemIds)
-        {
-
-
-        }*/
-        [HttpDelete("remove/{productId}")]
-        public async Task<IActionResult> RemoveItemFromCart(int itemid)
+        [HttpDelete("Clear")]
+        public async Task<IActionResult>  ClearCartItemsByItemIdsAsync([FromForm]int cartId,[FromForm] int[] itemIds)
         {
             // Call the repository method to remove the item from the cart
-            var result = await _repository.RemoveItemFromCartAsync(itemid);
+            var result = await _repository.ClearCartItemsByItemIdsAsync(cartId,itemIds);
 
             // If the item was not found or removed, return a 404 Not Found response
             if (!result)
@@ -85,7 +64,9 @@ namespace ECommerceAPI.Controllers
 
             // Return a 204 No Content response if the item was removed successfully
             return NoContent();
+
         }
+       
         [HttpPost("increase-quantity")]
         public async Task<IActionResult> IncreaseQuantity([FromForm] int itemId)
         {

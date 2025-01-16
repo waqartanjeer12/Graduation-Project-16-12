@@ -74,22 +74,6 @@
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.CartController",
-    "Method": "ClearCart",
-    "RelativePath": "api/Cart/{cartId}/clear",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "cartId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ECommerceAPI.Controllers.CartController",
     "Method": "AddItemToCart",
     "RelativePath": "api/Cart/add",
     "HttpMethod": "POST",
@@ -136,26 +120,21 @@
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.CartController",
-    "Method": "RemoveItemFromCart",
-    "RelativePath": "api/Cart/clear-selected/{cartId}/{itemIds}",
+    "Method": "ClearCartItemsByItemIdsAsync",
+    "RelativePath": "api/Cart/Clear",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "itemid",
+        "Name": "cartId",
         "Type": "System.Int32",
         "IsRequired": false
       },
       {
-        "Name": "cartId",
-        "Type": "",
-        "IsRequired": true
-      },
-      {
         "Name": "itemIds",
-        "Type": "",
-        "IsRequired": true
+        "Type": "System.Int32[]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -188,27 +167,6 @@
         "Name": "itemId",
         "Type": "System.Int32",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ECommerceAPI.Controllers.CartController",
-    "Method": "RemoveItemFromCart",
-    "RelativePath": "api/Cart/remove/{productId}",
-    "HttpMethod": "DELETE",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "itemid",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "productId",
-        "Type": "",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []

@@ -143,6 +143,7 @@ namespace ECommerceInfrastructure.Repositories
 
             return cartReadAddItemsToCartDto;
         }
+
         public async Task<List<CartGetAllItemsDTO>> GetAllCartItemsAsync()
         {
             // Fetch all carts including related entities
@@ -150,8 +151,6 @@ namespace ECommerceInfrastructure.Repositories
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
                 .ToListAsync();
-
-            
 
             // List to store the result
             var result = new List<CartGetAllItemsDTO>();
@@ -161,6 +160,7 @@ namespace ECommerceInfrastructure.Repositories
             {
                 // Map CartItems to CartReadAddItemsToCartDTO
                 var items = new List<CartReadAddItemsToCartDTO>();
+
                 foreach (var ci in cart.CartItems)
                 {
                     // Fetch color details based on color name
@@ -174,10 +174,10 @@ namespace ECommerceInfrastructure.Repositories
                         MainImageUrl = ci.Product.MainImage,
                         Price = ci.Product.Price,
                         OriginalPrice = ci.Product.OriginalPrice,
-                        ColorDetails = new ColorReadDTO
+                        ColorDetails =  new ColorReadDTO
                         {
-                            Id = color.Id ,
-                            Name = color.Name ,
+                            Id = color.Id,
+                            Name = color.Name,
                             ColorImage = color.Image
                         }
                     };
@@ -198,40 +198,13 @@ namespace ECommerceInfrastructure.Repositories
                 result.Add(new CartGetAllItemsDTO
                 {
                     CartId = cart.Id,
-                    items = items,
-                    totalPrice = totalPrice,
-                    totalOriginalPrice = totalOriginalPrice
+                    items = items, // This will be empty if there are no items in the cart
+                    totalPrice = totalPrice, // This will be 0 if there are no items
+                    totalOriginalPrice = totalOriginalPrice // This will be 0 if there are no items
                 });
             }
 
             return result;
-        }
-
-        public async Task<bool> ClearCartAsync(int cartId)
-        {
-            _logger.LogInformation($"Fetching cart with ID: {cartId} to clear items.");
-
-            // Fetch the cart with the specified cartId
-            var cart = await _context.Carts
-                .Include(c => c.CartItems)
-                .FirstOrDefaultAsync(c => c.Id == cartId);
-
-            // If the cart is not found, log and return false
-            if (cart == null)
-            {
-                _logger.LogWarning($"Cart with ID: {cartId} not found.");
-                return false;
-            }
-
-            // Remove all cart items
-            _logger.LogInformation($"Removing {cart.CartItems.Count} items from cart with ID: {cartId}.");
-            _context.CartItems.RemoveRange(cart.CartItems);
-
-            // Save changes to the database
-            await _context.SaveChangesAsync();
-
-            _logger.LogInformation($"Successfully cleared cart with ID: {cartId}.");
-            return true;
         }
         public async Task<bool> ClearCartItemsByItemIdsAsync(int cartId, int[] itemIds)
         {
@@ -270,37 +243,7 @@ namespace ECommerceInfrastructure.Repositories
             _logger.LogInformation($"Successfully cleared specified items from cart with ID: {cartId}.");
             return true;
         }
-        public async Task<bool> RemoveItemFromCartAsync(int cartItemId)
-        {
-            // Fetch the cart that contains the item with the specified cartItemId
-            var cart = await _context.Carts
-                .Include(c => c.CartItems)
-                .FirstOrDefaultAsync(c => c.CartItems.Any(ci => ci.CartItemId == cartItemId));
-
-            // If the cart or item is not found, return false
-            if (cart == null)
-            {
-                _logger.LogWarning($"Cart containing item with ID: {cartItemId} not found.");
-                return false;
-            }
-
-            // Find the cart item to be removed
-            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.CartItemId == cartItemId);
-            if (cartItem == null)
-            {
-                _logger.LogWarning($"Cart item with ID: {cartItemId} not found in the cart.");
-                return false;
-            }
-
-            // Remove the cart item
-            _context.CartItems.Remove(cartItem);
-
-            // Save changes to the database
-            await _context.SaveChangesAsync();
-
-            _logger.LogInformation($"Successfully removed item with ID: {cartItemId} from the cart.");
-            return true;
-        }
+        
         public async Task<bool> IncreaseQuantityAsync(int itemId)
         {
             _logger.LogInformation("Increasing quantity for item ID: {ItemId}", itemId);

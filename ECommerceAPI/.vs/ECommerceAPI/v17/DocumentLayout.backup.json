@@ -3,21 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\repositories\\cartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\interfaces\\icartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceapi\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|solutionrelative:controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\configurations\\identity\\appidentitydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\interfaces\\icartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\repositories\\categoryrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\cart\\cartreadproducts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -35,14 +54,7 @@
       "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\configurations\\identity\\appidentitydbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\repositories\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\account\\createuserdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -55,16 +67,7 @@
       "RelativeMoniker": "D:0:0:{BBD97DE2-AEA1-43DE-ADC7-E3DC374E40E2}|ECommerceAPI.csproj|solutionrelative:controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\color.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{285E6734-289E-4820-8B98-5065AE120EEF}|..\\ECommerceInfrastructure\\ECommerceInfrastructure.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommerceinfrastructure\\repositories\\productrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -97,9 +100,6 @@
       "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\product\\productreadbycategoryiddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\models\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{020C2D6A-A820-424F-BAA0-8E53706E790B}|..\\ECommerceCore\\ECommerceCore.csproj|c:\\users\\xpristo\\source\\repos\\graduation project\\ecommercecore\\dtos\\cart\\cartgetallitemsdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -128,34 +128,35 @@
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
-      "VerticalTabListWidth": 310,
+      "VerticalTabListWidth": 248,
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 39,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 0,
               "Title": "ProductRepository.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
               "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
               "RelativeToolTip": "..\\ECommerceInfrastructure\\Repositories\\ProductRepository.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAiwAMBAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAHICAAAAAAAAAAAAAI8CAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T00:13:45.37Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "CartRepository.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\CartRepository.cs",
               "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Repositories\\CartRepository.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\CartRepository.cs",
               "RelativeToolTip": "..\\ECommerceInfrastructure\\Repositories\\CartRepository.cs",
-              "ViewState": "AgIAALIAAAAAAAAAAAAqwMwAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-07T01:33:30.313Z",
               "IsPinned": true,
@@ -163,7 +164,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "CartAddItemsToCartDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Cart\\CartAddItemsToCartDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Cart\\CartAddItemsToCartDTO.cs",
@@ -172,8 +173,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-07T11:46:36.125Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -181,7 +181,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "20250115002747_ForAuth.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Migrations\\AppIdentityDb\\20250115002747_ForAuth.cs",
               "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Migrations\\AppIdentityDb\\20250115002747_ForAuth.cs",
@@ -192,19 +192,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 7,
               "Title": "AppIdentityDbContext.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Configurations\\identity\\AppIdentityDbContext.cs",
               "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Configurations\\identity\\AppIdentityDbContext.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Configurations\\identity\\AppIdentityDbContext.cs",
               "RelativeToolTip": "..\\ECommerceInfrastructure\\Configurations\\identity\\AppIdentityDbContext.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAADwvxMAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-15T00:22:36.021Z"
+              "WhenOpened": "2025-01-15T00:22:36.021Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 16,
               "Title": "authRepository.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\authRepository.cs",
               "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Repositories\\authRepository.cs",
@@ -216,7 +217,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "createUserDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Account\\createUserDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Account\\createUserDTO.cs",
@@ -228,7 +229,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 8,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
@@ -236,7 +237,8 @@
               "RelativeToolTip": "Controllers\\AuthController.cs",
               "ViewState": "AgIAADcAAAAAAAAAAADwv0sAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-15T00:02:36.262Z"
+              "WhenOpened": "2025-01-15T00:02:36.262Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -276,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "ProductReadByProductIdDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadByProductIdDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadByProductIdDTO.cs",
@@ -288,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "ProductReadByOriginalPrice.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadByOriginalPrice.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadByOriginalPrice.cs",
@@ -300,7 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "ProductReadByCategoryIdDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadByCategoryIdDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadByCategoryIdDTO.cs",
@@ -312,7 +314,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "ProductReadForCreateDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForCreateDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForCreateDTO.cs",
@@ -324,7 +326,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "ProductCreateDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductCreateDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductCreateDTO.cs",
@@ -336,15 +338,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 1,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Product.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\Models\\Product.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Product.cs",
               "RelativeToolTip": "..\\ECommerceCore\\Models\\Product.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAADwvzAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABEAAAAAAAAAAAA4wDAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-09T15:17:48.214Z"
+              "WhenOpened": "2025-01-09T15:17:48.214Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -360,7 +363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "ProductReadForUserDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Product\\ProductReadForUserDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Product\\ProductReadForUserDTO.cs",
@@ -372,7 +375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 3,
               "Title": "Cart.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Cart.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\Models\\Cart.cs",
@@ -380,11 +383,12 @@
               "RelativeToolTip": "..\\ECommerceCore\\Models\\Cart.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T00:49:44.351Z"
+              "WhenOpened": "2025-01-07T00:49:44.351Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "CartReadProducts.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Cart\\CartReadProducts.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Cart\\CartReadProducts.cs",
@@ -392,12 +396,11 @@
               "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Cart\\CartReadProducts.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T14:02:16.868Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T14:02:16.868Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 12,
               "Title": "CartReadAddItemsToCartDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Cart\\CartReadAddItemsToCartDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Cart\\CartReadAddItemsToCartDTO.cs",
@@ -405,38 +408,37 @@
               "RelativeToolTip": "..\\ECommerceCore\\DTOs\\Cart\\CartReadAddItemsToCartDTO.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T11:48:07.909Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-07T11:48:07.909Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "CartController.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Controllers\\CartController.cs",
               "RelativeDocumentMoniker": "Controllers\\CartController.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Controllers\\CartController.cs",
               "RelativeToolTip": "Controllers\\CartController.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACMAAAAAAAAAAAAAADQAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-07T01:37:43.989Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "ICartRepository.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Interfaces\\ICartRepository.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\Interfaces\\ICartRepository.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Interfaces\\ICartRepository.cs",
               "RelativeToolTip": "..\\ECommerceCore\\Interfaces\\ICartRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABLAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-07T01:35:26.52Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Configurations\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Configurations\\Data\\ApplicationDbContext.cs",
@@ -448,7 +450,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\User.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\Models\\User.cs",
@@ -460,15 +462,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 4,
               "Title": "CartItem.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\CartItem.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\Models\\CartItem.cs",
               "ToolTip": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\CartItem.cs",
               "RelativeToolTip": "..\\ECommerceCore\\Models\\CartItem.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAswBoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-07T01:07:21.743Z"
+              "WhenOpened": "2025-01-07T01:07:21.743Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -496,7 +499,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "CategoryRepository.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceInfrastructure\\Repositories\\CategoryRepository.cs",
               "RelativeDocumentMoniker": "..\\ECommerceInfrastructure\\Repositories\\CategoryRepository.cs",
@@ -504,12 +507,11 @@
               "RelativeToolTip": "..\\ECommerceInfrastructure\\Repositories\\CategoryRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFwAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-04T14:11:20.958Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-04T14:11:20.958Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "ColorReadForUser.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadForUser.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorReadForUser.cs",
@@ -521,7 +523,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "ColorReadDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorReadDTO.cs",
@@ -533,7 +535,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "ColorCreateDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorCreateDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorCreateDTO.cs",
@@ -545,7 +547,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "ColorReadForDisplayDTO.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\DTOs\\Color\\ColorReadForDisplayDTO.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\DTOs\\Color\\ColorReadForDisplayDTO.cs",
@@ -557,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "Color.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceCore\\Models\\Color.cs",
               "RelativeDocumentMoniker": "..\\ECommerceCore\\Models\\Color.cs",
@@ -593,7 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "ProductController.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "Controllers\\ProductController.cs",
@@ -605,7 +607,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\XPRISTO\\source\\repos\\Graduation Project\\ECommerceAPI\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
