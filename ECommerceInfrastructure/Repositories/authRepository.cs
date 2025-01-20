@@ -1,8 +1,10 @@
-﻿using ECommerceCore.Interfaces;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using ECommerceCore.DTOs.Account;
+using ECommerceCore.Interfaces;
 using ECommerceCore.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,57 +18,60 @@ namespace ECommerceInfrastructure.Repositories
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
-        private readonly IEmailSender _emailSender;
 
-        public AuthRepository(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration, IEmailSender emailSender)
+        public AuthRepository(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
-            _emailSender = emailSender;
         }
 
-        public async Task<string> RegisterAsync(User user, string password)
+        public async Task<string> RegisterAsync(RegisterDTO registerDTO)
         {
             try
             {
-                var result = await _userManager.CreateAsync(user, password);
+                var user = new User
+                {
+                    UserName = registerDTO.Name,
+                    Email = registerDTO.Email,
+                    CreatedAt = DateTime.UtcNow,
+                    IsActive = false  // Initially inactive until email is confirmed
+                };
+
+                var result = await _userManager.CreateAsync(user, registerDTO.Password);
                 if (!result.Succeeded)
                     throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
 
-                // إنشاء رمز تأكيد البريد الإلكتروني
+                // Generate email confirmation token
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 user.EmailConfirmationExpiry = DateTime.UtcNow.AddDays(7);
 
-                // تحديث المستخدم لإضافة تاريخ انتهاء صلاحية التأكيد
+                // Update user to add email confirmation expiry date
                 var updateResult = await _userManager.UpdateAsync(user);
                 if (!updateResult.Succeeded)
                     throw new Exception(string.Join(", ", updateResult.Errors.Select(e => e.Description)));
 
                 try
                 {
-                    // إرسال رابط التأكيد
-                    var confirmationLink = $"{_configuration["AppUrl"]}/api/auth/confirmemail?email={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
-                    await _emailSender.SendEmailAsync(user.Email, "تأكيد بريدك الإلكتروني", $"<p>لتأكيد بريدك الإلكتروني اضغط <a href='{confirmationLink}'>هنا</a>.</p>");
+                    var confirmationLink = $"{_configuration["AppUrl"]}/api/auth/confirm-email?email={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
+                    var email = new Email()
+                    {
+                        Subject = "Email Confirmation",
+                        Recivers = user.Email,
+                        Body = $"Please confirm your email by clicking <a href='{confirmationLink}'>here</a>."
+                    };
+                    EmailSettings.SendEmail(email);
                 }
                 catch (Exception emailException)
                 {
-                    throw new Exception("حدث خطأ أثناء إرسال البريد الإلكتروني: " + emailException.Message);
+                    throw new Exception("There was an error sending the email: " + emailException.Message);
                 }
 
-                return "تم التسجيل بنجاح! يرجى التحقق من بريدك الإلكتروني لتأكيد الحساب.";
-            }
-            catch (DbUpdateException dbEx)
-            {
-                if (dbEx.InnerException != null)
-                {
-                    throw new Exception($"خطأ في تحديث قاعدة البيانات: {dbEx.InnerException.Message}");
-                }
-                throw new Exception("حدث خطأ غير متوقع في قاعدة البيانات أثناء عملية التسجيل.");
+                return "Registration successful! Please check your email to confirm your account.";
             }
             catch (Exception ex)
             {
-                throw new Exception("حدث خطأ أثناء عملية التسجيل: " + ex.Message);
+                throw new Exception("There was an error during the registration process: " + ex.Message);
             }
         }
 
@@ -89,17 +94,46 @@ namespace ECommerceInfrastructure.Repositories
             return "Email confirmed successfully.";
         }
 
-        public async Task<string> LoginAsync(string email, string password)
+        public async Task<string> LoginAsync(LoginDTO loginDTO)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailAsync(loginDTO.email);
             if (user == null || !user.IsActive)
-                return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+                return "Invalid email or password.";
 
-            var result = await _signInManager.PasswordSignInAsync(user, password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(user, loginDTO.password, loginDTO.rememberMe, false);
             if (!result.Succeeded)
-                return "البريد الإلكتروني أو كلمة المرور غير صحيحة.";
+                return "Invalid email or password.";
 
             return GenerateToken(user);
+        }
+
+        public async Task<string> SendEmailConfirmationLink(ForgotPassword forgotPassword)
+        {
+            var user = await _userManager.FindByEmailAsync(forgotPassword.email);
+            if (user != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var email = new Email()
+                {
+                    Subject = "Reset Password",
+                    Recivers = forgotPassword.email,
+                    Body = $"To reset your password, click <a href='{_configuration["AppUrl"]}/reset-password?email={forgotPassword.email}&token={Uri.EscapeDataString(token)}'>here</a>."
+                };
+                EmailSettings.SendEmail(email);
+            }
+
+            return "Password reset link sent successfully.";
+        }
+
+        public async Task<string> ResetPasswordAsync(ResetPasswordDTO resetPassword)
+        {
+            var user = await _userManager.FindByEmailAsync(resetPassword.Email);
+            if (user == null)
+                return "User not found.";
+            var result = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.NewPassword);
+            if (!result.Succeeded)
+                return "Failed to reset password.";
+            return "Password reset successfully.";
         }
 
         private string GenerateToken(User user)

@@ -2,7 +2,7 @@
   {
     "ContainingType": "ECommerceAPI.Controllers.AuthController",
     "Method": "ConfirmEmail",
-    "RelativePath": "api/Auth/confirmemail",
+    "RelativePath": "api/Auth/confirm-email",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -22,6 +22,22 @@
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.AuthController",
+    "Method": "ForgotPassword",
+    "RelativePath": "api/Auth/forgot-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "forgotPassword",
+        "Type": "ECommerceCore.DTOs.Account.ForgotPassword",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
@@ -29,14 +45,9 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "password",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "loginDTO",
+        "Type": "ECommerceCore.DTOs.Account.LoginDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -50,24 +61,25 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Name",
-        "Type": "System.String",
-        "IsRequired": false
-      },
+        "Name": "registerDTO",
+        "Type": "RegisterDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.AuthController",
+    "Method": "ResetPassword",
+    "RelativePath": "api/Auth/reset-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
-        "Name": "Email",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Password",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "ConfirmPassword",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "resetPassword",
+        "Type": "ECommerceCore.DTOs.Account.ResetPasswordDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -167,6 +179,22 @@
         "Name": "itemId",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.CartController",
+    "Method": "RemoveItemFromCart",
+    "RelativePath": "api/Cart/remove/{itemid}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "itemid",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

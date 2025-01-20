@@ -2,7 +2,7 @@
 
 namespace ECommerceCore.DTOs.Account
 {
-    public class loginDTO
+    public class LoginDTO
     {
         [Required(ErrorMessage = "البريد الإلكتروني مطلوب.")]
         [EmailAddress(ErrorMessage = "صيغة البريد الإلكتروني غير صحيحة.")]
@@ -12,5 +12,6 @@ namespace ECommerceCore.DTOs.Account
         [StringLength(100, MinimumLength = 6, ErrorMessage = "يجب أن تتراوح كلمة المرور بين 6 و100 حرف.")]
         public string password { get; set; }
 
+        public bool rememberMe { get; set; }
     }
 }

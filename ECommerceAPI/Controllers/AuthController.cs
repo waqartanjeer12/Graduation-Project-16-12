@@ -1,7 +1,7 @@
 ﻿using ECommerceCore.DTOs.Account;
 using ECommerceCore.Interfaces;
-using ECommerceCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ECommerceAPI.Controllers
 {
@@ -17,59 +17,46 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromForm] RegisterDTO model)
+        public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            var result = await _authRepository.RegisterAsync(registerDTO);
+            if (result.Contains("successful"))
+                return Ok(new { message = result });
+            return BadRequest(new { message = result });
+        }
 
-            try
-            {
-                var user = new User
-                {
-                    UserName = model.Name,  // Corrected here to match the DTO
-                    Email = model.Email,
-                    IsActive = false,
-                    createdAt = DateTime.UtcNow
-                };
-                if (model.Password != model.ConfirmPassword)
-                {
-                    return BadRequest(new { Message = "كلمة المرور وتأكيد كلمة المرور لا تتطابقان." });
-                }
-
-                var result = await _authRepository.RegisterAsync(user, model.Password);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = ex.Message });
-            }
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(string email, string token)
+        {
+            var result = await _authRepository.ConfirmEmailAsync(email, token);
+            if (result.Contains("successfully"))
+                return Ok(new { message = result });
+            return BadRequest(new { message = result });
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromForm] loginDTO model)
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            var token = await _authRepository.LoginAsync(model.email, model.password);
-            if (token == null)
-                return Unauthorized(new { Message = "البريد الإلكتروني أو كلمة المرور غير صحيحة." });
-
-            return Ok(new { Token = token });
+            var result = await _authRepository.LoginAsync(loginDTO);
+            if (result.StartsWith("eyJ"))  // JWT token usually starts with "eyJ"
+                return Ok(new { token = result });
+            return BadRequest(new { message = result });
         }
 
-        [HttpGet("confirmemail")]
-        public async Task<IActionResult> ConfirmEmail([FromQuery] string email, [FromQuery] string token)
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword(ForgotPassword forgotPassword)
         {
-            try
-            {
-                var result = await _authRepository.ConfirmEmailAsync(email, token);
-                return Ok(new { Message = result });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Message = ex.Message });
-            }
+            var result = await _authRepository.SendEmailConfirmationLink(forgotPassword);
+            return Ok(new { message = result });
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDTO resetPassword)
+        {
+            var result = await _authRepository.ResetPasswordAsync(resetPassword);
+            if (result.Contains("successfully"))
+                return Ok(new { message = result });
+            return BadRequest(new { message = result });
         }
     }
 }

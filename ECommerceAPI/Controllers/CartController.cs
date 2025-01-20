@@ -66,6 +66,7 @@ namespace ECommerceAPI.Controllers
             return NoContent();
 
         }
+        [HttpDelete("remove/{itemid}")]
         public async Task<IActionResult> RemoveItemFromCart(int itemid)
         {
             // Call the repository method to remove the item from the cart

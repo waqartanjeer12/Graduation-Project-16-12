@@ -1,14 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using ECommerceCore.DTOs.Account;
-public class ResetPasswordDTO
+
+namespace ECommerceCore.DTOs.Account
 {
-    [Required(ErrorMessage = "المعرف مطلوب.")]
-    public string userId { get; set; }
+    public class ResetPasswordDTO
+    {
+        [Required]
+        public string Email { get; set; }
 
-    [Required(ErrorMessage = "رمز إعادة تعيين كلمة المرور مطلوب.")]
-    public string token { get; set; }
+        [Required]
+        public string Token { get; set; }
 
-    [Required(ErrorMessage = "كلمة المرور الجديدة مطلوبة.")]
-    [StringLength(100, MinimumLength = 6, ErrorMessage = "يجب أن تتراوح كلمة المرور بين 6 و100 حرف.")]
-    public string newPassword { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string NewPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+    }
 }

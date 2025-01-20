@@ -12,12 +12,13 @@ namespace ECommerceInfrastructure.Configurations.Identity
 
         public DbSet<User> users { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
 
-            // Seeding data for the User entity
-            
+            modelBuilder.Entity<ProductColor>()
+                .HasKey(pc => new { pc.ProductId, pc.ColorId });
+
         }
     }
 }

@@ -1,0 +1,97 @@
+2025-01-18 00:02:39.738 +02:00 [ERR] Failed executing DbCommand (12ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Carts] ADD CONSTRAINT [FK_Carts_User_UserId] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE CASCADE;
+2025-01-18 00:54:35.730 +02:00 [ERR] Failed executing DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [Carts] ADD CONSTRAINT [FK_Carts_User_UserId] FOREIGN KEY ([UserId]) REFERENCES [User] ([Id]) ON DELETE CASCADE;
+2025-01-18 02:41:54.180 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-18 03:04:47.641 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-18 03:22:07.275 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-18 03:30:31.216 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-18 03:53:02.505 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-18 03:53:03.493 +02:00 [ERR] Error occurred during registration.
+System.Exception: حدث خطأ أثناء عملية التسجيل: Passwords must have at least one uppercase ('A'-'Z').
+   at ECommerceInfrastructure.Repositories.AuthRepository.RegisterAsync(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\authRepository.cs:line 72
+   at ECommerceAPI.Controllers.AuthController.Register(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\AuthController.cs:line 33
+2025-01-18 03:53:18.104 +02:00 [ERR] Error occurred during registration.
+System.Exception: حدث خطأ أثناء عملية التسجيل: Passwords must have at least one uppercase ('A'-'Z').
+   at ECommerceInfrastructure.Repositories.AuthRepository.RegisterAsync(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\authRepository.cs:line 72
+   at ECommerceAPI.Controllers.AuthController.Register(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\AuthController.cs:line 33
+2025-01-18 03:53:21.314 +02:00 [ERR] Error occurred during registration.
+System.Exception: حدث خطأ أثناء عملية التسجيل: Passwords must have at least one uppercase ('A'-'Z').
+   at ECommerceInfrastructure.Repositories.AuthRepository.RegisterAsync(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\authRepository.cs:line 72
+   at ECommerceAPI.Controllers.AuthController.Register(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\AuthController.cs:line 33
+2025-01-18 03:53:41.335 +02:00 [INF] Sending email to lolo@example.com with subject تأكيد بريدك الإلكتروني
+2025-01-18 03:53:41.728 +02:00 [ERR] SMTP Exception: Could not send email to lolo@example.com. Server response: "GeneralFailure"
+System.Net.Mail.SmtpException: Failure sending mail.
+ ---> System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.Tasks.TaskToAsyncResult.End(IAsyncResult asyncResult)
+   at System.Net.Sockets.TcpClient.EndConnect(IAsyncResult asyncResult)
+   at System.Net.Mail.SmtpConnection.ConnectAndHandshakeAsyncResult.InitializeConnectionCallback(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at System.Net.Mail.SmtpClient.ConnectCallback(IAsyncResult result)
+   --- End of inner exception stack trace ---
+   at EmailSender.SendEmailAsync(String email, String subject, String htmlMessage) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\Interfaces\IEmailSender.cs:line 46
+2025-01-18 03:53:41.907 +02:00 [ERR] Error occurred during registration.
+System.Exception: حدث خطأ أثناء عملية التسجيل: حدث خطأ أثناء إرسال البريد الإلكتروني: Could not send email due to SMTP error.
+   at ECommerceInfrastructure.Repositories.AuthRepository.RegisterAsync(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\authRepository.cs:line 72
+   at ECommerceAPI.Controllers.AuthController.Register(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\AuthController.cs:line 33
+2025-01-18 20:18:18.682 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-18 20:18:21.779 +02:00 [INF] Sending email to Anass@gmail.com with subject Confirm Your Email
+2025-01-18 20:18:24.119 +02:00 [ERR] SMTP Exception: Could not send email to Anass@gmail.com. Server response: "MustIssueStartTlsFirst"
+System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. For more information, go to
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.EndSend(IAsyncResult result)
+   at System.Net.Mail.SendMailAsyncResult.SendMailFromCompleted(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at System.Net.Mail.SendMailAsyncResult.End(IAsyncResult result)
+   at System.Net.Mail.SmtpClient.SendMailCallback(IAsyncResult result)
+--- End of stack trace from previous location ---
+   at EmailSender.SendEmailAsync(String email, String subject, String message) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\Interfaces\IEmailSender.cs:line 46
+2025-01-18 20:18:24.162 +02:00 [ERR] Error occurred during registration.
+System.Exception: There was an error during the registration process: There was an error sending the email: Could not send email due to SMTP error.
+   at ECommerceInfrastructure.Repositories.AuthRepository.RegisterAsync(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\authRepository.cs:line 71
+   at ECommerceAPI.Controllers.AuthController.Register(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\AuthController.cs:line 33
+2025-01-18 20:28:43.574 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-18 20:28:44.747 +02:00 [ERR] Error occurred during registration.
+System.Exception: There was an error during the registration process: Username 'ula harb' is invalid, can only contain letters or digits.
+   at ECommerceInfrastructure.Repositories.AuthRepository.RegisterAsync(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\authRepository.cs:line 71
+   at ECommerceAPI.Controllers.AuthController.Register(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\AuthController.cs:line 33
+2025-01-18 20:29:01.786 +02:00 [ERR] Error occurred during registration.
+System.Exception: There was an error during the registration process: There was an error sending the email: Value cannot be null. (Parameter 's')
+   at ECommerceInfrastructure.Repositories.AuthRepository.RegisterAsync(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\authRepository.cs:line 71
+   at ECommerceAPI.Controllers.AuthController.Register(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\AuthController.cs:line 33
+2025-01-18 20:29:40.084 +02:00 [ERR] Error occurred during registration.
+System.Exception: There was an error during the registration process: Username 'waqar' is already taken.
+   at ECommerceInfrastructure.Repositories.AuthRepository.RegisterAsync(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\authRepository.cs:line 71
+   at ECommerceAPI.Controllers.AuthController.Register(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\AuthController.cs:line 33
+2025-01-18 20:29:53.538 +02:00 [ERR] Error occurred during registration.
+System.Exception: There was an error during the registration process: There was an error sending the email: Value cannot be null. (Parameter 's')
+   at ECommerceInfrastructure.Repositories.AuthRepository.RegisterAsync(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\authRepository.cs:line 71
+   at ECommerceAPI.Controllers.AuthController.Register(RegisterDTO registerDTO) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\AuthController.cs:line 33
+2025-01-18 21:52:23.388 +02:00 [ERR] Failed executing DbCommand (79ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetRoles] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(256) NULL,
+    [NormalizedName] nvarchar(256) NULL,
+    [ConcurrencyStamp] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetRoles] PRIMARY KEY ([Id])
+);
+2025-01-18 21:54:20.180 +02:00 [ERR] Failed executing DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetRoles] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(256) NULL,
+    [NormalizedName] nvarchar(256) NULL,
+    [ConcurrencyStamp] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetRoles] PRIMARY KEY ([Id])
+);
+2025-01-18 21:57:23.699 +02:00 [ERR] Failed executing DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [AspNetRoles] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(256) NULL,
+    [NormalizedName] nvarchar(256) NULL,
+    [ConcurrencyStamp] nvarchar(max) NULL,
+    CONSTRAINT [PK_AspNetRoles] PRIMARY KEY ([Id])
+);

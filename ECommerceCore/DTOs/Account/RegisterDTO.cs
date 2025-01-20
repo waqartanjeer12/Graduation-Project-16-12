@@ -3,19 +3,21 @@
 public class RegisterDTO
 {
     [Required(ErrorMessage = "الاسم الكامل مطلوب.")]
-     [StringLength(100, ErrorMessage = "الاسم الكامل يجب ألا يتجاوز 100 حرف.")]
-    public string Name { get; set; }  // Changed to PascalCase
+    [StringLength(100, ErrorMessage = "الاسم الكامل يجب ألا يتجاوز 100 حرف.")]
+    public string Name { get; set; }
 
     [Required(ErrorMessage = "البريد الإلكتروني مطلوب.")]
-    [EmailAddress(ErrorMessage = "صيغة البريد الإلكتروني غير صحيحة.")]
-    public string Email { get; set; }  // Changed to PascalCase
+    [MinLength(5, ErrorMessage = "البريد الإلكتروني يجب أن يحتوي على على الأقل 5 حروف.")]
+    [DataType(DataType.EmailAddress)]
+    public string Email { get; set; }
 
     [Required(ErrorMessage = "كلمة المرور مطلوبة.")]
     [StringLength(100, MinimumLength = 6, ErrorMessage = "يجب أن تتراوح كلمة المرور بين 6 و100 حرف.")]
-    public string Password { get; set; }  // Changed to PascalCase
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
 
     [Required(ErrorMessage = "تأكيد كلمة المرور مطلوب.")]
+    [DataType(DataType.Password)]
     [Compare("Password", ErrorMessage = "كلمة المرور وتأكيد كلمة المرور لا يتطابقان.")]
-    public string ConfirmPassword { get; set; }  // This will compare the ConfirmPassword field with Password
-
+    public string ConfirmPassword { get; set; }
 }

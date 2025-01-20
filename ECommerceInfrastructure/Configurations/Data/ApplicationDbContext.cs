@@ -1,9 +1,11 @@
 ﻿using ECommerceCore.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerceInfrastructure.Configurations.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -15,26 +17,21 @@ namespace ECommerceInfrastructure.Configurations.Data
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Cart> Carts { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-
-            modelBuilder.Entity<CartItem>().ToTable("CartItems");
-            // Define the unique index on the Name property For Category
+            // Unique index on Name property for Category
             modelBuilder.Entity<Category>()
                 .HasIndex(p => p.Name)
                 .IsUnique();
 
-
-            // Define the unique index on the Name property For Products
+            // Unique index on Name property for Colors
             modelBuilder.Entity<Color>()
                 .HasIndex(p => p.Name)
                 .IsUnique();
-        
 
-        modelBuilder.Entity<Product>()
+            modelBuilder.Entity<Product>()
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId)
@@ -49,8 +46,6 @@ namespace ECommerceInfrastructure.Configurations.Data
             modelBuilder.Entity<ProductColor>()
                 .HasKey(pc => new { pc.ProductId, pc.ColorId });
 
-            
-
             modelBuilder.Entity<Product>()
                 .HasMany(p => p.Colors)
                 .WithOne(pc => pc.Product)
@@ -63,10 +58,11 @@ namespace ECommerceInfrastructure.Configurations.Data
                 .HasForeignKey(pc => pc.ColorId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-           /* modelBuilder.Entity<User>()
-               .HasOne(u => u.Cart)
-               .WithOne(c => c.User)
-               .HasForeignKey<Cart>(c => c.UserId);*/
+            // Configure the User-Cart one-to-one relationship
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Cart)
+                .WithOne(c => c.User)
+                .HasForeignKey<Cart>(c => c.UserId);
 
             modelBuilder.Entity<Cart>()
                 .HasMany(c => c.CartItems)
@@ -77,8 +73,6 @@ namespace ECommerceInfrastructure.Configurations.Data
                 .HasOne(ci => ci.Product)
                 .WithMany(p => p.CartItem)
                 .HasForeignKey(ci => ci.ProductId);
-
         }
-
     }
 }
