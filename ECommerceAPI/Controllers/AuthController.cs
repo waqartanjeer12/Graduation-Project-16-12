@@ -25,35 +25,48 @@ namespace ECommerceAPI.Controllers
             return BadRequest(new { message = result });
         }
 
-        [HttpGet("confirm-email")]
-        public async Task<IActionResult> ConfirmEmail(string email, string token)
-        {
-            var result = await _authRepository.ConfirmEmailAsync(email, token);
-            if (result.Contains("successfully"))
-                return Ok(new { message = result });
-            return BadRequest(new { message = result });
-        }
-
         [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
         {
+            if (loginDTO == null)
+            {
+                return BadRequest(new { message = "The loginDTO field is required." });
+            }
+
             var result = await _authRepository.LoginAsync(loginDTO);
             if (result.StartsWith("eyJ"))  // JWT token usually starts with "eyJ"
                 return Ok(new { token = result });
             return BadRequest(new { message = result });
         }
 
-        [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword(ForgotPassword forgotPassword)
+        [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(string email, string token)
         {
-            var result = await _authRepository.SendEmailConfirmationLink(forgotPassword);
-            return Ok(new { message = result });
+            var result = await _authRepository.ConfirmEmailAsync(email, token);
+            if (result.Contains("successfully"))
+                // Redirect to the specified URL after successful confirmation
+                return Redirect("http://localhost:5173");
+            return BadRequest(new { message = result });
+        }
+
+        [HttpPost("forgot-password")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO forgotPasswordDTO)
+        {
+            var result = await _authRepository.ForgotPasswordAsync(forgotPasswordDTO);
+            if (result.Contains("sent"))
+                return Ok(new { message = result });
+            return BadRequest(new { message = result });
         }
 
         [HttpPost("reset-password")]
-        public async Task<IActionResult> ResetPassword(ResetPasswordDTO resetPassword)
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO resetPasswordDTO)
         {
-            var result = await _authRepository.ResetPasswordAsync(resetPassword);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var result = await _authRepository.ResetPasswordAsync(resetPasswordDTO);
             if (result.Contains("successfully"))
                 return Ok(new { message = result });
             return BadRequest(new { message = result });

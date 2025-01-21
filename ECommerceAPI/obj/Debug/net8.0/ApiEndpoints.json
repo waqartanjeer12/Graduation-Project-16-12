@@ -29,8 +29,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "forgotPassword",
-        "Type": "ECommerceCore.DTOs.Account.ForgotPassword",
+        "Name": "forgotPasswordDTO",
+        "Type": "ECommerceCore.DTOs.Account.ForgotPasswordDTO",
         "IsRequired": true
       }
     ],
@@ -77,7 +77,7 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "resetPassword",
+        "Name": "resetPasswordDTO",
         "Type": "ECommerceCore.DTOs.Account.ResetPasswordDTO",
         "IsRequired": true
       }
