@@ -1,7 +1,7 @@
 ﻿using ECommerceCore.Interfaces;
 using ECommerceCore.Models;
 using ECommerceInfrastructure.Configurations.Data;
-using ECommerceInfrastructure.Configurations.Identity;
+
 using ECommerceInfrastructure.Repositories;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -32,9 +32,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<AppIdentityDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"))
-           .ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning)));
 
 // Add Identity services
 builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
@@ -45,17 +42,18 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
     options.Password.RequireLowercase = true;
     options.Password.RequireDigit = true;
 })
-.AddEntityFrameworkStores<AppIdentityDbContext>()
+.AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
 // Register application services
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IAuthRepository, authRepository>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddTransient<EmailSettings>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<IUserRepository,UserRepository>();
 
 // Configure CORS to allow all origins
 builder.Services.AddCors(options =>

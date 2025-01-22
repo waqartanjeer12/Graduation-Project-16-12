@@ -5,7 +5,7 @@
 namespace ECommerceInfrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class plzzzzzz : Migration
+    public partial class plzWork : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

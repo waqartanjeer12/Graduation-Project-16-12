@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ECommerceCore.DTOs.Account
+namespace ECommerceCore.DTOs.User.Account
 {
     public class createUserDTO
     {
         [Required(ErrorMessage = "الاسم الكامل مطلوب.")]
         [StringLength(100, ErrorMessage = "الاسم الكامل يجب ألا يتجاوز 100 حرف.")]
-      
+
         public string name { get; set; }
 
         [Required(ErrorMessage = "البريد الإلكتروني مطلوب.")]

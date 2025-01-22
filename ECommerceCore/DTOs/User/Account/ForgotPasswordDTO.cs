@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerceCore.DTOs.Account
+namespace ECommerceCore.DTOs.User.Account
 {
     public class ForgotPasswordDTO
     {

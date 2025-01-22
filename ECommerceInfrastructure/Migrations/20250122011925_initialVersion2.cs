@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace ECommerceInfrastructure.Migrations.AppIdentityDb
+namespace ECommerceInfrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class foruser7 : Migration
+    public partial class initialVersion2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

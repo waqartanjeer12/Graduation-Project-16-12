@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using ECommerceCore.DTOs.Account;
+using ECommerceCore.DTOs.User.Account;
 using ECommerceCore.Interfaces;
 using ECommerceCore.Models;
 using Microsoft.AspNetCore.Identity;
@@ -13,13 +13,13 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ECommerceInfrastructure.Repositories
 {
-    public class AuthRepository : IAuthRepository
+    public class authRepository : IAuthRepository
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
 
-        public AuthRepository(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+        public authRepository(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -120,7 +120,7 @@ namespace ECommerceInfrastructure.Repositories
             return "Password reset link sent";
         }
         public async Task<string> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO)
-        {htt
+        {
             var user = await _userManager.FindByEmailAsync(resetPasswordDTO.Email);
             if (user == null)
             {

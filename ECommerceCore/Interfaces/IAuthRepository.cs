@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using System.Threading.Tasks;
-using ECommerceCore.DTOs.Account;
+using ECommerceCore.DTOs.User.Account;
 
 namespace ECommerceCore.Interfaces
 {

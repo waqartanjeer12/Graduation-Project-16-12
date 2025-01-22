@@ -13,7 +13,9 @@ namespace ECommerceCore.Models
             get => base.Id;
             set => base.Id = value;
         }
+
         public string? Img { get; set; }
+        
 
         [Required(ErrorMessage = "الاسم الكامل مطلوب.")]
         [StringLength(100, ErrorMessage = "الاسم الكامل يجب ألا يتجاوز 100 حرف.")]
@@ -26,8 +28,14 @@ namespace ECommerceCore.Models
         [Phone(ErrorMessage = "صيغة رقم الهاتف غير صحيحة.")]
         public override string? PhoneNumber { get; set; }
 
-        [StringLength(200, ErrorMessage = "العنوان يجب ألا يتجاوز 200 حرف.")]
-        public string? Address { get; set; }
+        [StringLength(100, ErrorMessage = "اسم المدينة يجب ألا يتجاوز 100 حرف.")]
+        public string? City { get; set; }
+
+        [StringLength(100, ErrorMessage = "اسم المنطقة يجب ألا يتجاوز 100 حرف.")]
+        public string? Area { get; set; }
+
+        [StringLength(100, ErrorMessage = "اسم الشارع يجب ألا يتجاوز 100 حرف.")]
+        public string? Street { get; set; }
 
         public bool IsActive { get; set; } = true;
 
@@ -35,8 +43,7 @@ namespace ECommerceCore.Models
 
         public DateTime? EmailConfirmationExpiry { get; set; }
 
-        public Cart Cart { get; set; }
-
         
+        public Cart Cart { get; set; }
     }
 }

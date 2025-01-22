@@ -30,7 +30,7 @@
     "Parameters": [
       {
         "Name": "forgotPasswordDTO",
-        "Type": "ECommerceCore.DTOs.Account.ForgotPasswordDTO",
+        "Type": "ECommerceCore.DTOs.User.Account.ForgotPasswordDTO",
         "IsRequired": true
       }
     ],
@@ -46,7 +46,7 @@
     "Parameters": [
       {
         "Name": "loginDTO",
-        "Type": "ECommerceCore.DTOs.Account.LoginDTO",
+        "Type": "ECommerceCore.DTOs.User.Account.LoginDTO",
         "IsRequired": true
       }
     ],
@@ -78,7 +78,7 @@
     "Parameters": [
       {
         "Name": "resetPasswordDTO",
-        "Type": "ECommerceCore.DTOs.Account.ResetPasswordDTO",
+        "Type": "ECommerceCore.DTOs.User.Account.ResetPasswordDTO",
         "IsRequired": true
       }
     ],
@@ -703,5 +703,82 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.UserController",
+    "Method": "GetAllUsersAdmin",
+    "RelativePath": "api/User/AllUsersAdmin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.UserController",
+    "Method": "GetUserById",
+    "RelativePath": "api/User/ByUserId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.UserController",
+    "Method": "UpdateUser",
+    "RelativePath": "api/User/update/{userId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "Img",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "Name",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PhoneNumber",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Area",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Street",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ImgUrl",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

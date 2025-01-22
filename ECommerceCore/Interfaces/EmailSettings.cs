@@ -1,4 +1,4 @@
-﻿using ECommerceCore.DTOs.Account;
+﻿using ECommerceCore.DTOs.User.Account;
 using System.Net;
 using System.Net.Mail;
 
