@@ -18,6 +18,9 @@ namespace ECommerceCore.Models
         [ForeignKey("Cart")]
         public int CartId { get; set; }
         public Cart Cart { get; set; }
+        [ForeignKey("Order")]
+        public int OrderId { get; set; }
+        public Order Order { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "الكمية يجب أن تكون على الأقل 1")]
         public int Quantity { get; set; }
         public String ColorName { get; set; }

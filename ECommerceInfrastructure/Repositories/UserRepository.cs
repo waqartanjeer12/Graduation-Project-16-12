@@ -24,14 +24,14 @@ namespace ECommerceInfrastructure.Repositories
             _logger = logger;
         }
 
-        public async Task<GetUserForUserDTO> GetUserByIdAsync(int userId)
+        public async Task<GetUserForUserDTO> GetUserByEmailAsync(String email)
         {
-            _logger.LogInformation("جارِ جلب المستخدم بالمعرف: {Id}", userId);
+            _logger.LogInformation("جارِ جلب المستخدم بالمعرف: {Id}", email);
 
             try
             {
                 var user = await _context.Users
-                    .Where(u => u.Id == userId&&u.IsActive==true)
+                    .Where(u => u.Email == email && u.IsActive==true)
                     .Select(u => new GetUserForUserDTO
                     {
                         UserId = u.Id,
@@ -48,7 +48,7 @@ namespace ECommerceInfrastructure.Repositories
 
                 if (user == null)
                 {
-                    _logger.LogWarning("لم يتم العثور على المستخدم بالمعرف: {Id}", userId);
+                    _logger.LogWarning("لم يتم العثور على المستخدم بالمعرف: {Id}", email);
                     return null;
                 }
 
@@ -58,7 +58,7 @@ namespace ECommerceInfrastructure.Repositories
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "حدث خطأ أثناء جلب المستخدم بالمعرف: {Id}", userId);
+                _logger.LogError(ex, "حدث خطأ أثناء جلب المستخدم بالمعرف: {Id}", email);
                 return null;
             }
         }

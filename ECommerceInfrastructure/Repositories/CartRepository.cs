@@ -31,7 +31,15 @@ namespace ECommerceInfrastructure.Repositories
             }
 
             // Log the incoming addItemDto details
-            _logger.LogInformation($"Received request to add item: ProductId={addItemDto.ProductId}, Quantity={addItemDto.Quantity}, ColorName={addItemDto.ColorName}");
+            _logger.LogInformation($"Received request to add item: ProductId={addItemDto.ProductId}, Quantity={addItemDto.Quantity}, ColorName={addItemDto.ColorName}, UserId={addItemDto.UserId}");
+
+            // Ensure the UserId exists
+            var user = await _context.Users.FindAsync(addItemDto.UserId);
+            if (user == null)
+            {
+                _logger.LogError($"User with ID {addItemDto.UserId} not found.");
+                return null;
+            }
 
             // Fetch the product and include its colors
             var product = await _context.Products
@@ -66,16 +74,17 @@ namespace ECommerceInfrastructure.Repositories
                 return null;  // Return null to indicate failure due to insufficient inventory
             }
 
-            // Fetch or create a cart for the user (assuming user context is available)
+            // Fetch or create a cart for the user based on UserId
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(c => c.UserId == addItemDto.UserId);
 
             if (cart == null)
             {
                 cart = new Cart
                 {
+                    UserId = addItemDto.UserId, // Ensure UserId is properly set
                     CartItems = new List<CartItem>()
                 };
                 _context.Carts.Add(cart);

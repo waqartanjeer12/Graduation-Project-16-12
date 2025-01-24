@@ -9,7 +9,7 @@ namespace ECommerceCore.Interfaces
 {
     public interface IUserRepository
     {
-        Task<GetUserForUserDTO> GetUserByIdAsync(int userId);
+        Task<GetUserForUserDTO> GetUserByEmailAsync(String email);
         Task <List<GetUsersForAdminDTO>> GetAllUsersAdminAsync();
         Task<GetUserForUserDTO> UpdateUserAsync(int userId, UpdateUserInformationDTO dto);
     }

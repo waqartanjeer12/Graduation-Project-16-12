@@ -1,0 +1,10 @@
+2025-01-23 01:54:25.321 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-23 01:54:25.773 +02:00 [INF] جارِ جلب المستخدم بالمعرف: task.tanjeer@gmail.com
+2025-01-23 01:56:17.877 +02:00 [INF] جارِ جلب المستخدم بالمعرف: task.tanjeer@gmail
+2025-01-23 01:56:17.908 +02:00 [WRN] لم يتم العثور على المستخدم بالمعرف: task.tanjeer@gmail
+2025-01-23 19:25:11.140 +02:00 [ERR] Failed executing DbCommand (158ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [CartItems] ADD CONSTRAINT [FK_CartItems_Orders_OrderId] FOREIGN KEY ([OrderId]) REFERENCES [Orders] ([OrderId]) ON DELETE CASCADE;
+2025-01-23 19:44:01.749 +02:00 [ERR] Failed executing DbCommand (51ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [CartItems] ADD CONSTRAINT [FK_CartItems_Orders_OrderId] FOREIGN KEY ([OrderId]) REFERENCES [Orders] ([OrderId]) ON DELETE CASCADE;
+2025-01-23 20:22:33.814 +02:00 [ERR] Failed executing DbCommand (145ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE [CartItems] ADD CONSTRAINT [FK_CartItems_Orders_OrderId] FOREIGN KEY ([OrderId]) REFERENCES [Orders] ([OrderId]) ON DELETE CASCADE;

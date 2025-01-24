@@ -17,11 +17,11 @@ namespace ECommerceAPI.Controllers
             _repository = repository;
         }
 
-        [HttpGet("ByUserId")]
+        [HttpGet("ByUserEmail")]
 
-        public async Task<IActionResult> GetUserById(int id)
+        public async Task<IActionResult> GetUserByEmail(String email)
         {
-            var user = await _repository.GetUserByIdAsync(id);
+            var user = await _repository.GetUserByEmailAsync(email);
 
             if (user == null)
             {

@@ -106,6 +106,11 @@
         "Name": "ColorName",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -331,6 +336,22 @@
         "Name": "name",
         "Type": "System.String",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.OrderController",
+    "Method": "CreateOrder",
+    "RelativePath": "api/Order/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createOrderDTO",
+        "Type": "ECommerceCore.DTOs.Order.CreateOrderDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -716,15 +737,15 @@
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.UserController",
-    "Method": "GetUserById",
-    "RelativePath": "api/User/ByUserId",
+    "Method": "GetUserByEmail",
+    "RelativePath": "api/User/ByUserEmail",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
-        "Type": "System.Int32",
+        "Name": "email",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],

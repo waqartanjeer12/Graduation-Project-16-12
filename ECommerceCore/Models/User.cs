@@ -45,5 +45,6 @@ namespace ECommerceCore.Models
 
         
         public Cart Cart { get; set; }
+        public ICollection<Order> Orders { get; set; }
     }
 }

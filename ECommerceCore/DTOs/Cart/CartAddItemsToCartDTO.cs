@@ -10,6 +10,7 @@ namespace ECommerceCore.DTOs.Cart
 {
     public class CartAddItemsToCartDTO
     {
+
         [Required(ErrorMessage = "يرجى إدخال رقم المنتج")]
         public int ProductId { get; set; }
 
@@ -19,5 +20,7 @@ namespace ECommerceCore.DTOs.Cart
 
         [Required(ErrorMessage = "يرجى إدخال اسم اللون")]
         public String ColorName { get; set; }
+
+        public int UserId { get; set; }
     }
 }

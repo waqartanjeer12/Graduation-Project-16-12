@@ -45,4 +45,5 @@ public class Product
     public ICollection<ProductImage> AdditionalImages { get; set; } 
     public ICollection<ProductColor> Colors { get; set; }
     public ICollection<CartItem> CartItem { get; set; }
+    public ICollection<OrderItem> OrderItem { get; set; }
 }
