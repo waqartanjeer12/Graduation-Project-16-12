@@ -75,7 +75,7 @@ namespace ECommerceInfrastructure.Repositories
             if (!result.Succeeded)
                 return "Invalid password.";
 
-            return GenerateToken(user);
+            return await GenerateTokenAsync(user, _userManager);
         }
 
         public async Task<string> ConfirmEmailAsync(string email, string token)
@@ -135,24 +135,34 @@ namespace ECommerceInfrastructure.Repositories
 
             return "Password has been reset successfully.";
         }
-
-        private string GenerateToken(User user)
+        public async Task<string> GenerateTokenAsync(User user, UserManager<User> userManager)
         {
-            var claims = new[]
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
-            };
+            // إضافة Claims الأساسية مثل الاسم والبريد الإلكتروني
+            var claims = new List<Claim>
+    {
+        new Claim(JwtRegisteredClaimNames.Sub, user.Email), // البريد الإلكتروني
+        new Claim(JwtRegisteredClaimNames.Email, user.Email), // البريد الإلكتروني (مكرر لتوافق مع JWT القياسي)
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // معرف المستخدم
+        new Claim(ClaimTypes.Name, user.UserName) // اسم المستخدم
+    };
 
+            // إضافة الأدوار (Roles) إلى الـ Claims
+            var userRoles = await userManager.GetRolesAsync(user);
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            // إنشاء مفتاح التوقيع
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+            // إنشاء التوكن
             var token = new JwtSecurityToken(
                 issuer: _configuration["JWT:Issuer"],
                 audience: _configuration["JWT:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(30),
+                expires: DateTime.UtcNow.AddDays(14), // مدة الصلاحية 14 يومًا
                 signingCredentials: creds
             );
 
