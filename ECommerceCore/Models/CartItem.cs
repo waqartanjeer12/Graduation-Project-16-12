@@ -19,7 +19,7 @@ namespace ECommerceCore.Models
         public int CartId { get; set; }
         public Cart Cart { get; set; }
         [ForeignKey("Order")]
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }//i make it nullable because the item may be in the cart and not in the order
         public Order Order { get; set; }
         [Range(1, int.MaxValue, ErrorMessage = "الكمية يجب أن تكون على الأقل 1")]
         public int Quantity { get; set; }

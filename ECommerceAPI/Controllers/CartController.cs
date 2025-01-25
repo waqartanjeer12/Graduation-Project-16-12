@@ -1,54 +1,42 @@
 ﻿using ECommerceCore.DTOs.Cart;
 using ECommerceInfrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
-namespace ECommerceAPI.Controllers
+[Route("api/[controller]")]
+[ApiController]
+[Authorize]
+public class CartController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CartController : ControllerBase
+    private readonly ICartRepository _repository;
+
+    public CartController(ICartRepository repository)
     {
-        private readonly ICartRepository _repository;
+        _repository = repository;
+    }
 
-        public CartController(ICartRepository repository)
+    [HttpPost("add")]
+    public async Task<IActionResult> AddItemToCart([FromBody] CartAddItemsToCartDTO addItemDto)
+    {
+        var result = await _repository.AddItemToCartAsync(addItemDto);
+        if (result == null)
         {
-            _repository = repository;
+            return BadRequest("Item could not be added to the cart.");
         }
-
-        [HttpPost("add")]
-        public async Task<IActionResult> AddItemToCart([FromForm] CartAddItemsToCartDTO addItemDto)
+        return Ok(result);
+    }
+    [HttpGet("items")]
+        public async Task<IActionResult> GetCartItem([FromQuery] string token)
         {
-            if (!ModelState.IsValid)
+            var result = await _repository.GetAllCartItemsAsync(token);
+            if (result == null)
             {
-                return BadRequest(ModelState);
+                return NotFound("No items found in the cart.");
             }
-
-            var cartReadAddItemsToCartDto = await _repository.AddItemToCartAsync(addItemDto);
-
-            if (cartReadAddItemsToCartDto == null)
-            {
-                return NotFound(new { message = "Product or color not found" });
-            }
-
-           
-
-            return Ok(cartReadAddItemsToCartDto);
+            return Ok(result);
         }
 
 
-        [HttpGet("all")]
-        public async Task<ActionResult<CartGetAllItemsDTO>> GetAllCartItems()
-        {
-            var cartItems = await _repository.GetAllCartItemsAsync();
-
-            if (cartItems == null)
-            {
-                return NotFound(new { message = "Cart not found" });
-            }
-
-            return Ok(cartItems);
-        }
 
         [HttpDelete("Clear")]
         public async Task<IActionResult>  ClearCartItemsByItemIdsAsync([FromForm]int cartId,[FromForm] int[] itemIds)
@@ -109,4 +97,3 @@ namespace ECommerceAPI.Controllers
             return Ok(new { message = "Quantity decreased successfully." });
         }
     }
-}

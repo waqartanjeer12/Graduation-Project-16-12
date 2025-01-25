@@ -85,7 +85,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ECommerceAPI.Controllers.CartController",
+    "ContainingType": "CartController",
     "Method": "AddItemToCart",
     "RelativePath": "api/Cart/add",
     "HttpMethod": "POST",
@@ -93,50 +93,15 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ProductId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Quantity",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "ColorName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": false
+        "Name": "addItemDto",
+        "Type": "ECommerceCore.DTOs.Cart.CartAddItemsToCartDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ECommerceAPI.Controllers.CartController",
-    "Method": "GetAllCartItems",
-    "RelativePath": "api/Cart/all",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "ECommerceCore.DTOs.Cart.CartGetAllItemsDTO",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "ECommerceAPI.Controllers.CartController",
+    "ContainingType": "CartController",
     "Method": "ClearCartItemsByItemIdsAsync",
     "RelativePath": "api/Cart/Clear",
     "HttpMethod": "DELETE",
@@ -157,7 +122,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ECommerceAPI.Controllers.CartController",
+    "ContainingType": "CartController",
     "Method": "DecreaseQuantity",
     "RelativePath": "api/Cart/decrease-quantity",
     "HttpMethod": "POST",
@@ -173,7 +138,7 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ECommerceAPI.Controllers.CartController",
+    "ContainingType": "CartController",
     "Method": "IncreaseQuantity",
     "RelativePath": "api/Cart/increase-quantity",
     "HttpMethod": "POST",
@@ -189,7 +154,23 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "ECommerceAPI.Controllers.CartController",
+    "ContainingType": "CartController",
+    "Method": "GetCartItem",
+    "RelativePath": "api/Cart/items",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "CartController",
     "Method": "RemoveItemFromCart",
     "RelativePath": "api/Cart/remove/{itemid}",
     "HttpMethod": "DELETE",
@@ -349,9 +330,49 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "createOrderDTO",
-        "Type": "ECommerceCore.DTOs.Order.CreateOrderDTO",
-        "IsRequired": true
+        "Name": "FName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Phone",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "City",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Street",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Area",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ShippingPrice",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "cartItemIds",
+        "Type": "System.Int32[]",
+        "IsRequired": false
+      },
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

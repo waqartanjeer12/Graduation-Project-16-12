@@ -6,7 +6,7 @@ namespace ECommerceInfrastructure.Repositories
     public interface ICartRepository
     {
         Task<CartReadAddItemsToCartDTO> AddItemToCartAsync(CartAddItemsToCartDTO addItemDto);
-        Task <List<CartGetAllItemsDTO>> GetAllCartItemsAsync();
+        Task <List<CartGetAllItemsDTO>> GetAllCartItemsAsync(string token);
         
        Task<bool> ClearCartItemsByItemIdsAsync(int cartId, int[] itemIds);
         Task<bool> RemoveItemFromCartAsync(int cartItemId);

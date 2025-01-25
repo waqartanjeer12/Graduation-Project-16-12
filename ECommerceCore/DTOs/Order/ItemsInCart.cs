@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerceCore.DTOs.Order
 {
-    public  class ItemsInCart
+    public class ItemsInCart
     {
-        public int CartItemId {  get; set; }
-        public String CartMainImageUrl { get; set; }
-        public decimal cartItemPrice { get; set; }
-        public int quantity { get; set; }
+        public int OrderItemId { get; set; } // Added OrderItemId
+        
+        public string CartMainImageUrl { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = "يجب أن يكون السعر قيمة موجبة")]
+        [Precision(18, 2)]
+        public decimal CartItemPrice { get; set; }
+        public int Quantity { get; set; }
     }
 }

@@ -2,10 +2,17 @@
 using ECommerceCore.DTOs.Color;
 using ECommerceCore.Models;
 using ECommerceInfrastructure.Configurations.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ECommerceInfrastructure.Repositories
@@ -14,198 +21,198 @@ namespace ECommerceInfrastructure.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<CartRepository> _logger;
+        private readonly UserManager<User> _userManager;
+        private readonly IConfiguration _configuration;
 
-        public CartRepository(ApplicationDbContext context, ILogger<CartRepository> logger)
+        public CartRepository(ApplicationDbContext context, ILogger<CartRepository> logger, UserManager<User> userManager, IConfiguration configuration)
         {
             _context = context;
             _logger = logger;
+            _userManager = userManager;
+            _configuration = configuration;
         }
 
-
-        public async Task<CartReadAddItemsToCartDTO> AddItemToCartAsync(CartAddItemsToCartDTO addItemDto)
+        private async Task<User> GetUserByTokenAsync(string token)
         {
-            if (addItemDto == null)
+            try
             {
-                _logger.LogError("addItemDto is null.");
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes(_configuration["JWT:Key"]);
+
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidIssuer = _configuration["JWT:Issuer"],
+                    ValidateAudience = true,
+                    ValidAudience = _configuration["JWT:Audience"],
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var userId = jwtToken.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+
+                return await _userManager.FindByIdAsync(userId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Token validation failed: {ex.Message}");
                 return null;
             }
+        }
 
-            // Log the incoming addItemDto details
-            _logger.LogInformation($"Received request to add item: ProductId={addItemDto.ProductId}, Quantity={addItemDto.Quantity}, ColorName={addItemDto.ColorName}, UserId={addItemDto.UserId}");
-
-            // Ensure the UserId exists
-            var user = await _context.Users.FindAsync(addItemDto.UserId);
+        public async Task<CartReadAddItemsToCartDTO> AddItemToCartAsync(CartAddItemsToCartDTO createDto)
+        {
+            // Validate user via token
+            var user = await GetUserByTokenAsync(createDto.token);
             if (user == null)
-            {
-                _logger.LogError($"User with ID {addItemDto.UserId} not found.");
-                return null;
-            }
+                throw new Exception("User not found or invalid token.");
 
-            // Fetch the product and include its colors
+            // Validate product
             var product = await _context.Products
                 .Include(p => p.Colors)
-                    .ThenInclude(pc => pc.Color)
-                .FirstOrDefaultAsync(p => p.Id == addItemDto.ProductId);
-
+                .ThenInclude(pc => pc.Color)
+                .FirstOrDefaultAsync(p => p.Id == createDto.ProductId);
             if (product == null)
-            {
-                _logger.LogError($"Product with ID {addItemDto.ProductId} not found.");
-                return null;
-            }
+                throw new Exception("Product not found.");
 
-            // Log the retrieved product details
-            _logger.LogInformation($"Retrieved product: Id={product.Id}, Name={product.Name}, Inventory={product.Inventory}");
+            // Check if the specified color exists for the product
+            var color = product.Colors.FirstOrDefault(c => c.Color.Name == createDto.ColorName);
+            if (color == null)
+                throw new Exception("The specified color is not available for this product.");
 
-            // Find the selected color (case-insensitive comparison)
-            var selectedColor = product.Colors.FirstOrDefault(c => c.Color != null && c.Color.Name.Equals(addItemDto.ColorName, StringComparison.OrdinalIgnoreCase));
+            // Ensure the quantity requested does not exceed inventory
+            if (createDto.Quantity > product.Inventory)
+                throw new Exception("Requested quantity exceeds available inventory.");
 
-            if (selectedColor == null)
-            {
-                _logger.LogError($"Color {addItemDto.ColorName} not found for product ID {addItemDto.ProductId}.");
-                return null;
-            }
-
-            // Log the selected color details
-            _logger.LogInformation($"Selected color: Id={selectedColor.Color.Id}, Name={selectedColor.Color.Name}");
-
-            if (product.Inventory < addItemDto.Quantity)
-            {
-                _logger.LogWarning($"Insufficient inventory for product {addItemDto.ProductId}. Requested: {addItemDto.Quantity}, Available: {product.Inventory}");
-                return null;  // Return null to indicate failure due to insufficient inventory
-            }
-
-            // Fetch or create a cart for the user based on UserId
+            // Check if the user already has a cart
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
-                .ThenInclude(ci => ci.Product)
-                .FirstOrDefaultAsync(c => c.UserId == addItemDto.UserId);
+                .FirstOrDefaultAsync(c => c.UserId == user.Id);
 
             if (cart == null)
             {
-                cart = new Cart
-                {
-                    UserId = addItemDto.UserId, // Ensure UserId is properly set
-                    CartItems = new List<CartItem>()
-                };
+                cart = new Cart { UserId = user.Id, CartItems = new List<CartItem>() };
                 _context.Carts.Add(cart);
             }
 
-            // Check if the item already exists in the cart with the same product ID and color name
-            var existingItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == addItemDto.ProductId && ci.ColorName.Equals(addItemDto.ColorName, StringComparison.OrdinalIgnoreCase));
-
-            int updatedQuantity;
-            CartItem cartItem;
-            if (existingItem != null)
+            // Check if the item already exists in the cart
+            var existingCartItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == product.Id && ci.ColorName == createDto.ColorName);
+            if (existingCartItem != null)
             {
-                // Update the quantity for the existing item
-                existingItem.Quantity += addItemDto.Quantity;
-                updatedQuantity = existingItem.Quantity;
-                cartItem = existingItem;
+                existingCartItem.Quantity += createDto.Quantity;
             }
             else
             {
-                // Add a new item to the cart
-                cartItem = new CartItem
+                var newCartItem = new CartItem
                 {
-                    ProductId = addItemDto.ProductId,
-                    Quantity = addItemDto.Quantity,
-                    Cart = cart,
-                    ColorName = addItemDto.ColorName
+                    ProductId = product.Id,
+                    Quantity = createDto.Quantity,
+                    ColorName = createDto.ColorName,
+                    CartId = cart.Id
                 };
-                cart.CartItems.Add(cartItem);
-                updatedQuantity = addItemDto.Quantity;
+                cart.CartItems.Add(newCartItem);
             }
 
+            // Update inventory
+            product.Inventory -= createDto.Quantity;
+
+            // Save changes to database
             await _context.SaveChangesAsync();
 
-            // Prepare the result DTO
-            var cartReadProducts = new CartReadProducts
+            // Prepare and return the read DTO
+            var cartItem = cart.CartItems.Last();
+            var readCartItem = new CartReadAddItemsToCartDTO
             {
-                ProductId = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                MainImageUrl = product.MainImage,
-                Price = product.Price,
-                OriginalPrice = product.OriginalPrice,
-                ColorDetails = new ColorReadDTO
+                ItemId = cartItem.CartItemId,
+                Quantity = cartItem.Quantity,
+                products = new CartReadProducts
                 {
-                    Id = selectedColor.Color.Id,
-                    Name = selectedColor.Color.Name,
-                    ColorImage = selectedColor.Color.Image
+                    ProductId = product.Id,
+                    Name = product.Name,
+                    Description = product.Description,
+                    MainImageUrl = product.MainImage,
+                    Price = product.Price,
+                    OriginalPrice = product.OriginalPrice,
+                    ColorDetails = new ColorReadDTO
+                    {
+                        Id = color.Color.Id,
+                        Name = color.Color.Name,
+                        ColorImage = color.Color.Image
+                    }
                 }
             };
 
-            var cartReadAddItemsToCartDto = new CartReadAddItemsToCartDTO
-            {
-                ItemId = cartItem.CartItemId,  // Use CartItemId instead of CartId
-                products = cartReadProducts,
-                Quantity = updatedQuantity
-            };
-
-            return cartReadAddItemsToCartDto;
+            return readCartItem;
         }
-        public async Task<List<CartGetAllItemsDTO>> GetAllCartItemsAsync()
+    
+        public async Task<List<CartGetAllItemsDTO>> GetAllCartItemsAsync(string token)
         {
-            // Fetch all carts including related entities
-            var carts = await _context.Carts
+            var currentUser = await GetUserByTokenAsync(token);
+            if (currentUser == null)
+            {
+                _logger.LogError("Authenticated user not found.");
+                return null;
+            }
+
+            var cart = await _context.Carts
                 .Include(c => c.CartItems)
                 .ThenInclude(ci => ci.Product)
-                .ToListAsync();
+                .FirstOrDefaultAsync(c => c.UserId == currentUser.Id);
 
-            // List to store the result
-            var result = new List<CartGetAllItemsDTO>();
-
-            // Iterate through each cart
-            foreach (var cart in carts)
+            if (cart == null)
             {
-                // Map CartItems to CartReadAddItemsToCartDTO
-                var items = new List<CartReadAddItemsToCartDTO>();
+                _logger.LogWarning($"Cart not found for user ID: {currentUser.Id}");
+                return new List<CartGetAllItemsDTO>();
+            }
 
-                foreach (var ci in cart.CartItems)
+            var items = new List<CartReadAddItemsToCartDTO>();
+
+            foreach (var ci in cart.CartItems)
+            {
+                var color = await _context.Colors.FirstOrDefaultAsync(c => c.Name == ci.ColorName);
+
+                var cartReadProducts = new CartReadProducts
                 {
-                    // Fetch color details based on color name
-                    var color = await _context.Colors.FirstOrDefaultAsync(c => c.Name == ci.ColorName);
-
-                    var cartReadProducts = new CartReadProducts
+                    ProductId = ci.ProductId,
+                    Name = ci.Product.Name,
+                    Description = ci.Product.Description,
+                    MainImageUrl = ci.Product.MainImage,
+                    Price = ci.Product.Price,
+                    OriginalPrice = ci.Product.OriginalPrice,
+                    ColorDetails = new ColorReadDTO
                     {
-                        ProductId = ci.ProductId,
-                        Name = ci.Product.Name,
-                        Description = ci.Product.Description,
-                        MainImageUrl = ci.Product.MainImage,
-                        Price = ci.Product.Price,
-                        OriginalPrice = ci.Product.OriginalPrice,
-                        ColorDetails =  new ColorReadDTO
-                        {
-                            Id = color.Id,
-                            Name = color.Name,
-                            ColorImage = color.Image
-                        }
-                    };
+                        Id = color.Id,
+                        Name = color.Name,
+                        ColorImage = color.Image
+                    }
+                };
 
-                    items.Add(new CartReadAddItemsToCartDTO
-                    {
-                        ItemId = ci.CartItemId,
-                        products = cartReadProducts,
-                        Quantity = ci.Quantity
-                    });
-                }
-
-                // Calculate the total price and total original price
-                var totalPrice = items.Sum(item => item.products.Price * item.Quantity);
-                var totalOriginalPrice = items.Sum(item => item.products.OriginalPrice.HasValue ? item.products.OriginalPrice.Value * item.Quantity : 0);
-
-                // Add the cart details including the list of items and total prices to the result list
-                result.Add(new CartGetAllItemsDTO
+                items.Add(new CartReadAddItemsToCartDTO
                 {
-                    CartId = cart.Id,
-                    items = items, // This will be empty if there are no items in the cart
-                    totalPrice = totalPrice, // This will be 0 if there are no items
-                    totalOriginalPrice = totalOriginalPrice // This will be 0 if there are no items
+                    ItemId = ci.CartItemId,
+                    products = cartReadProducts,
+                    Quantity = ci.Quantity
                 });
             }
 
-            return result;
+            var totalPrice = items.Sum(item => item.products.Price * item.Quantity);
+            var totalOriginalPrice = items.Sum(item => item.products.OriginalPrice.HasValue ? item.products.OriginalPrice.Value * item.Quantity : 0);
+
+            var result = new CartGetAllItemsDTO
+            {
+                CartId = cart.Id,
+                items = items,
+                totalPrice = totalPrice,
+                totalOriginalPrice = totalOriginalPrice
+            };
+
+            return new List<CartGetAllItemsDTO> { result };
         }
+
+
         public async Task<bool> ClearCartItemsByItemIdsAsync(int cartId, int[] itemIds)
         {
             _logger.LogInformation($"Fetching cart with ID: {cartId} and clearing items with specified item IDs.");

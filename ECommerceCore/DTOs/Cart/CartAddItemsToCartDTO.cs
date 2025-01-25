@@ -20,7 +20,10 @@ namespace ECommerceCore.DTOs.Cart
 
         [Required(ErrorMessage = "يرجى إدخال اسم اللون")]
         public String ColorName { get; set; }
+        [Required(ErrorMessage = "يرجى إدخال التوكين الخاص باليوزر")]
 
-        public int UserId { get; set; }
+        public String token { get; set; }
+
+
     }
 }

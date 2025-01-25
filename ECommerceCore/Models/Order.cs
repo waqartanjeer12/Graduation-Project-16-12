@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -22,8 +23,14 @@ namespace ECommerceCore.Models
         public string City { get; set; }
         public string Street { get; set; }
         public string Area { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = "يجب أن يكون السعر قيمة موجبة")]
+        [Precision(18, 2)]
         public decimal totalPriceBeforeShipping { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = "يجب أن يكون السعر قيمة موجبة")]
+        [Precision(18, 2)]
         public decimal shippingPrice { get; set; }
+        [Range(0, double.MaxValue, ErrorMessage = "يجب أن يكون السعر قيمة موجبة")]
+        [Precision(18, 2)]
         public decimal totalPrice { get; set; }
 
         [ForeignKey("User")]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,8 +24,12 @@ namespace ECommerceCore.DTOs.Order
         [Required(ErrorMessage = "يرجى ادخال المنطقة")]
         public string Area { get; set; }
         [Required(ErrorMessage = "يرجى ادخال سعر الشحن")]
+        [Range(0, double.MaxValue, ErrorMessage = "يجب أن يكون السعر قيمة موجبة")]
+        [Precision(18, 2)]
         public decimal ShippingPrice { get; set; } = 0;
         [Required(ErrorMessage ="يرجى ادخال أرقام ")]
-        public int[] cartItemIds { get; set; } 
+        public int[] cartItemIds { get; set; }
+        [Required(ErrorMessage = "يرجى ادخال التوكين الخاص باليوزر")]
+        public string token { get; set; }
     }
 }

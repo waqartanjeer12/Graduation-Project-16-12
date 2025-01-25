@@ -18,7 +18,7 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderDTO createOrderDTO)
+        public async Task<IActionResult> CreateOrder([FromForm] CreateOrderDTO createOrderDTO)
         {
             if (!ModelState.IsValid)
             {
