@@ -24,10 +24,12 @@ public class Authorization
         {
             var admin = new User
             {
-                UserName = adminEmail,
+                UserName = adminEmail.Split('@')[0],
                 Email = adminEmail,
                 IsActive = true,
-                EmailConfirmed = true
+                EmailConfirmed = true,
+                Role="Admin"
+
             };
             var createAdmin = await userManager.CreateAsync(admin, adminPassword);
             if (createAdmin.Succeeded)

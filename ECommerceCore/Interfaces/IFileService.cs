@@ -13,6 +13,8 @@ namespace ECommerceCore.Interfaces
 
     public class FileService : IFileService
     {
+        private static readonly string[] AllowedExtensions = { ".jpg", ".png", ".webp" };
+
         public async Task<string> UploadFileAsync(IFormFile file, string folderName)
         {
             var projectRoot = Directory.GetCurrentDirectory();
@@ -21,6 +23,12 @@ namespace ECommerceCore.Interfaces
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
+            }
+
+            var fileExtension = Path.GetExtension(file.FileName).ToLower();
+            if (!Array.Exists(AllowedExtensions, ext => ext == fileExtension))
+            {
+                throw new InvalidOperationException("يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط");
             }
 
             var fileName = $"{Guid.NewGuid()}_{file.FileName}";

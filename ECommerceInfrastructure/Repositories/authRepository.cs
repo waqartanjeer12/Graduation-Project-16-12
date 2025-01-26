@@ -26,37 +26,66 @@ namespace ECommerceInfrastructure.Repositories
             _configuration = configuration;
         }
 
-        public async Task<string> RegisterAsync(RegisterDTO registerDTO)
+        public async Task<Dictionary<string, string[]>> RegisterAsync(RegisterDTO registerDTO)
         {
+            var errors = new Dictionary<string, string[]>();
+
+            // التحقق من وجود البريد الإلكتروني مسبقًا
             var existingUser = await _userManager.FindByEmailAsync(registerDTO.Email);
             if (existingUser != null)
             {
-                if (!existingUser.EmailConfirmed || !existingUser.IsActive)
-                {
-                    return "Email already exists but is not confirmed or the account is inactive. Please check your email to confirm your account.";
-                }
-                return "Email already exists.";
+                errors.Add("Email", new[] { "البريد الإلكتروني مسجل بالفعل. يرجى استخدام بريد آخر." });
+                return errors;
             }
 
+            // إنشاء المستخدم
             var user = new User
             {
                 UserName = registerDTO.Name,
                 Email = registerDTO.Email,
                 CreatedAt = DateTime.UtcNow,
-                IsActive = false // Initially inactive until email is confirmed
+                IsActive = false, // Initially inactive until email is confirmed
+                Role = "User" // تعيين قيمة افتراضية
             };
 
             var result = await _userManager.CreateAsync(user, registerDTO.Password);
             if (!result.Succeeded)
-                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+            {
+                // إضافة أخطاء كلمة المرور
+                if (result.Errors.Any(e =>
+                    e.Code.Contains("PasswordRequiresNonAlphanumeric") ||
+                    e.Code.Contains("PasswordRequiresLower") ||
+                    e.Code.Contains("PasswordRequiresUpper") ||
+                    e.Code.Contains("PasswordRequiresDigit")))
+                {
+                    errors.Add("Password", new[] { "يرجى إدخال كلمة مرور قوية تحتوي على حرف صغير، حرف كبير، رقم، ورمز خاص." });
+                }
+                // إضافة أخطاء الاسم
+                else if (result.Errors.Any(e => e.Code.Contains("DuplicateUserName")))
+                {
+                    errors.Add("Name", new[] { "اسم المستخدم مسجل مسبقًا. يرجى اختيار اسم آخر." });
+                }
+                return errors;
+            }
+
+
+
+            // add user to role table
+            await _userManager.AddToRoleAsync(user, "User");
+
 
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             user.EmailConfirmationExpiry = DateTime.UtcNow.AddDays(7);
 
             var updateResult = await _userManager.UpdateAsync(user);
             if (!updateResult.Succeeded)
-                throw new Exception(string.Join(", ", updateResult.Errors.Select(e => e.Description)));
+            {
+                // إضافة أخطاء التحديث
+                errors.Add("General", updateResult.Errors.Select(e => e.Description).ToArray());
+                return errors;
+            }
 
+            // إرسال بريد التأكيد
             var confirmationLink = $"{_configuration["AppUrl"]}/api/auth/confirm-email?email={Uri.EscapeDataString(user.Email)}&token={Uri.EscapeDataString(token)}";
             var email = new Email()
             {
@@ -65,8 +94,9 @@ namespace ECommerceInfrastructure.Repositories
                 Body = $"Please confirm your email by clicking <a href='{confirmationLink}'>here</a>."
             };
             EmailSettings.SendEmail(email);
+            // إذا لم توجد أخطاء
+            return null;
 
-            return "Registration successful! Please check your email to confirm your account.";
         }
 
         public async Task<string> LoginAsync(LoginDTO loginDTO)
@@ -88,7 +118,8 @@ namespace ECommerceInfrastructure.Repositories
         private async Task<string> GenerateTokenAsync(User user)
         {
             // Determine the role
-            string role = user.Email == "waqar.tanger12@gmail.com" ? "Admin" : "User";
+            var roles =await _userManager.GetRolesAsync(user);
+            string role = roles.FirstOrDefault() ?? "User";
 
             // Adding essential claims like name, email, and role
             var claims = new List<Claim>
@@ -96,8 +127,8 @@ namespace ECommerceInfrastructure.Repositories
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email), // Email
                 new Claim(JwtRegisteredClaimNames.Email, user.Email), // Email (duplicate for JWT standard compliance)
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // User ID
-                new Claim(ClaimTypes.Name, user.UserName), // Username
-                new Claim(ClaimTypes.Role, role) // User's role
+                new Claim("userName", user.UserName), // Username
+                new Claim("role", role) // User's role
             };
 
             // Creating the signing key
@@ -116,24 +147,7 @@ namespace ECommerceInfrastructure.Repositories
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async Task<string> ConfirmEmailAsync(string email, string token)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-            if (user == null) throw new Exception("User not found.");
-
-            if (user.IsActive) return "Email already confirmed.";
-
-            if (user.EmailConfirmationExpiry < DateTime.UtcNow)
-                throw new Exception("Email confirmation link has expired.");
-
-            var result = await _userManager.ConfirmEmailAsync(user, token);
-            if (!result.Succeeded) throw new Exception("Failed to confirm email.");
-
-            user.IsActive = true;
-            await _userManager.UpdateAsync(user);
-
-            return "Email confirmed successfully.";
-        }
+      
 
         public async Task<string> ForgotPasswordAsync(ForgotPasswordDTO forgotPasswordDTO)
         {

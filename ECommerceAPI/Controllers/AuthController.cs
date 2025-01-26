@@ -19,15 +19,26 @@ namespace ECommerceAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                var token = await _authRepository.RegisterAsync(registerDTO);
-                return Ok(new { Token = token });
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
             }
-            catch (Exception ex)
+
+            var errorsFromService = await _authRepository.RegisterAsync(registerDTO);
+
+            if (errorsFromService != null)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { errors = errorsFromService });
             }
+
+            return Ok(new { Message = "تم التسجيل بنجاح! يرجى التحقق من بريدك الإلكتروني لتأكيد حسابك." });
         }
 
         [HttpPost("login")]
@@ -36,7 +47,7 @@ namespace ECommerceAPI.Controllers
             try
             {
                 var token = await _authRepository.LoginAsync(loginDTO);
-                if (token.StartsWith("Email") || token.StartsWith("Invalid"))
+                if (token.StartsWith("Email") || token.StartsWith("Invalid") || token.StartsWith("Your email is not confirmed "))
                 {
                     return BadRequest(token);
                 }
@@ -48,15 +59,7 @@ namespace ECommerceAPI.Controllers
             }
         }
 
-        [HttpGet("confirm-email")]
-        public async Task<IActionResult> ConfirmEmail(string email, string token)
-        {
-            var result = await _authRepository.ConfirmEmailAsync(email, token);
-            if (result.Contains("successfully"))
-                // Redirect to the specified URL after successful confirmation
-                return Redirect("http://localhost:5173");
-            return BadRequest(new { message = result });
-        }
+        
 
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO forgotPasswordDTO)

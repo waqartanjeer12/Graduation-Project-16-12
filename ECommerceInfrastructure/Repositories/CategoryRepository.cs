@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 using ECommerceCore.DTOs.Category;
 using ECommerceCore.Models;
 using ECommerceInfrastructure.Configurations.Data;
-using ECommerceCore.Interfaces;  // Add this for IFileService
+using ECommerceCore.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc;  // Add this for ILogger
 
 namespace ECommerceInfrastructure.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _context;
-        private readonly IFileService _fileService;  // Inject IFileService
-        private readonly ILogger<CategoryRepository> _logger;  // Inject ILogger
+        private readonly IFileService _fileService;
+        private readonly ILogger<CategoryRepository> _logger;
 
         public CategoryRepository(ApplicationDbContext context, IFileService fileService, ILogger<CategoryRepository> logger)
         {
@@ -32,6 +31,7 @@ namespace ECommerceInfrastructure.Repositories
                 .Select(c => new CategoryReadDTO { Img = c.Img, Name = c.Name })
                 .ToListAsync();
         }
+
         public async Task<List<CategoryReadForAdminDTO>> GetAllCategoriesForAdminAsync()
         {
             return await _context.Categories
@@ -44,36 +44,34 @@ namespace ECommerceInfrastructure.Repositories
                 .ToListAsync();
         }
 
-
         public async Task<CategoryReadDTO> GetCategoryByIdAsync(int id)
-{
-    _logger.LogInformation("جارِ جلب الفئة بالمعرف: {Id}", id);
+        {
+            _logger.LogInformation("جارِ جلب الفئة بالمعرف: {Id}", id);
 
-    try
-    {
-                var category = await _context.Categories
-            .Where(c => c.Id == id)
-            .Select(c => new CategoryReadDTO
+            try
             {
-                Img = c.Img,
-                Name = c.Name
-            })
-            .FirstOrDefaultAsync(); // Fetch a single category
-
+                var category = await _context.Categories
+                    .Where(c => c.Id == id)
+                    .Select(c => new CategoryReadDTO
+                    {
+                        Img = c.Img,
+                        Name = c.Name
+                    })
+                    .FirstOrDefaultAsync();
 
                 if (category == null)
-        {
-            _logger.LogWarning("لم يتم العثور على أي فئة للمعرف: {Id}", id);
-        }
+                {
+                    _logger.LogWarning("لم يتم العثور على أي فئة للمعرف: {Id}", id);
+                }
 
-        return category;
-    }
-    catch (Exception ex)
-    {
-        _logger.LogError(ex, "حدث خطأ أثناء جلب الفئة بالمعرف: {Id}", id);
-        throw; // Rethrow the exception to be handled by the controller
-    }
-}
+                return category;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء جلب الفئة بالمعرف: {Id}", id);
+                throw;
+            }
+        }
 
         public async Task<CategoryReadForIdName> GetCategoryReadForIdName(int id)
         {
@@ -89,17 +87,28 @@ namespace ECommerceInfrastructure.Repositories
             };
         }
 
-
-        public async Task<Category> CreateCategoryAsync(CategoryCreateDTO categoryDto)
+        public async Task<Dictionary<string, string[]>> CreateCategoryAsync(CategoryCreateDTO categoryDto)
         {
             _logger.LogInformation("بداية إنشاء فئة جديدة");
+            var errors = new Dictionary<string, string[]>();
 
             try
             {
                 if (categoryDto == null)
                 {
                     _logger.LogWarning("تم استدعاء CreateCategoryAsync مع DTO فارغ.");
-                    return null;  // Return null or a specific failure value
+                    errors.Add("General", new[] { "CreateCategoryAsync was called with a null DTO." });
+                    return errors;
+                }
+
+                var existingCategory = await _context.Categories
+                    .FirstOrDefaultAsync(c => c.Name == categoryDto.Name);
+
+                if (existingCategory != null)
+                {
+                    _logger.LogWarning("اسم الفئة موجود بالفعل: {Name}", categoryDto.Name);
+                    errors.Add("Name", new[] { "اسم الفئة موجود بالفعل. يرجى اختيار اسم آخر." });
+                    return errors;
                 }
 
                 var fileName = await _fileService.UploadFileAsync(categoryDto.Img, "images");
@@ -114,19 +123,26 @@ namespace ECommerceInfrastructure.Repositories
 
                 _logger.LogInformation("تم إنشاء الفئة بنجاح بالاسم: {Name}", category.Name);
 
-                return category;
+                return null; // No errors
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء إنشاء الفئة: نوع الملف غير مدعوم.");
+                errors.Add("Img", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                return errors;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء إنشاء الفئة.");
-                return null;  // Return null or a specific failure value
+                errors.Add("General", new[] { "An error occurred while creating the category." });
+                return errors;
             }
         }
 
-
-        public async Task<CategoryReadDTO> UpdateCategoryAsync(int id, CategoryUpdateDTO categoryDto)
+        public async Task<Dictionary<string, string[]>> UpdateCategoryAsync(int id, CategoryUpdateDTO categoryDto)
         {
             _logger.LogInformation("البدء بالتعديل باستخدام المعرف: {Id}", id);
+            var errors = new Dictionary<string, string[]>();
 
             try
             {
@@ -134,61 +150,83 @@ namespace ECommerceInfrastructure.Repositories
                 if (category == null)
                 {
                     _logger.LogWarning("الفئة غير موجودة بالنسبة للمعرف: {Id}", id);
-                    return null;
+                    errors.Add("category", new[] { "الفئة المدخلة غير موجودة" });
+                    return errors;
                 }
 
-                // Update name if provided
                 if (!string.IsNullOrEmpty(categoryDto.Name) && category.Name != categoryDto.Name)
                 {
+                    var existingCategory = await _context.Categories
+                        .FirstOrDefaultAsync(c => c.Name == categoryDto.Name && c.Id != id);
+
+                    if (existingCategory != null)
+                    {
+                        _logger.LogWarning("اسم الفئة موجود بالفعل: {Name}", categoryDto.Name);
+                        errors.Add("Name", new[] { "اسم الفئة موجود بالفعل. يرجى اختيار اسم آخر." });
+                        return errors;
+                    }
+
                     category.Name = categoryDto.Name;
                 }
 
-                // Update image if provided
                 if (categoryDto.Img != null && categoryDto.Img.Length > 0)
                 {
-                    // Delete old image if exists
-                    if (!string.IsNullOrEmpty(category.Img))
+                    try
                     {
-                        _fileService.DeleteFile(Path.GetFileName(category.Img), "images");
-                        _logger.LogInformation("حذف الصورة القديمة حسب المعرف: {Id}", id);
-                    }
+                        if (!string.IsNullOrEmpty(category.Img))
+                        {
+                            _fileService.DeleteFile(Path.GetFileName(category.Img), "images");
+                            _logger.LogInformation("حذف الصورة القديمة حسب المعرف: {Id}", id);
+                        }
 
-                    // Save new image
-                    var fileName = await _fileService.UploadFileAsync(categoryDto.Img, "images");
-                    category.Img = $"/files/images/{fileName}";
+                        var fileName = await _fileService.UploadFileAsync(categoryDto.Img, "images");
+                        category.Img = $"/files/images/{fileName}";
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        _logger.LogError(ex, "حدث خطأ أثناء تحديث الفئة: نوع الملف غير مدعوم.");
+                        errors.Add("Img", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                        return errors;
+                    }
                 }
 
                 await _context.SaveChangesAsync();
 
                 _logger.LogInformation("تم التعديل على الفئة بنجاح: {Id}", id);
 
-                return new CategoryReadDTO
-                {
-                    Img = category.Img,
-                    Name = category.Name
-                };
+                return null; // No errors
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء العديل على الفئة: {Id}", id);
-                return null;
+                errors.Add("category", new[] { "حدث خطأ أثناء التعديل على الفئة" });
+                return errors;
             }
         }
-    
 
-
-
-    public async Task<bool> DeleteCategoryAsync(int id)
+        public async Task<Dictionary<string, string[]>> DeleteCategoryAsync(int id)
         {
             _logger.LogInformation("بداية حذف الفئة للـ ID: {Id}", id);
+            var errors = new Dictionary<string, string[]>();
 
             try
             {
-                var category = await _context.Categories.FindAsync(id);
+                var category = await _context.Categories
+                    .Include(c => c.Products)
+                    .FirstOrDefaultAsync(c => c.Id == id);
+
                 if (category == null)
                 {
                     _logger.LogWarning("لم يتم العثور على فئة بالـ ID: {Id}", id);
-                    return false;
+                    errors.Add("category", new[] { "الفئة المدخلة غير موجودة" });
+                    return errors;
+                }
+
+                if (category.Products.Any())
+                {
+                    _logger.LogWarning("لا يمكن حذف الفئة لأن هناك منتجات مرتبطة بها: {Id}", id);
+                    errors.Add("category", new[] { "لا يمكن حذف الفئة لأن هناك منتجات مرتبطة بها." });
+                    return errors;
                 }
 
                 if (!string.IsNullOrEmpty(category.Img))
@@ -196,7 +234,7 @@ namespace ECommerceInfrastructure.Repositories
                     var filePath = Path.Combine(Directory.GetCurrentDirectory(), "files", "images", Path.GetFileName(category.Img));
                     if (File.Exists(filePath))
                     {
-                        File.Delete(filePath);  // Delete the file
+                        File.Delete(filePath);
                         _logger.LogInformation("تم حذف الصورة الخاصة بالفئة ID: {Id}", id);
                     }
                 }
@@ -206,12 +244,13 @@ namespace ECommerceInfrastructure.Repositories
 
                 _logger.LogInformation("تم حذف الفئة بنجاح للـ ID: {Id}", id);
 
-                return true;
+                return null; // No errors
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء حذف الفئة للـ ID: {Id}", id);
-                return false;  // Return false if the deletion fails
+                errors.Add("General", new[] { "An error occurred while deleting the category." });
+                return errors;
             }
         }
 
@@ -233,9 +272,8 @@ namespace ECommerceInfrastructure.Repositories
             catch (Exception ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء البحث عن الفئات حسب الاسم: {Name}", name);
-                return new List<CategoryReadDTO>();  // Return an empty list if an error occurs
+                return new List<CategoryReadDTO>();
             }
         }
     }
 }
-

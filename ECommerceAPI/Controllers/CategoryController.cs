@@ -1,8 +1,12 @@
 ﻿using ECommerceCore.DTOs.Category;
 using ECommerceInfrastructure.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ECommerceAPI.Controllers
 {
@@ -88,55 +92,69 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> CreateCategory([FromForm] CategoryCreateDTO categoryDto)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                var category = await _repository.CreateCategoryAsync(categoryDto);
-                return Ok(new { Message = "تم إنشاء الفئة بنجاح", CategoryId = category.Id });
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
             }
-            catch (Exception ex)
+
+            var category = await _repository.CreateCategoryAsync(categoryDto);
+
+            if (category != null)
             {
-                Log.Error(ex, "حدث خطأ أثناء إنشاء الفئة.");
-                return StatusCode(500, "حدث خطأ أثناء إنشاء الفئة.");
+                return BadRequest(new { errors = category });
             }
+
+            return Ok(new { Message = "تم إنشاء الفئة بنجاح" });
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCategory([FromRoute] int id, [FromForm] CategoryUpdateDTO categoryDto)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                var category = await _repository.UpdateCategoryAsync(id, categoryDto);
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
 
-                if (category == null)
-                {
-                    return NotFound("لم يتم العثور على الفئة.");
-                }
-
-                return Ok(new { Message = "تم تحديث الفئة بنجاح", Category = category });
+                return BadRequest(new { errors });
             }
-            catch (Exception ex)
+
+            var category = await _repository.UpdateCategoryAsync(id, categoryDto);
+
+            if (category != null)
             {
-                Log.Error(ex, "حدث خطأ أثناء تحديث الفئة.");
-                return StatusCode(500, "حدث خطأ أثناء تحديث الفئة.");
+                return BadRequest(new { errors = category });
             }
+
+            return Ok(new { Message = "تم تحديث الفئة بنجاح" });
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCategory([FromRoute] int id)
         {
-            try
+            var category = await _repository.DeleteCategoryAsync(id);
+
+            if (category != null)
             {
-                var success = await _repository.DeleteCategoryAsync(id);
-                if (!success) return NotFound("لم يتم العثور على الفئة.");
-                return Ok(new { Message = "تم حذف الفئة بنجاح" });
+                return BadRequest(new { errors = category });
             }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "حدث خطأ أثناء حذف الفئة.");
-                return StatusCode(500, "حدث خطأ أثناء حذف الفئة.");
-            }
+
+            return Ok(new { Message = "تم حذف الفئة بنجاح" });
         }
 
         [HttpGet("search")]
