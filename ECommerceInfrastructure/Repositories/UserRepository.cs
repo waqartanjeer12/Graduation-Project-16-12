@@ -1,11 +1,14 @@
 ﻿using ECommerceCore.DTOs.User;
 using ECommerceCore.Interfaces;
+using ECommerceCore.Models;
 using ECommerceInfrastructure.Configurations.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,12 +19,20 @@ namespace ECommerceInfrastructure.Repositories
         private readonly ApplicationDbContext _context;
         private readonly IFileService _fileService;  // Inject IFileService
         private readonly ILogger<UserRepository> _logger;  // Inject ILogger
+        private readonly UserManager<User> _userManager;
 
-        public UserRepository(ApplicationDbContext context, IFileService fileService, ILogger<UserRepository> logger)
+
+        public UserRepository(ApplicationDbContext context, IFileService fileService, ILogger<UserRepository> logger, UserManager<User> userManager)
         {
             _context = context;
             _fileService = fileService;
             _logger = logger;
+            _userManager = userManager;
+        }
+        public async Task<User> GetUserFromClaimsAsync(ClaimsPrincipal userClaims)
+        {
+            var userId = userClaims.FindFirstValue(ClaimTypes.NameIdentifier);
+            return await _userManager.FindByIdAsync(userId);
         }
 
         public async Task<GetUserForUserDTO> GetUserByEmailAsync(String email)
@@ -104,10 +115,10 @@ namespace ECommerceInfrastructure.Repositories
 
                 // Update basic properties
                 user.UserName = dto.Name ?? user.UserName;//return left if not null and then right
-                user.PhoneNumber = dto.PhoneNumber ?? user.PhoneNumber;
-                user.City = dto.City ?? user.City;
-                user.Area = dto.Area ?? user.Area;
-                user.Street = dto.Street ?? user.Street;
+                user.PhoneNumber = dto.PhoneNumber;
+                user.City = dto.City ;
+                user.Area = dto.Area ;
+                user.Street = dto.Street ;
 
                 // Handle Img update
                 if (dto.Img != null)

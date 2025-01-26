@@ -26,7 +26,7 @@ namespace ECommerceInfrastructure.Repositories
             _userManager = userManager;
         }
 
-        private async Task<User> GetUserFromClaimsAsync(ClaimsPrincipal userClaims)
+        public async Task<User> GetUserFromClaimsAsync(ClaimsPrincipal userClaims)
         {
             var userId = userClaims.FindFirstValue(ClaimTypes.NameIdentifier);
             return await _userManager.FindByIdAsync(userId);

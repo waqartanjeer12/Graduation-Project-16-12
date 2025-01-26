@@ -19,24 +19,33 @@ namespace ECommerceAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO registerDTO)
         {
-            var result = await _authRepository.RegisterAsync(registerDTO);
-            if (result.Contains("successful"))
-                return Ok(new { message = result });
-            return BadRequest(new { message = result });
+            try
+            {
+                var token = await _authRepository.RegisterAsync(registerDTO);
+                return Ok(new { Token = token });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
-            if (loginDTO == null)
+            try
             {
-                return BadRequest(new { message = "The loginDTO field is required." });
+                var token = await _authRepository.LoginAsync(loginDTO);
+                if (token.StartsWith("Email") || token.StartsWith("Invalid"))
+                {
+                    return BadRequest(token);
+                }
+                return Ok(new { Token = token });
             }
-
-            var result = await _authRepository.LoginAsync(loginDTO);
-            if (result.StartsWith("eyJ"))  // JWT token usually starts with "eyJ"
-                return Ok(new { token = result });
-            return BadRequest(new { message = result });
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("confirm-email")]

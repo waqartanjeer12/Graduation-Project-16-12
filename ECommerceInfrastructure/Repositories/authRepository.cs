@@ -13,13 +13,13 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ECommerceInfrastructure.Repositories
 {
-    public class authRepository : IAuthRepository
+    public class AuthRepository : IAuthRepository
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IConfiguration _configuration;
 
-        public authRepository(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
+        public AuthRepository(UserManager<User> userManager, SignInManager<User> signInManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -31,6 +31,10 @@ namespace ECommerceInfrastructure.Repositories
             var existingUser = await _userManager.FindByEmailAsync(registerDTO.Email);
             if (existingUser != null)
             {
+                if (!existingUser.EmailConfirmed || !existingUser.IsActive)
+                {
+                    return "Email already exists but is not confirmed or the account is inactive. Please check your email to confirm your account.";
+                }
                 return "Email already exists.";
             }
 
@@ -39,7 +43,7 @@ namespace ECommerceInfrastructure.Repositories
                 UserName = registerDTO.Name,
                 Email = registerDTO.Email,
                 CreatedAt = DateTime.UtcNow,
-                IsActive = false  // Initially inactive until email is confirmed
+                IsActive = false // Initially inactive until email is confirmed
             };
 
             var result = await _userManager.CreateAsync(user, registerDTO.Password);
@@ -71,11 +75,45 @@ namespace ECommerceInfrastructure.Repositories
             if (user == null)
                 return "Email does not exist. You can register.";
 
+            if (!user.EmailConfirmed || !user.IsActive)
+                return "Your email is not confirmed or your account is inactive. Please confirm your email to activate your account.";
+
             var result = await _signInManager.PasswordSignInAsync(user, loginDTO.Password, loginDTO.RememberMe, false);
             if (!result.Succeeded)
                 return "Invalid password.";
 
-            return await GenerateTokenAsync(user, _userManager);
+            return await GenerateTokenAsync(user);
+        }
+
+        private async Task<string> GenerateTokenAsync(User user)
+        {
+            // Determine the role
+            string role = user.Email == "waqar.tanger12@gmail.com" ? "Admin" : "User";
+
+            // Adding essential claims like name, email, and role
+            var claims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, user.Email), // Email
+                new Claim(JwtRegisteredClaimNames.Email, user.Email), // Email (duplicate for JWT standard compliance)
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // User ID
+                new Claim(ClaimTypes.Name, user.UserName), // Username
+                new Claim(ClaimTypes.Role, role) // User's role
+            };
+
+            // Creating the signing key
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            // Creating the token
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JWT:Issuer"],
+                audience: _configuration["JWT:Audience"],
+                claims: claims,
+                expires: DateTime.UtcNow.AddDays(14), // Token validity: 14 days
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         public async Task<string> ConfirmEmailAsync(string email, string token)
@@ -119,6 +157,7 @@ namespace ECommerceInfrastructure.Repositories
 
             return "Password reset link sent";
         }
+
         public async Task<string> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO)
         {
             var user = await _userManager.FindByEmailAsync(resetPasswordDTO.Email);
@@ -134,39 +173,6 @@ namespace ECommerceInfrastructure.Repositories
             }
 
             return "Password has been reset successfully.";
-        }
-        public async Task<string> GenerateTokenAsync(User user, UserManager<User> userManager)
-        {
-            // إضافة Claims الأساسية مثل الاسم والبريد الإلكتروني
-            var claims = new List<Claim>
-    {
-        new Claim(JwtRegisteredClaimNames.Sub, user.Email), // البريد الإلكتروني
-        new Claim(JwtRegisteredClaimNames.Email, user.Email), // البريد الإلكتروني (مكرر لتوافق مع JWT القياسي)
-        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // معرف المستخدم
-        new Claim(ClaimTypes.Name, user.UserName) // اسم المستخدم
-    };
-
-            // إضافة الأدوار (Roles) إلى الـ Claims
-            var userRoles = await userManager.GetRolesAsync(user);
-            foreach (var role in userRoles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
-
-            // إنشاء مفتاح التوقيع
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            // إنشاء التوكن
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:Issuer"],
-                audience: _configuration["JWT:Audience"],
-                claims: claims,
-                expires: DateTime.UtcNow.AddDays(14), // مدة الصلاحية 14 يومًا
-                signingCredentials: creds
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

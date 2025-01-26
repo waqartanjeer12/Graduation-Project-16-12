@@ -19,11 +19,16 @@ namespace ECommerceInfrastructure.Configurations.Data
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
-      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // Remove the unique index on UserName
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasIndex(e => e.NormalizedUserName).IsUnique(false);
+            });
 
             // Unique index on Name property for Category
             modelBuilder.Entity<Category>()
@@ -99,7 +104,7 @@ namespace ECommerceInfrastructure.Configurations.Data
                 .HasMany(o => o.CartItems)
                 .WithOne(ci => ci.Order)
                 .HasForeignKey(ci => ci.OrderId)
-                .OnDelete(DeleteBehavior.Restrict); // Use Restrict here
+                .OnDelete(DeleteBehavior.Restrict);
 
             // Configure the Order-OrderItem one-to-many relationship.
             modelBuilder.Entity<Order>()
@@ -114,8 +119,6 @@ namespace ECommerceInfrastructure.Configurations.Data
                 .WithOne(oi => oi.Product)
                 .HasForeignKey(oi => oi.ProductId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-          
         }
     }
 }

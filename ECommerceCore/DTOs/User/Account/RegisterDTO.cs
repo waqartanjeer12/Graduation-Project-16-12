@@ -4,6 +4,7 @@ public class RegisterDTO
 {
     [Required(ErrorMessage = "الاسم الكامل مطلوب.")]
     [StringLength(100, ErrorMessage = "الاسم الكامل يجب ألا يتجاوز 100 حرف.")]
+    [RegularExpression(@"^[\p{L}0-9]+([\s_\-][\p{L}0-9]+)*$", ErrorMessage = "Name must consist of letters, numbers, and optionally one of '-', '_', or space between words without repetition.")]
     public string Name { get; set; }
 
     [Required(ErrorMessage = "البريد الإلكتروني مطلوب.")]
@@ -20,4 +21,6 @@ public class RegisterDTO
     [DataType(DataType.Password)]
     [Compare("Password", ErrorMessage = "كلمة المرور وتأكيد كلمة المرور لا يتطابقان.")]
     public string ConfirmPassword { get; set; }
+
+   
 }
