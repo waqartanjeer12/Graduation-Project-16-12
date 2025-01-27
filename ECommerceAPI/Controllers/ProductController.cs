@@ -1,8 +1,12 @@
 ﻿using ECommerceCore.DTOs.Color;
 using ECommerceCore.DTOs.Product;
 using ECommerceCore.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ECommerceAPI.Controllers
 {
@@ -37,78 +41,157 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost("Color")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateColorAsync([FromForm] ColorCreateDTO colorDto)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                var color = await _repository.CreateColorAsync(colorDto);
-                return Ok(new { Message = "تم إنشاء اللون بنجاح", ColorId = color.Id });
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
             }
-            catch (Exception ex)
+
+            var errorsFromService = await _repository.CreateColorAsync(colorDto);
+
+            if (errorsFromService != null)
             {
-                Log.Error(ex, "حدث خطأ أثناء اضافة اللون.");
-                return StatusCode(500, "حدث خطأ أثناء اضافة اللون.");
+                return BadRequest(new { errors = errorsFromService });
             }
+
+            return Ok(new { Message = "تم إنشاء اللون بنجاح" });
         }
 
         [HttpDelete("Color/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteColorAsync(int id)
         {
-            try
+            var errorsFromService = await _repository.DeleteColorAsync(id);
+
+            if (errorsFromService != null)
             {
-                await _repository.DeleteColorAsync(id);
-                return StatusCode(204, new { Message = "تم حذف المنتج بنجاح." }); // 204 No Content
+                return BadRequest(new { errors = errorsFromService });
             }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "[حدث خطأ أثناء حذف المنتج باستخدام المعرف]: {Id}", id);
-                return StatusCode(404, "حدث خطأ أثناء حذف المنتج باستخدام المعرف"); // 500 Internal Server Error
-            }
+
+            return StatusCode(204, new { Message = "تم حذف اللون بنجاح." }); // 204 No Content
         }
 
         [HttpPut("Color/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateColorAsync([FromRoute] int id, [FromForm] ColorUpdateDTO colorDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
+            }
+
+            var errorsFromService = await _repository.UpdateColorAsync(id, colorDto);
+
+            if (errorsFromService != null)
+            {
+                return BadRequest(new { errors = errorsFromService });
+            }
+
+            return Ok(new { Message = "تم تحديث اللون بنجاح" });
+        }
+
+        [HttpGet("Color/{id}")]
+        public async Task<IActionResult> GetColorByIdAsync(int id)
         {
             try
             {
-                var color = await _repository.UpdateColorAsync(id, colorDto);
-                return Ok(new { Message = "تم تحديث اللون بنجاح", ColorId = color.Id });
+                Log.Information("جارِ جلب اللون باستخدام المعرف: {Id}", id);
+                var color = await _repository.GetColorByIdAsync(id);
+
+                if (color == null)
+                {
+                    return NotFound(new { Message = "لم يتم العثور على اللون." });
+                }
+
+                return Ok(new { Message = "تم العثور على اللون.", Color = color });
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "[حدث خطأ أثناء تحديث اللون باستخدام المعرف]: {Id}", id);
-                return StatusCode(500, "Internal server error"); // 500 Internal Server Error
+                Log.Error(ex, "[حدث خطأ أثناء جلب اللون باستخدام المعرف]: {Id}", id);
+                return StatusCode(500, new { Message = "حدث خطأ أثناء استرداد اللون." });
             }
         }
 
         [HttpPost("create")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateProductAsync([FromForm] ProductCreateDTO productCreateDTO)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                var createdProductDTO = await _repository.CreateProductAsync(productCreateDTO);
-                return Ok(new { Message = "تم انشاء المنتج بنجاح ", Product = createdProductDTO });
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
             }
-            catch (Exception ex)
+
+            var errorsFromService = await _repository.CreateProductAsync(productCreateDTO);
+
+            if (errorsFromService != null)
             {
-                Log.Error(ex, "حدث خطأ أثناء انشاء المنتج.");
-                return StatusCode(500, "حدث خطأ أثناء انشاء المنتج.");
+                return BadRequest(new { errors = errorsFromService });
             }
+
+            return Ok(new { Message = "تم إنشاء المنتج بنجاح" });
         }
 
         [HttpPut("update/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateProductAsync(int id, [FromForm] ProductUpdateDTO productUpdateDTO)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                var updatedProductDTO = await _repository.UpdateProductAsync(id, productUpdateDTO);
-                return Ok(new { Message = "تم تحديث المنتج بنجاح ", Product = updatedProductDTO });
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
             }
-            catch (Exception ex)
+
+            var errorsFromService = await _repository.UpdateProductAsync(id, productUpdateDTO);
+
+            if (errorsFromService != null)
             {
-                Log.Error(ex, "حدث خطأ أثناء تحديث المنتج.");
-                return StatusCode(500, "حدث خطأ أثناء تحديث المنتج.");
+                return BadRequest(new { errors = errorsFromService });
             }
+
+            return Ok(new { Message = "تم تحديث المنتج بنجاح" });
+        }
+
+        [HttpDelete("product/{id}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var errorsFromService = await _repository.DeleteProductAsync(id);
+
+            if (errorsFromService != null)
+            {
+                return BadRequest(new { errors = errorsFromService });
+            }
+
+            return StatusCode(204, new { Message = "تم حذف المنتج بنجاح" }); // 204 No Content
         }
 
         [HttpGet("admin")]
@@ -140,6 +223,7 @@ namespace ECommerceAPI.Controllers
                 return StatusCode(500, "حدث خطأ أثناء جلب المنتجات.");
             }
         }
+
         [HttpGet("original")]
         public async Task<ActionResult<List<ProductReadByOriginalPrice>>> GetAlProductsByComparisionOriginalPrice()
         {
@@ -154,6 +238,7 @@ namespace ECommerceAPI.Controllers
                 return StatusCode(500, "حدث خطأ أثناء جلب المنتجات.");
             }
         }
+
         [HttpGet("productId/{id}")]
         public async Task<ActionResult<ProductReadByProductIdDTO>> GetProductByProductIdForAdmin(int id)
         {
@@ -173,25 +258,6 @@ namespace ECommerceAPI.Controllers
             }
         }
 
-        [HttpDelete("product/{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
-        {
-            try
-            {
-                var result = await _repository.DeleteProductAsync(id);
-                if (result)
-                {
-                    return StatusCode(204, new { Message = "تم عملية الحذف بنجاح" }); // 204 No Content
-                }
-
-                return StatusCode(404, new { Message = "المنتج الذي تبحث عنه غير موجود" }); // 404 Not Found
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "[حدث خطأ أثناء حذف المنتج باستخدام المعرف]: {Id}", id);
-                return StatusCode(500, "Internal server error"); // 500 Internal Server Error
-            }
-        }
         [HttpGet("categoryId/{id}")]
         public async Task<ActionResult<List<ProductReadByCategoryIdDTO>>> GetProductByCategoryId(int id)
         {
@@ -206,6 +272,7 @@ namespace ECommerceAPI.Controllers
                 return StatusCode(500, new { Message = "حدث خطأ أثناء جلب المنتجات." });
             }
         }
+
         [HttpGet("search")]
         public async Task<IActionResult> SearchProducts([FromQuery] string query)
         {
@@ -223,11 +290,5 @@ namespace ECommerceAPI.Controllers
 
             return Ok(products);
         }
-
-
-
-
-
-        
     }
 }

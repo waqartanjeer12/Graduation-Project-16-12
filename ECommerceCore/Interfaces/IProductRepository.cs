@@ -1,28 +1,26 @@
 ﻿using ECommerceCore.DTOs.Color;
 using ECommerceCore.DTOs.Product;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ECommerceCore.Interfaces
 {
     public interface IProductRepository
     {
-
-        Task<Color> CreateColorAsync(ColorCreateDTO colorCreateDTO);
+        Task<Dictionary<string, string[]>> CreateColorAsync(ColorCreateDTO colorCreateDTO);
         Task<List<ColorReadDTO>> GetColorAsync();
-        Task DeleteColorAsync(int id);
-        Task<ColorReadDTO> UpdateColorAsync(int id, ColorUpdateDTO colorUpdateDTO);
+        Task<Dictionary<string, string[]>> DeleteColorAsync(int id);
+        Task<ColorReadDTO> GetColorByIdAsync(int id);
+        Task<Dictionary<string, string[]>> UpdateColorAsync(int id, ColorUpdateDTO colorUpdateDTO);
 
-        Task<ProductReadForCreateDTO> CreateProductAsync(ProductCreateDTO productCreateDTO);
+        Task<Dictionary<string, string[]>> CreateProductAsync(ProductCreateDTO productCreateDTO);
         Task<List<ProductReadForAdminDTO>> GetAllProductsForAdminAsync();
         Task<List<ProductReadForUserDTO>> GetAllProductsForUserAsync();
         Task<ProductReadByProductIdDTO> GetProductByProductIdAsync(int id);
         Task<List<ProductReadByCategoryIdDTO>> GetProductByCategoryIdAsync(int id);
-        Task<ProductReadForUpdateDTO> UpdateProductAsync(int id, ProductUpdateDTO productUpdateDTO);
+        Task<Dictionary<string, string[]>> UpdateProductAsync(int id, ProductUpdateDTO productUpdateDTO);
         Task<List<ProductReadByOriginalPrice>> GetAlProductsByComparisionOriginalPrice();
         Task<List<ProductReadForSearchDTO>> SearchProductsAsync(string query);
-        Task<bool> DeleteProductAsync(int id);
-
-
-
-        
+        Task<Dictionary<string, string[]>> DeleteProductAsync(int id);
     }
 }

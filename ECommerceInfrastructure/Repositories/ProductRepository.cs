@@ -20,19 +20,21 @@ namespace ECommerceInfrastructure.Repositories
             _fileService = fileService;
             _logger = logger;
         }
-       
+
 
         // Method to create a new color
-        public async Task<Color> CreateColorAsync(ColorCreateDTO colorCreateDTO)
+        public async Task<Dictionary<string, string[]>> CreateColorAsync(ColorCreateDTO colorCreateDTO)
         {
             _logger.LogInformation("بداية إضافة لون جديد");
+            var errors = new Dictionary<string, string[]>();
 
             try
             {
                 if (colorCreateDTO == null)
                 {
                     _logger.LogWarning("colorCreateDTO is null");
-                    return null;
+                    errors.Add("Color", new[] { "اللون المدخل غير موجود." });
+                    return errors;
                 }
 
                 var fileName = await _fileService.UploadFileAsync(colorCreateDTO.ColorImage, "images");
@@ -46,15 +48,28 @@ namespace ECommerceInfrastructure.Repositories
                 await _context.SaveChangesAsync();
 
                 _logger.LogInformation("تم اضافة اللون بنجاح ");
-
-                return colors;
+                return null; // No errors
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء اضافة اللون: نوع الملف غير مدعوم.");
+                errors.Add("ColorImage", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                return errors;
+            }
+            catch (IOException ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء تحميل ملف اللون.");
+                errors.Add("ColorImage", new[] { "حدث خطأ أثناء تحميل ملف اللون." });
+                return errors;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء اضافة اللون.");
-                return null;
+                errors.Add("Color", new[] { "حدث خطأ أثناء اضافة صورة اللون." });
+                return errors;
             }
         }
+
 
         public async Task<List<ColorReadDTO>> GetColorAsync()
         {
@@ -81,10 +96,9 @@ namespace ECommerceInfrastructure.Repositories
                 return new List<ColorReadDTO>(); // إرجاع قائمة فارغة في حالة حدوث خطأ
             }
         }
-
-        public async Task<ColorReadDTO> UpdateColorAsync(int id, ColorUpdateDTO colorUpdateDTO)
+        public async Task<ColorReadDTO> GetColorByIdAsync(int id)
         {
-            _logger.LogInformation("بداية تحديث اللون ");
+            _logger.LogInformation("بداية جلب اللون باستخدام المعرف: {Id}", id);
 
             try
             {
@@ -93,8 +107,41 @@ namespace ECommerceInfrastructure.Repositories
 
                 if (color == null)
                 {
-                    _logger.LogWarning("لم يتم العثور على اللون");
+                    _logger.LogWarning("لم يتم العثور على اللون بالمعرف: {Id}", id);
                     return null;
+                }
+
+                var colorReadDTO = new ColorReadDTO
+                {
+                    Id = color.Id,
+                    Name = color.Name,
+                    ColorImage = color.Image
+                };
+
+                _logger.LogInformation("تم جلب اللون بنجاح بالمعرف: {Id}", id);
+
+                return colorReadDTO;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء جلب اللون بالمعرف: {Id}", id);
+                return null;
+            }
+        }
+        public async Task<Dictionary<string, string[]>> UpdateColorAsync(int id, ColorUpdateDTO colorUpdateDTO)
+        {
+            _logger.LogInformation("بداية تحديث اللون ");
+            var errors = new Dictionary<string, string[]>();
+
+            try
+            {
+                var color = await _context.Colors.FirstOrDefaultAsync(c => c.Id == id);
+
+                if (color == null)
+                {
+                    _logger.LogWarning("لم يتم العثور على اللون");
+                    errors.Add("Color", new[] { "اللون المدخل غير موجود." });
+                    return errors;
                 }
 
                 if (colorUpdateDTO.ColorImage != null)
@@ -102,66 +149,90 @@ namespace ECommerceInfrastructure.Repositories
                     var fileName = await _fileService.UploadFileAsync(colorUpdateDTO.ColorImage, "images");
                     color.Image = $"/files/images/{fileName}";
                 }
+
                 if (colorUpdateDTO.Name != null)
                 {
-
                     color.Name = colorUpdateDTO.Name;
                 }
-                ColorReadDTO colorReadDTO = new ColorReadDTO
-                {
-                    Id = color.Id,
-                    Name = color.Name,
-                    ColorImage = color.Image
-                };
+
                 await _context.SaveChangesAsync();
 
                 _logger.LogInformation("تم تحديث اللون بنجاح ");
-                return colorReadDTO;
+                return null; // No errors
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء تحديث اللون: نوع الملف غير مدعوم.");
+                errors.Add("ColorImage", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                return errors;
+            }
+            catch (IOException ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء تحميل ملف اللون.");
+                errors.Add("ColorImage", new[] { "حدث خطأ أثناء تحميل ملف اللون." });
+                return errors;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء تحديث اللون  ");
-                return null;
+                errors.Add("Color", new[] { "حدث خطأ أثناء اضافة صورة اللون" });
+                return errors;
             }
         }
 
         // Method to delete a color
-        public async Task DeleteColorAsync(int id)
+        public async Task<Dictionary<string, string[]>> DeleteColorAsync(int id)
         {
-            _logger.LogInformation("بداية حذف اللون  ");
+            _logger.LogInformation("بداية حذف اللون ");
+            var errors = new Dictionary<string, string[]>();
 
             try
             {
                 var color = await _context.Colors
+                    .Include(c => c.ProductColors)
                     .FirstOrDefaultAsync(c => c.Id == id);
 
                 if (color == null)
                 {
                     _logger.LogWarning("لم يتم العثور على اللون ");
-                    return;
+                    errors.Add("Color", new[] { "Color not found." });
+                    return errors;
+                }
+
+                // Check if the color is associated with any products
+                if (color.ProductColors.Any())
+                {
+                    _logger.LogWarning("لا يمكن حذف اللون لأنه مرتبط بمنتجات ");
+                    errors.Add("Color", new[] { "لا يمكن حذف اللون لأنه مرتبط بمنتجات" });
+                    return errors;
                 }
 
                 _context.Colors.Remove(color);
                 await _context.SaveChangesAsync();
 
-                _logger.LogInformation("تم حذف اللون بنجاح  ");
+                _logger.LogInformation("تم حذف اللون بنجاح ");
+                return null; // No errors
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "حدث خطأ أثناء حذف اللون  ");
+                _logger.LogError(ex, "حدث خطأ أثناء حذف اللون ");
+                errors.Add("Color", new[] { "An error occurred while deleting the color." });
+                return errors;
             }
         }
         // Method to create a new product
-        public async Task<ProductReadForCreateDTO> CreateProductAsync(ProductCreateDTO productCreateDTO)
+        public async Task<Dictionary<string, string[]>> CreateProductAsync(ProductCreateDTO productCreateDTO)
         {
             _logger.LogInformation("بداية إضافة منتج جديد");
+            var errors = new Dictionary<string, string[]>();
 
             try
             {
                 if (productCreateDTO == null)
                 {
                     _logger.LogWarning("ProductCreateDTO is null");
-                    return null;
+                    errors.Add("Product", new[] { "المنتج المدخل غير موجود" });
+                    return errors;
                 }
 
                 // Upload the main image and get URL
@@ -185,12 +256,12 @@ namespace ECommerceInfrastructure.Repositories
                 }
 
                 // Retrieve the category by name
-                var category = await _context.Categories
-                    .FirstOrDefaultAsync(c => c.Name == productCreateDTO.CategoryName);
+                var category = await _context.Categories.FirstOrDefaultAsync(c => c.Name == productCreateDTO.CategoryName);
                 if (category == null)
                 {
                     _logger.LogWarning("الفئة غير موجودة يرجى البحث عن فئة أخرى", productCreateDTO.CategoryName);
-                    return null;
+                    errors.Add("CategoryName", new[] { "الفئة غير موجودة يرجى البحث عن فئة أخرى." });
+                    return errors;
                 }
 
                 // Fetch existing colors based on provided names
@@ -201,8 +272,7 @@ namespace ECommerceInfrastructure.Repositories
                 {
                     foreach (var colorName in productCreateDTO.ColorNames)
                     {
-                        var color = await _context.Colors
-                            .FirstOrDefaultAsync(c => c.Name == colorName);
+                        var color = await _context.Colors.FirstOrDefaultAsync(c => c.Name == colorName);
 
                         if (color != null)
                         {
@@ -236,26 +306,25 @@ namespace ECommerceInfrastructure.Repositories
 
                 _logger.LogInformation("تم إضافة المنتج بنجاح : {Name}", product.Name);
 
-                // Convert the saved product entity to ProductReadForUserDTO with URLs
-                var productReadForCreateDTO = new ProductReadForCreateDTO
-                {
-                    Name = product.Name,
-                    Description = product.Description,
-                    CategoryName = category.Name,
-                    MainImageUrl = mainImageUrl,
-                    AdditionalImageUrls = additionalImageUrls,
-                    Inventory = product.Inventory,
-                    ColorDetails = colorDetails,
-                    Price = productCreateDTO.Price,
-                    OriginalPrice = productCreateDTO.OriginalPrice
-                };
-
-                return productReadForCreateDTO;
+                return null; // No errors
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء اضافة المنتج: نوع الملف غير مدعوم.");
+                errors.Add("MainImage", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                return errors;
+            }
+            catch (IOException ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء تحميل ملف المنتج.");
+                errors.Add("MainImage", new[] { "حدث خطأ أثناء تحميل ملف المنتج." });
+                return errors;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "حدث خطأ أثناء اضافة المنتج");
-                throw;
+                _logger.LogError(ex, "حدث خطأ أثناء اضافة المنتج.");
+                errors.Add("Product", new[] { "حدث خطأ أثناء انشاء المنتج" });
+                return errors;
             }
         }
         // Method to get all products for admin
@@ -367,9 +436,10 @@ namespace ECommerceInfrastructure.Repositories
                 return new List<ProductReadByOriginalPrice>();
             }
         }
-        public async Task<bool> DeleteProductAsync(int id)
+        public async Task<Dictionary<string, string[]>> DeleteProductAsync(int id)
         {
             _logger.LogInformation("بداية حذف المنتج  ");
+            var errors = new Dictionary<string, string[]>();
 
             try
             {
@@ -381,7 +451,8 @@ namespace ECommerceInfrastructure.Repositories
                 if (product == null)
                 {
                     _logger.LogWarning("لم يتم العثور على المنتج ");
-                    return false;
+                    errors.Add("Product", new[] { "المنتج المدخل غير موجود" });
+                    return errors;
                 }
 
                 // Delete MainImage if it exists
@@ -411,29 +482,34 @@ namespace ECommerceInfrastructure.Repositories
                 await _context.SaveChangesAsync();
 
                 _logger.LogInformation("تم حذف المنتج بنجاح  ");
-
-                return true;
+                return null; // No errors
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء حذف المنتج  ");
-                return false;
+                errors.Add("General", new[] { "حدث خطأ أثناء حذف المنتج" });
+                return errors;
             }
         }
 
-        public async Task<ProductReadForUpdateDTO> UpdateProductAsync(int id, ProductUpdateDTO productUpdateDTO)
+        public async Task<Dictionary<string, string[]>> UpdateProductAsync(int id, ProductUpdateDTO productUpdateDTO)
         {
+            _logger.LogInformation("بداية تحديث المنتج باستخدام المعرف: {Id}", id);
+            var errors = new Dictionary<string, string[]>();
+
             try
             {
                 var product = await _context.Products
                     .Include(p => p.AdditionalImages)
                     .Include(p => p.Colors)
+                    .ThenInclude(pc => pc.Color)
                     .FirstOrDefaultAsync(p => p.Id == id);
 
                 if (product == null)
                 {
-                    _logger.LogWarning("Product not found");
-                    return null;
+                    _logger.LogWarning("المنتج المدخل غير موجود");
+                    errors.Add("Product", new[] { "المنتج المدخل غير موجود" });
+                    return errors;
                 }
 
                 // Update basic properties
@@ -494,50 +570,47 @@ namespace ECommerceInfrastructure.Repositories
                 }
 
                 // Handle Colors update
-                var productColors = new List<ProductColor>();
-                var colorDetails = new List<ColorReadDTO>();
                 if (productUpdateDTO.ColorNames != null && productUpdateDTO.ColorNames.Any())
                 {
+                    var existingColorIds = product.Colors.Select(pc => pc.ColorId).ToList();
+
                     foreach (var colorName in productUpdateDTO.ColorNames)
                     {
-                        var color = await _context.Colors
-                            .FirstOrDefaultAsync(c => c.Name == colorName);
+                        var color = await _context.Colors.FirstOrDefaultAsync(c => c.Name == colorName);
 
-                        if (color != null)
+                        if (color != null && !existingColorIds.Contains(color.Id))
                         {
-                            productColors.Add(new ProductColor { ColorId = color.Id });
-                            colorDetails.Add(new ColorReadDTO { Id = color.Id, Name = color.Name, ColorImage = color.Image });
+                            product.Colors.Add(new ProductColor { ProductId = product.Id, ColorId = color.Id });
                         }
-                        else
+                        else if (color == null)
                         {
-                            _logger.LogWarning("Color not found");
+                            _logger.LogWarning("Color not found: {ColorName}", colorName);
                         }
                     }
                 }
 
                 await _context.SaveChangesAsync();
 
-                // Map to ProductReadForUpdateDTO
-                var productReadForUpdateDTO = new ProductReadForUpdateDTO
-                {
-                    Name = product.Name,
-                    Description = product.Description,
-                    CategoryName = (await _context.Categories.FindAsync(product.CategoryId))?.Name,
-                    MainImageUrl = product.MainImage,
-                    AdditionalImageUrls = product.AdditionalImages.Select(ai => ai.ImageUrl).ToList(),
-                    Price = product.Price,
-                    OriginalPrice = product.OriginalPrice,
-                    Inventory = product.Inventory,
-                    ColorDetails = colorDetails
-                };
-
-                _logger.LogInformation("Product updated successfully");
-                return productReadForUpdateDTO;
+                _logger.LogInformation("تم تحديث المنتج بنجاح: {Id}", id);
+                return null; // No errors
+            }
+            catch (InvalidOperationException ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء تحديث المنتج: نوع الملف غير مدعوم.");
+                errors.Add("MainImage", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                return errors;
+            }
+            catch (IOException ex)
+            {
+                _logger.LogError(ex, "حدث خطأ أثناء تحميل ملف المنتج.");
+                errors.Add("MainImage", new[] { "حدث خطأ أثناء تحميل ملف المنتج." });
+                return errors;
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while updating the product");
-                return null;
+                _logger.LogError(ex, "حدث خطأ أثناء تحديث المنتج: {Id}", id);
+                errors.Add("General", new[] { "An error occurred while updating the product." });
+                return errors;
             }
         }
 

@@ -471,6 +471,22 @@
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.ProductController",
+    "Method": "GetColorByIdAsync",
+    "RelativePath": "api/Product/Color/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.ProductController",
     "Method": "CreateProductAsync",
     "RelativePath": "api/Product/create",
     "HttpMethod": "POST",
