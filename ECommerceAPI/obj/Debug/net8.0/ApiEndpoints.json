@@ -1,6 +1,27 @@
 [
   {
     "ContainingType": "ECommerceAPI.Controllers.AuthController",
+    "Method": "ConfirmEmail",
+    "RelativePath": "api/Auth/confirm-email",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.AuthController",
     "Method": "ForgotPassword",
     "RelativePath": "api/Auth/forgot-password",
     "HttpMethod": "POST",
@@ -82,16 +103,11 @@
   {
     "ContainingType": "CartController",
     "Method": "ClearCartItemsByItemIdsAsync",
-    "RelativePath": "api/Cart/Clear",
+    "RelativePath": "api/Cart/clear",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "cartId",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
       {
         "Name": "itemIds",
         "Type": "System.Int32[]",
@@ -145,14 +161,19 @@
   {
     "ContainingType": "CartController",
     "Method": "RemoveItemFromCart",
-    "RelativePath": "api/Cart/remove/{itemid}",
+    "RelativePath": "api/Cart/remove/{cartitemid}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "itemid",
+        "Name": "cartitemid",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "cartitemid",
+        "Type": "",
         "IsRequired": true
       }
     ],
@@ -296,6 +317,16 @@
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.OrderController",
+    "Method": "GetAllOrdersForAdmin",
+    "RelativePath": "api/Order/all-orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.OrderController",
     "Method": "CreateOrder",
     "RelativePath": "api/Order/create",
     "HttpMethod": "POST",
@@ -340,11 +371,6 @@
       {
         "Name": "cartItemIds",
         "Type": "System.Int32[]",
-        "IsRequired": false
-      },
-      {
-        "Name": "token",
-        "Type": "System.String",
         "IsRequired": false
       }
     ],

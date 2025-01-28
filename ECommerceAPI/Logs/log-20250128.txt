@@ -1,0 +1,50 @@
+2025-01-28 00:43:22.716 +02:00 [WRN] Cart containing item with ID: 1 not found.
+2025-01-28 00:43:49.364 +02:00 [WRN] Cart containing item with ID: 12 not found.
+2025-01-28 00:45:12.416 +02:00 [INF] Increasing quantity for item ID: 0
+2025-01-28 00:45:12.457 +02:00 [WRN] Item not found for ID: 0
+2025-01-28 00:45:23.270 +02:00 [INF] Increasing quantity for item ID: 1
+2025-01-28 00:45:23.277 +02:00 [WRN] Item not found for ID: 1
+2025-01-28 00:45:37.403 +02:00 [INF] Increasing quantity for item ID: 11
+2025-01-28 00:45:37.424 +02:00 [INF] Successfully increased quantity for item ID: 11
+2025-01-28 00:48:01.328 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-28 00:53:50.908 +02:00 [INF] Increasing quantity for item ID: 12
+2025-01-28 00:53:50.938 +02:00 [INF] Successfully increased quantity for item ID: 12
+2025-01-28 00:55:37.395 +02:00 [INF] Increasing quantity for item ID: 12
+2025-01-28 00:55:37.406 +02:00 [INF] Successfully increased quantity for item ID: 12
+2025-01-28 00:57:20.909 +02:00 [INF] Decreasing quantity for item ID: 0
+2025-01-28 00:57:20.929 +02:00 [WRN] Item not found for ID: 0
+2025-01-28 00:57:26.930 +02:00 [INF] Decreasing quantity for item ID: 0
+2025-01-28 00:57:26.941 +02:00 [WRN] Item not found for ID: 0
+2025-01-28 00:57:48.732 +02:00 [INF] Decreasing quantity for item ID: 0
+2025-01-28 00:57:48.739 +02:00 [WRN] Item not found for ID: 0
+2025-01-28 00:58:27.562 +02:00 [INF] Decreasing quantity for item ID: 12
+2025-01-28 00:58:27.576 +02:00 [INF] Successfully decreased quantity for item ID: 12
+2025-01-28 03:18:41.630 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-28 03:19:13.027 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.
+2025-01-28 03:19:18.418 +02:00 [INF] جارِ جلب جميع الفئات للمشرف.
+2025-01-28 03:22:19.273 +02:00 [ERR] Hosting failed to start
+System.IO.IOException: Failed to bind to address http://0.0.0.0:5132: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.AddressesStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindAsync(ListenOptions[] listenOptions, AddressBindContext context, Func`2 useHttps, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__15_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)

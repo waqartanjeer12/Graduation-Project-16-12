@@ -128,7 +128,7 @@ namespace ECommerceInfrastructure.Repositories
             catch (InvalidOperationException ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء إنشاء الفئة: نوع الملف غير مدعوم.");
-                errors.Add("Img", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                errors.Add("Img", new[] { "يرجى تحميل صورة بتنسيق jpg  أو  jpeg  أو png  أو  webp فقط" });
                 return errors;
             }
             catch (Exception ex)
@@ -185,7 +185,7 @@ namespace ECommerceInfrastructure.Repositories
                     catch (InvalidOperationException ex)
                     {
                         _logger.LogError(ex, "حدث خطأ أثناء تحديث الفئة: نوع الملف غير مدعوم.");
-                        errors.Add("Img", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                        errors.Add("Img", new[] { "يرجى تحميل صورة بتنسيق jpg  أو  jpeg  أو png  أو  webp فقط" });
                         return errors;
                     }
                 }

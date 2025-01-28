@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace ECommerceCore.DTOs.Order
 {
     public class CreateOrderDTO
-    { 
+    {
 
-        [Required(ErrorMessage ="يرجى ادخال الاسم الأول")]
+        [Required(ErrorMessage = "يرجى ادخال الاسم الأول")]
         public string FName { get; set; }
-        [Required(ErrorMessage ="يرجى ادخال الاسم الثاني")]
+        [Required(ErrorMessage = "يرجى ادخال الاسم الثاني")]
         public string LName { get; set; }
         [Required(ErrorMessage = "يرجى ادخال رقم الهاتف")]
         public string Phone { get; set; }
@@ -27,9 +27,9 @@ namespace ECommerceCore.DTOs.Order
         [Range(0, double.MaxValue, ErrorMessage = "يجب أن يكون السعر قيمة موجبة")]
         [Precision(18, 2)]
         public decimal ShippingPrice { get; set; } = 0;
-        [Required(ErrorMessage ="يرجى ادخال أرقام ")]
+        [Required(ErrorMessage = "يرجى ادخال أرقام ")]
         public int[] cartItemIds { get; set; }
-        [Required(ErrorMessage = "يرجى ادخال التوكين الخاص باليوزر")]
-        public string token { get; set; }
+        
+
     }
 }

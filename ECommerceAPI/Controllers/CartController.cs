@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+
+
 public class CartController : ControllerBase
 {
     private readonly ICartRepository _repository;
@@ -16,19 +17,34 @@ public class CartController : ControllerBase
     {
         _repository = repository;
     }
-
     [HttpPost("add")]
+    [Authorize(Roles = "User")]
     public async Task<IActionResult> AddItemToCart([FromBody] CartAddItemsToCartDTO addItemDto)
     {
-        var result = await _repository.AddItemToCartAsync(addItemDto, User);
-        if (result == null)
+        if (!ModelState.IsValid)
         {
-            return BadRequest("Item could not be added to the cart.");
+            var errors = ModelState
+                .Where(ms => ms.Value.Errors.Count > 0)
+                .ToDictionary(
+                    kvp => kvp.Key,
+                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                );
+
+            return BadRequest(new { errors });
         }
-        return Ok(result);
+
+        var errorsFromService = await _repository.AddItemToCartAsync(addItemDto, User);
+
+        if (errorsFromService != null)
+        {
+            return BadRequest(new { errors = errorsFromService });
+        }
+
+        return Ok(new { Message = "Item added to cart successfully." });
     }
 
     [HttpGet("items")]
+    [Authorize(Roles = "User")]
     public async Task<IActionResult> GetCartItem()
     {
         var result = await _repository.GetAllCartItemsAsync(User);
@@ -38,48 +54,105 @@ public class CartController : ControllerBase
         }
         return Ok(result);
     }
-
-    [HttpDelete("Clear")]
-    public async Task<IActionResult> ClearCartItemsByItemIdsAsync([FromForm] int cartId, [FromForm] int[] itemIds)
+    [HttpDelete("clear")]
+    [Authorize(Roles = "User")]
+    public async Task<IActionResult> ClearCartItemsByItemIdsAsync([FromForm] int[] itemIds)
     {
-        var result = await _repository.ClearCartItemsByItemIdsAsync(cartId, itemIds);
-        if (!result)
+        if (!ModelState.IsValid)
         {
-            return NotFound(new { message = "Item not found in the cart" });
+            var errors = ModelState
+                .Where(ms => ms.Value.Errors.Count > 0)
+                .ToDictionary(
+                    kvp => kvp.Key,
+                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                );
+
+            return BadRequest(new { errors });
         }
-        return NoContent();
+
+        var errorsFromService = await _repository.ClearCartItemsByItemIdsAsync(User, itemIds);
+
+        if (errorsFromService != null)
+        {
+            return BadRequest(new { errors = errorsFromService });
+        }
+
+        return Ok(new { Message = "Items deleted from cart successfully." });
     }
 
-    [HttpDelete("remove/{itemid}")]
-    public async Task<IActionResult> RemoveItemFromCart(int itemid)
+    [HttpDelete("remove/{cartitemid}")]
+    [Authorize(Roles = "User")]
+    public async Task<IActionResult> RemoveItemFromCart([FromForm] int cartitemid)
     {
-        var result = await _repository.RemoveItemFromCartAsync(itemid);
-        if (!result)
+        if (!ModelState.IsValid)
         {
-            return NotFound(new { message = "Item not found in the cart" });
+            var errors = ModelState
+                .Where(ms => ms.Value.Errors.Count > 0)
+                .ToDictionary(
+                    kvp => kvp.Key,
+                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                );
+
+            return BadRequest(new { errors });
         }
-        return NoContent();
+
+        var errorsFromService = await _repository.RemoveItemFromCartAsync(User, cartitemid);
+
+        if (errorsFromService != null)
+        {
+            return NotFound(new { errors = errorsFromService });
+        }
+
+        return Ok(new { Message = "Item deleted from cart successfully." });
     }
 
     [HttpPost("increase-quantity")]
+    [Authorize(Roles = "User")]
     public async Task<IActionResult> IncreaseQuantity([FromForm] int itemId)
     {
-        var success = await _repository.IncreaseQuantityAsync(itemId);
-        if (!success)
+        if (!ModelState.IsValid)
         {
-            return BadRequest(new { message = "Failed to increase quantity. Item not found or not enough stock." });
+            var errors = ModelState
+                .Where(ms => ms.Value.Errors.Count > 0)
+                .ToDictionary(
+                    kvp => kvp.Key,
+                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                );
+
+            return BadRequest(new { errors });
+        }
+
+        var errorsFromService = await _repository.IncreaseQuantityAsync(User, itemId);
+
+        if (errorsFromService != null)
+        {
+            return BadRequest(new { errors = errorsFromService });
         }
 
         return Ok(new { message = "Quantity increased successfully." });
     }
 
     [HttpPost("decrease-quantity")]
+    [Authorize(Roles = "User")]
     public async Task<IActionResult> DecreaseQuantity([FromForm] int itemId)
     {
-        var success = await _repository.DecreaseQuantityAsync(itemId);
-        if (!success)
+        if (!ModelState.IsValid)
         {
-            return BadRequest(new { message = "Failed to decrease quantity. Item not found or quantity cannot be less than 1." });
+            var errors = ModelState
+                .Where(ms => ms.Value.Errors.Count > 0)
+                .ToDictionary(
+                    kvp => kvp.Key,
+                    kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                );
+
+            return BadRequest(new { errors });
+        }
+
+        var errorsFromService = await _repository.DecreaseQuantityAsync(User, itemId);
+
+        if (errorsFromService != null)
+        {
+            return BadRequest(new { errors = errorsFromService });
         }
 
         return Ok(new { message = "Quantity decreased successfully." });

@@ -1,0 +1,12 @@
+2025-01-28 03:22:28.939 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-28 03:23:37.312 +02:00 [WRN] Cart not found for user ID: 4
+2025-01-28 03:45:15.768 +02:00 [INF] Starting order creation process.
+2025-01-28 03:45:20.761 +02:00 [WRN] No cart items found for the provided IDs.
+2025-01-28 03:45:27.613 +02:00 [INF] Starting order creation process.
+2025-01-28 03:45:27.656 +02:00 [INF] Total price before shipping: 200.00
+2025-01-28 03:45:28.024 +02:00 [INF] Order created successfully with ID: 1
+2025-01-28 03:45:28.118 +02:00 [INF] Order creation process completed successfully, and cart items cleared.
+2025-01-28 03:45:50.229 +02:00 [INF] Starting order creation process.
+2025-01-28 03:45:50.310 +02:00 [INF] Total price before shipping: 200.00
+2025-01-28 03:45:50.332 +02:00 [INF] Order created successfully with ID: 2
+2025-01-28 03:45:50.472 +02:00 [INF] Order creation process completed successfully, and cart items cleared.

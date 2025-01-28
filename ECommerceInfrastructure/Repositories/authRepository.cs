@@ -98,7 +98,38 @@ namespace ECommerceInfrastructure.Repositories
             return null;
 
         }
+        public async Task<Dictionary<string, string[]>> ConfirmEmailAsync(string email, string token)
+        {
+            var errors = new Dictionary<string, string[]>();
 
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+            {
+                errors.Add("Email", new[] { "المستخدم غير موجود" });
+                return errors;
+            }
+            if (user.IsActive)
+            {
+                errors.Add("Email", new[] { "Email already confirmed." });
+                return errors;
+            }
+            if (user.EmailConfirmationExpiry < DateTime.UtcNow)
+            {
+                errors.Add("Email", new[] { "Email confirmation link has expired." });
+                return errors;
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            if (!result.Succeeded)
+            {
+                errors.Add("Email", result.Errors.Select(e => e.Description).ToArray());
+                return errors;
+            }
+
+            user.IsActive = true;
+            await _userManager.UpdateAsync(user);
+            return null; // No errors, confirmation successful
+        }
         public async Task<string> LoginAsync(LoginDTO loginDTO)
         {
             var user = await _userManager.FindByEmailAsync(loginDTO.Email);

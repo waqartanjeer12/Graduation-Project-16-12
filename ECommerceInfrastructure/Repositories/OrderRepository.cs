@@ -29,57 +29,36 @@ namespace ECommerceInfrastructure.Repositories
             _context = context;
             _logger = logger;
             _userManager = userManager;
-            _configuration = configuration;
+            
         }
 
-        private async Task<User> GetUserByTokenAsync(string token)
+
+
+        public async Task<User> GetUserFromClaimsAsync(ClaimsPrincipal userClaims)
         {
-            try
-            {
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.UTF8.GetBytes(_configuration["JWT:Key"]);
-
-                tokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = true,
-                    ValidIssuer = _configuration["JWT:Issuer"],
-                    ValidateAudience = true,
-                    ValidAudience = _configuration["JWT:Audience"],
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
-                }, out SecurityToken validatedToken);
-
-                var jwtToken = (JwtSecurityToken)validatedToken;
-                var userId = jwtToken.Claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
-
-                return await _userManager.FindByIdAsync(userId);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Token validation failed: {ex.Message}");
-                return null;
-            }
+            var userId = userClaims.FindFirstValue(ClaimTypes.NameIdentifier);
+            return await _userManager.FindByIdAsync(userId);
         }
-
-        public async Task<ReadCreateOrderDTO> CreateOrderAsync(CreateOrderDTO createOrderDTO)
+        public async Task<Dictionary<string, string[]>> CreateOrderAsync(CreateOrderDTO createOrderDTO, ClaimsPrincipal userClaims)
         {
+            var errors = new Dictionary<string, string[]>();
             _logger.LogInformation("Starting order creation process.");
 
             // Validate input DTO
             if (createOrderDTO == null)
             {
                 _logger.LogWarning("Invalid input data for order creation.");
-                throw new ArgumentException("Invalid input data");
+                errors.Add("Order", new[] { "Invalid input data" });
+                return errors;
             }
 
             // Validate user via token
-            var user = await GetUserByTokenAsync(createOrderDTO.token);
+            var user = await GetUserFromClaimsAsync(userClaims);
             if (user == null)
             {
                 _logger.LogWarning("Invalid token provided.");
-                throw new ArgumentException("User not found or invalid token.");
+                errors.Add("User", new[] { "User not found or invalid token." });
+                return errors;
             }
 
             // Fetch CartItems by IDs
@@ -91,7 +70,19 @@ namespace ECommerceInfrastructure.Repositories
             if (cartItems == null || !cartItems.Any())
             {
                 _logger.LogWarning("No cart items found for the provided IDs.");
-                throw new ArgumentException("Cart items not found");
+                errors.Add("CartItems", new[] { "Cart items not found" });
+                return errors;
+            }
+
+            // Check inventory
+            foreach (var cartItem in cartItems)
+            {
+                if (cartItem.Quantity > cartItem.Product.Inventory)
+                {
+                    _logger.LogWarning("Not enough stock for product ID: {ProductId}", cartItem.ProductId);
+                    errors.Add("Inventory", new[] { $"Not enough Inventory for product ID: {cartItem.ProductId}" });
+                    return errors;
+                }
             }
 
             // Calculate total price before shipping
@@ -120,7 +111,7 @@ namespace ECommerceInfrastructure.Repositories
                     Quantity = ci.Quantity,
                     OrderItemMainImageUrl = ci.Product.MainImage,
                     OrderItemPrice = ci.Product.Price,
-                    
+
                 }).ToList()
             };
 
@@ -129,41 +120,29 @@ namespace ECommerceInfrastructure.Repositories
 
             _logger.LogInformation("Order created successfully with ID: {OrderId}", order.OrderId);
 
-            // Fetch the saved order with order items
-            var savedOrder = await _context.Orders
-                .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product)
-                .FirstOrDefaultAsync(o => o.OrderId == order.OrderId);
+            // Clear the cart items
+            _context.CartItems.RemoveRange(cartItems);
+            await _context.SaveChangesAsync();
 
-            // Map OrderItems to ItemsInCart DTO with OrderItemId and CartItemId
-            var itemsInCart = savedOrder.OrderItems.Select(oi => new ItemsInCart
-            {
-                OrderItemId = oi.OrderItemId,
-                
-                CartMainImageUrl = oi.OrderItemMainImageUrl,
-                CartItemPrice = oi.OrderItemPrice,
-                Quantity = oi.Quantity
-            }).ToList();
+            _logger.LogInformation("Order creation process completed successfully, and cart items cleared.");
 
-            // Create the ReadCreateOrderDTO
-            var readCreateOrderDTO = new ReadCreateOrderDTO
-            {
-                OrderId = savedOrder.OrderId,
-                FName = savedOrder.FName,
-                LName = savedOrder.LName,
-                Phone = savedOrder.Phone,
-                City = savedOrder.City,
-                Street = savedOrder.Street,
-                Area = savedOrder.Area,
-                TotalPriceBeforeShipping = savedOrder.totalPriceBeforeShipping,
-                ShippingPrice = savedOrder.shippingPrice,
-                TotalPrice = savedOrder.totalPrice,
-                ItemsInCart = itemsInCart
-            };
+            // Return minimal response
+            return null; // No errors
+        }
+        public async Task<List<GetAllOrdersForAdmin>> GetAllOrdersForAdminAsync()
+        {
+            var orders = await _context.Orders
+                .Select(o => new GetAllOrdersForAdmin
+                {
+                    OrderId = o.OrderId,
+                    orderDate = o.orderDate,
+                    orderStatus = o.orderStatus,
+                    orderStatusDetails = o.orderStatusDetails,
+                    totalPrice = o.totalPrice
+                })
+                .ToListAsync();
 
-            _logger.LogInformation("Order creation process completed successfully.");
-
-            return readCreateOrderDTO;
+            return orders.Any() ? orders : null;
         }
     }
 }

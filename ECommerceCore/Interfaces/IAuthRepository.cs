@@ -7,7 +7,8 @@ namespace ECommerceCore.Interfaces
     public interface IAuthRepository
     {
         Task<Dictionary<string, string[]>> RegisterAsync(RegisterDTO registerDTO);
-       
+        Task<Dictionary<string, string[]>> ConfirmEmailAsync(string email, string token);
+
         Task<string> LoginAsync(LoginDTO loginDTO);
         Task<string> ForgotPasswordAsync(ForgotPasswordDTO forgotPassword);
         Task<string> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO);

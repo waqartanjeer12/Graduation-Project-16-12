@@ -58,8 +58,20 @@ namespace ECommerceAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+         [HttpGet("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail(string email, string token)
+        {
+            var result = await _authRepository.ConfirmEmailAsync(email, token);
 
-        
+            if (result != null)
+            {
+                return BadRequest(new { errors = result });
+            }
+
+            // Redirect to the specified URL after successful confirmation
+            return Redirect("http://localhost:5173");
+        }
+
 
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO forgotPasswordDTO)

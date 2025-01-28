@@ -13,7 +13,7 @@ namespace ECommerceCore.Interfaces
 
     public class FileService : IFileService
     {
-        private static readonly string[] AllowedExtensions = { ".jpg", ".png", ".webp" };
+        private static readonly string[] AllowedExtensions = { ".jpg", ".jpeg", ".png", ".webp" };
 
         public async Task<string> UploadFileAsync(IFormFile file, string folderName)
         {

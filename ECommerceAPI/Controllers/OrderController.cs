@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ECommerceCore.DTOs.Order;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerceAPI.Controllers
 {
@@ -18,23 +19,51 @@ namespace ECommerceAPI.Controllers
         }
 
         [HttpPost("create")]
+        [Authorize(Roles = "User")]
+        
         public async Task<IActionResult> CreateOrder([FromForm] CreateOrderDTO createOrderDTO)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
             }
 
-            try
+            var result = await _repository.CreateOrderAsync(createOrderDTO, User);
+
+            if (result != null && result.Any())
             {
-                var result = await _repository.CreateOrderAsync(createOrderDTO);
-                return Ok(result);
+                return BadRequest(new { errors = result });
             }
-            catch (Exception ex)
+
+            return Ok(new { message = "Order created successfully." });
+        }
+        [HttpGet("all-orders")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAllOrdersForAdmin()
+        {
+            var orders = await _repository.GetAllOrdersForAdminAsync();
+
+            if (orders == null || !orders.Any())
             {
-                return BadRequest(ex.Message);
+                ModelState.AddModelError("Orders", "No orders found.");
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
             }
-           
+
+            return Ok(orders);
         }
     }
 }

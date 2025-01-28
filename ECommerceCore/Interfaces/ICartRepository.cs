@@ -8,11 +8,11 @@ namespace ECommerceInfrastructure.Repositories
 {
     public interface ICartRepository
     {
-        Task<CartReadAddItemsToCartDTO> AddItemToCartAsync(CartAddItemsToCartDTO createDto, ClaimsPrincipal userClaims);
+        Task<Dictionary<string, string[]>> AddItemToCartAsync(CartAddItemsToCartDTO createDto, ClaimsPrincipal userClaims);
         Task<List<CartGetAllItemsDTO>> GetAllCartItemsAsync(ClaimsPrincipal userClaims);
-        Task<bool> ClearCartItemsByItemIdsAsync(int cartId, int[] itemIds);
-        Task<bool> RemoveItemFromCartAsync(int cartItemId);
-        Task<bool> IncreaseQuantityAsync(int itemId);
-        Task<bool> DecreaseQuantityAsync(int itemId);
+        Task<Dictionary<string, string[]>> ClearCartItemsByItemIdsAsync(ClaimsPrincipal userClaims, int[] itemIds);
+        Task<Dictionary<string, string[]>> RemoveItemFromCartAsync(ClaimsPrincipal userClaims, int cartItemId);
+        Task<Dictionary<string, string[]>> IncreaseQuantityAsync(ClaimsPrincipal userClaims, int itemId);
+        Task<Dictionary<string, string[]>> DecreaseQuantityAsync(ClaimsPrincipal userClaims, int itemId);
     }
 }

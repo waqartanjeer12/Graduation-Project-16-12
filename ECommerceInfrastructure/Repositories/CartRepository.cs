@@ -32,25 +32,39 @@ namespace ECommerceInfrastructure.Repositories
             return await _userManager.FindByIdAsync(userId);
         }
 
-        public async Task<CartReadAddItemsToCartDTO> AddItemToCartAsync(CartAddItemsToCartDTO createDto, ClaimsPrincipal userClaims)
+        public async Task<Dictionary<string, string[]>> AddItemToCartAsync(CartAddItemsToCartDTO createDto, ClaimsPrincipal userClaims)
         {
+            var errors = new Dictionary<string, string[]>();
+
             var user = await GetUserFromClaimsAsync(userClaims);
             if (user == null)
-                throw new Exception("User not found.");
+            {
+                errors.Add("User", new[] { "User not found." });
+                return errors;
+            }
 
             var product = await _context.Products
                 .Include(p => p.Colors)
                 .ThenInclude(pc => pc.Color)
                 .FirstOrDefaultAsync(p => p.Id == createDto.ProductId);
             if (product == null)
-                throw new Exception("Product not found.");
+            {
+                errors.Add("Product", new[] { "Product not found." });
+                return errors;
+            }
 
             var color = product.Colors.FirstOrDefault(c => c.Color.Name == createDto.ColorName);
             if (color == null)
-                throw new Exception("The specified color is not available for this product.");
+            {
+                errors.Add("Color", new[] { "The specified color is not available for this product." });
+                return errors;
+            }
 
             if (createDto.Quantity > product.Inventory)
-                throw new Exception("Requested quantity exceeds available inventory.");
+            {
+                errors.Add("Quantity", new[] { "Requested quantity exceeds available inventory." });
+                return errors;
+            }
 
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
@@ -82,31 +96,9 @@ namespace ECommerceInfrastructure.Repositories
             product.Inventory -= createDto.Quantity;
             await _context.SaveChangesAsync();
 
-            var cartItem = cart.CartItems.Last();
-            var readCartItem = new CartReadAddItemsToCartDTO
-            {
-                ItemId = cartItem.CartItemId,
-                Quantity = cartItem.Quantity,
-                products = new CartReadProducts
-                {
-                    ProductId = product.Id,
-                    Name = product.Name,
-                    Description = product.Description,
-                    MainImageUrl = product.MainImage,
-                    Price = product.Price,
-                    OriginalPrice = product.OriginalPrice,
-                    ColorDetails = new ColorReadDTO
-                    {
-                        Id = color.Color.Id,
-                        Name = color.Color.Name,
-                        ColorImage = color.Color.Image
-                    }
-                }
-            };
-
-            return readCartItem;
+            return null; // No errors, item added successfully
         }
-
+       
         public async Task<List<CartGetAllItemsDTO>> GetAllCartItemsAsync(ClaimsPrincipal userClaims)
         {
             var currentUser = await GetUserFromClaimsAsync(userClaims);
@@ -171,18 +163,28 @@ namespace ECommerceInfrastructure.Repositories
             return new List<CartGetAllItemsDTO> { result };
         }
 
-        public async Task<bool> ClearCartItemsByItemIdsAsync(int cartId, int[] itemIds)
+
+        public async Task<Dictionary<string, string[]>> ClearCartItemsByItemIdsAsync(ClaimsPrincipal userClaims, int[] itemIds)
         {
-            _logger.LogInformation($"Fetching cart with ID: {cartId} and clearing items with specified item IDs.");
+            var errors = new Dictionary<string, string[]>();
+
+            var currentUser = await GetUserFromClaimsAsync(userClaims);
+            if (currentUser == null)
+            {
+                errors.Add("User", new[] { "Authenticated user not found." });
+                _logger.LogWarning("Authenticated user not found.");
+                return errors;
+            }
 
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
-                .FirstOrDefaultAsync(c => c.Id == cartId);
+                .FirstOrDefaultAsync(c => c.UserId == currentUser.Id);
 
             if (cart == null)
             {
-                _logger.LogWarning($"Cart with ID: {cartId} not found.");
-                return false;
+                errors.Add("Cart", new[] { $"Cart not found for user ID: {currentUser.Id}" });
+                _logger.LogWarning($"Cart not found for user ID: {currentUser.Id}");
+                return errors;
             }
 
             var itemsToRemove = cart.CartItems
@@ -191,82 +193,117 @@ namespace ECommerceInfrastructure.Repositories
 
             if (itemsToRemove.Count == 0)
             {
-                _logger.LogWarning($"No items found in cart with ID: {cartId} matching the specified item IDs.");
-                return false;
+                errors.Add("Items", new[] { $"No items found in cart matching the specified item IDs." });
+                _logger.LogWarning($"No items found in cart for user ID: {currentUser.Id} matching the specified item IDs.");
+                return errors;
             }
 
-            _logger.LogInformation($"Removing {itemsToRemove.Count} items from cart with ID: {cartId}.");
+            _logger.LogInformation($"Removing {itemsToRemove.Count} items from cart for user ID: {currentUser.Id}.");
             _context.CartItems.RemoveRange(itemsToRemove);
 
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation($"Successfully cleared specified items from cart with ID: {cartId}.");
-            return true;
+            _logger.LogInformation($"Successfully cleared specified items from cart for user ID: {currentUser.Id}.");
+            return null; // No errors
         }
-
-        public async Task<bool> RemoveItemFromCartAsync(int cartItemId)
+        public async Task<Dictionary<string, string[]>> RemoveItemFromCartAsync(ClaimsPrincipal userClaims, int cartItemId)
         {
+            var errors = new Dictionary<string, string[]>();
+
+            var currentUser = await GetUserFromClaimsAsync(userClaims);
+            if (currentUser == null)
+            {
+                errors.Add("User", new[] { "Authenticated user not found." });
+                _logger.LogWarning("Authenticated user not found.");
+                return errors;
+            }
+
             var cart = await _context.Carts
                 .Include(c => c.CartItems)
-                .FirstOrDefaultAsync(c => c.CartItems.Any(ci => ci.CartItemId == cartItemId));
+                .FirstOrDefaultAsync(c => c.UserId == currentUser.Id && c.CartItems.Any(ci => ci.CartItemId == cartItemId));
 
             if (cart == null)
             {
+                errors.Add("Cart", new[] { $"Cart containing item with ID: {cartItemId} not found." });
                 _logger.LogWarning($"Cart containing item with ID: {cartItemId} not found.");
-                return false;
+                return errors;
             }
 
             var cartItem = cart.CartItems.FirstOrDefault(ci => ci.CartItemId == cartItemId);
             if (cartItem == null)
             {
+                errors.Add("CartItem", new[] { $"Cart item with ID: {cartItemId} not found in the cart." });
                 _logger.LogWarning($"Cart item with ID: {cartItemId} not found in the cart.");
-                return false;
+                return errors;
             }
 
             _context.CartItems.Remove(cartItem);
             await _context.SaveChangesAsync();
 
             _logger.LogInformation($"Successfully removed item with ID: {cartItemId} from the cart.");
-            return true;
+            return null; // No errors
         }
 
-        public async Task<bool> IncreaseQuantityAsync(int itemId)
+        public async Task<Dictionary<string, string[]>> IncreaseQuantityAsync(ClaimsPrincipal userClaims, int itemId)
         {
+            var errors = new Dictionary<string, string[]>();
+
+            var currentUser = await GetUserFromClaimsAsync(userClaims);
+            if (currentUser == null)
+            {
+                errors.Add("User", new[] { "Authenticated user not found." });
+                _logger.LogWarning("Authenticated user not found.");
+                return errors;
+            }
+
             _logger.LogInformation("Increasing quantity for item ID: {ItemId}", itemId);
 
             var cartItem = await _context.CartItems
                 .Include(ci => ci.Product)
-                .FirstOrDefaultAsync(ci => ci.CartItemId == itemId);
+                .FirstOrDefaultAsync(ci => ci.CartItemId == itemId && ci.Cart.UserId == currentUser.Id);
             if (cartItem == null)
             {
+                errors.Add("Item", new[] { "Item not found." });
                 _logger.LogWarning("Item not found for ID: {ItemId}", itemId);
-                return false;
+                return errors;
             }
 
             var inventory = cartItem.Product.Inventory;
             if (cartItem.Quantity >= inventory)
             {
+                errors.Add("Stock", new[] { "Not enough stock." });
                 _logger.LogWarning("Not enough stock for item ID: {ItemId}", itemId);
-                return false;
+                return errors;
             }
 
             cartItem.Quantity++;
             await _context.SaveChangesAsync();
 
             _logger.LogInformation("Successfully increased quantity for item ID: {ItemId}", itemId);
-            return true;
+            return null; // No errors
         }
 
-        public async Task<bool> DecreaseQuantityAsync(int itemId)
+        public async Task<Dictionary<string, string[]>> DecreaseQuantityAsync(ClaimsPrincipal userClaims, int itemId)
         {
+            var errors = new Dictionary<string, string[]>();
+
+            var currentUser = await GetUserFromClaimsAsync(userClaims);
+            if (currentUser == null)
+            {
+                errors.Add("User", new[] { "Authenticated user not found." });
+                _logger.LogWarning("Authenticated user not found.");
+                return errors;
+            }
+
             _logger.LogInformation("Decreasing quantity for item ID: {ItemId}", itemId);
 
             var cartItem = await _context.CartItems
-                .FirstOrDefaultAsync(ci => ci.CartItemId == itemId);
+                .FirstOrDefaultAsync(ci => ci.CartItemId == itemId && ci.Cart.UserId == currentUser.Id);
             if (cartItem == null)
             {
+                errors.Add("Item", new[] { "Item not found." });
                 _logger.LogWarning("Item not found for ID: {ItemId}", itemId);
-                return false;
+                return errors;
             }
 
             if (cartItem.Quantity > 1)
@@ -274,12 +311,13 @@ namespace ECommerceInfrastructure.Repositories
                 cartItem.Quantity--;
                 await _context.SaveChangesAsync();
                 _logger.LogInformation("Successfully decreased quantity for item ID: {ItemId}", itemId);
-                return true;
+                return null; // No errors
             }
             else
             {
+                errors.Add("Quantity", new[] { "Cannot decrease quantity below 1." });
                 _logger.LogWarning("Cannot decrease quantity below 1 for item ID: {ItemId}", itemId);
-                return false;
+                return errors;
             }
         }
     }

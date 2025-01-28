@@ -37,6 +37,16 @@ namespace ECommerceInfrastructure.Repositories
                     return errors;
                 }
 
+                var existingColor = await _context.Colors
+                   .FirstOrDefaultAsync(c => c.Name == colorCreateDTO.Name);
+
+                if (existingColor != null)
+                {
+                    _logger.LogWarning("اسم اللون موجود بالفعل: {Name}", colorCreateDTO.Name);
+                    errors.Add("Name", new[] { "اسم اللون موجود بالفعل. يرجى اختيار اسم آخر." });
+                    return errors;
+                }
+
                 var fileName = await _fileService.UploadFileAsync(colorCreateDTO.ColorImage, "images");
                 var colors = new Color
                 {
@@ -53,7 +63,7 @@ namespace ECommerceInfrastructure.Repositories
             catch (InvalidOperationException ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء اضافة اللون: نوع الملف غير مدعوم.");
-                errors.Add("ColorImage", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                errors.Add("ColorImage", new[] { "يرجى تحميل صورة بتنسيق jpg  أو  jpeg  أو png  أو  webp فقط" });
                 return errors;
             }
             catch (IOException ex)
@@ -114,8 +124,8 @@ namespace ECommerceInfrastructure.Repositories
                 var colorReadDTO = new ColorReadDTO
                 {
                     Id = color.Id,
-                    Name = color.Name,
-                    ColorImage = color.Image
+                    ColorImage = color.Image ,
+                    Name = color.Name
                 };
 
                 _logger.LogInformation("تم جلب اللون بنجاح بالمعرف: {Id}", id);
