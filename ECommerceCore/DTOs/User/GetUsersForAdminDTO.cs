@@ -16,6 +16,6 @@ namespace ECommerceCore.DTOs.User
         public string City { get; set; }
 
         public bool IsActive { get; set; }
-        public DateTime createdAt { get; set; }
+        public string createdAt { get; set; }
     }
 }

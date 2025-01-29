@@ -6,9 +6,8 @@ namespace ECommerceCore.DTOs.User.Account
     {
         [Required]
         public string Email { get; set; }
-
         [Required]
-        public string Token { get; set; }
+        public string Code { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

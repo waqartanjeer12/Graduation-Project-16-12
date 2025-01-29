@@ -22,22 +22,6 @@
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.AuthController",
-    "Method": "ForgotPassword",
-    "RelativePath": "api/Auth/forgot-password",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "forgotPasswordDTO",
-        "Type": "ECommerceCore.DTOs.User.Account.ForgotPasswordDTO",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ECommerceAPI.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
@@ -79,6 +63,22 @@
       {
         "Name": "resetPasswordDTO",
         "Type": "ECommerceCore.DTOs.User.Account.ResetPasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.AuthController",
+    "Method": "SendResetPasswordLink",
+    "RelativePath": "api/Auth/send-reset-password-link",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "forgotPasswordDTO",
+        "Type": "ECommerceCore.DTOs.User.Account.ForgotPasswordDTO",
         "IsRequired": true
       }
     ],
@@ -317,6 +317,43 @@
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.OrderController",
+    "Method": "GetOrderDetailsById",
+    "RelativePath": "api/Order/{orderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.OrderController",
+    "Method": "UpdateOrderStatusById",
+    "RelativePath": "api/Order/{orderId}/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateOrderStatusDTO",
+        "Type": "ECommerceCore.DTOs.Order.UpdateOrderStatusDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.OrderController",
     "Method": "GetAllOrdersForAdmin",
     "RelativePath": "api/Order/all-orders",
     "HttpMethod": "GET",
@@ -372,6 +409,32 @@
         "Name": "cartItemIds",
         "Type": "System.Int32[]",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.OrderController",
+    "Method": "GetOrderDetailsByUser",
+    "RelativePath": "api/Order/user",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.OrderController",
+    "Method": "UpdateOrderStatusByUser",
+    "RelativePath": "api/Order/user/status",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateOrderStatusDTO",
+        "Type": "ECommerceCore.DTOs.Order.UpdateOrderStatusDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -700,7 +763,7 @@
       },
       {
         "Name": "Price",
-        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Decimal",
         "IsRequired": false
       },
       {
@@ -710,7 +773,7 @@
       },
       {
         "Name": "Inventory",
-        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "Type": "System.Int32",
         "IsRequired": false
       },
       {

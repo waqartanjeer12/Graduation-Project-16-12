@@ -124,7 +124,7 @@ namespace ECommerceInfrastructure.Repositories
                 var colorReadDTO = new ColorReadDTO
                 {
                     Id = color.Id,
-                    ColorImage = color.Image ,
+                    ColorImage = color.Image,
                     Name = color.Name
                 };
 
@@ -154,6 +154,21 @@ namespace ECommerceInfrastructure.Repositories
                     return errors;
                 }
 
+                if (!string.IsNullOrEmpty(colorUpdateDTO.Name) && color.Name != colorUpdateDTO.Name)
+                {
+                    var existingColor = await _context.Colors
+                        .FirstOrDefaultAsync(c => c.Name == colorUpdateDTO.Name && c.Id != id);
+
+                    if (existingColor != null)
+                    {
+                        _logger.LogWarning("اسم اللون موجود بالفعل: {Name}", colorUpdateDTO.Name);
+                        errors.Add("Name", new[] { "اسم اللون موجود بالفعل. يرجى اختيار اسم آخر." });
+                        return errors;
+                    }
+
+                    color.Name = colorUpdateDTO.Name;
+                }
+
                 if (colorUpdateDTO.ColorImage != null)
                 {
                     var fileName = await _fileService.UploadFileAsync(colorUpdateDTO.ColorImage, "images");
@@ -173,7 +188,7 @@ namespace ECommerceInfrastructure.Repositories
             catch (InvalidOperationException ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء تحديث اللون: نوع الملف غير مدعوم.");
-                errors.Add("ColorImage", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                errors.Add("ColorImage", new[] { "يرجى تحميل صورة بتنسيق jpg  أو  jpeg  أو png  أو  webp فقط" });
                 return errors;
             }
             catch (IOException ex)
@@ -230,7 +245,6 @@ namespace ECommerceInfrastructure.Repositories
                 return errors;
             }
         }
-        // Method to create a new product
         public async Task<Dictionary<string, string[]>> CreateProductAsync(ProductCreateDTO productCreateDTO)
         {
             _logger.LogInformation("بداية إضافة منتج جديد");
@@ -321,7 +335,7 @@ namespace ECommerceInfrastructure.Repositories
             catch (InvalidOperationException ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء اضافة المنتج: نوع الملف غير مدعوم.");
-                errors.Add("MainImage", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                errors.Add("MainImage", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp أو jpeg فقط." });
                 return errors;
             }
             catch (IOException ex)
@@ -421,7 +435,7 @@ namespace ECommerceInfrastructure.Repositories
                     .Where(p => p.Price < p.OriginalPrice)
                     .Select(p => new ProductReadByOriginalPrice
                     {
-                        ProductId=p.Id,
+                        ProductId = p.Id,
                         Name = p.Name,
                         Description = p.Description,
                         CategoryName = p.Category.Name,
@@ -431,7 +445,7 @@ namespace ECommerceInfrastructure.Repositories
                         OriginalPrice = p.OriginalPrice,
                         ColorDetails = p.Colors.Select(c => new ColorReadForUserDTO
                         {
-                           
+
                             Name = c.Color.Name,
                             ColorImage = c.Color.Image
                         }).ToList()
@@ -501,7 +515,6 @@ namespace ECommerceInfrastructure.Repositories
                 return errors;
             }
         }
-
         public async Task<Dictionary<string, string[]>> UpdateProductAsync(int id, ProductUpdateDTO productUpdateDTO)
         {
             _logger.LogInformation("بداية تحديث المنتج باستخدام المعرف: {Id}", id);
@@ -537,17 +550,11 @@ namespace ECommerceInfrastructure.Repositories
                         product.CategoryId = category.Id;
                 }
 
-                if (productUpdateDTO.Price.HasValue)
-                {
-                    product.Price = productUpdateDTO.Price.Value;
-                }
+                product.Price = productUpdateDTO.Price;
 
                 product.OriginalPrice = productUpdateDTO.OriginalPrice;
 
-                if (productUpdateDTO.Inventory.HasValue)
-                {
-                    product.Inventory = productUpdateDTO.Inventory.Value;
-                }
+                product.Inventory = productUpdateDTO.Inventory;
 
                 // Handle MainImage update
                 if (productUpdateDTO.MainImage != null)
@@ -579,25 +586,36 @@ namespace ECommerceInfrastructure.Repositories
                     }
                 }
 
-                // Handle Colors update
-                if (productUpdateDTO.ColorNames != null && productUpdateDTO.ColorNames.Any())
-                {
-                    var existingColorIds = product.Colors.Select(pc => pc.ColorId).ToList();
 
+                // Handle Colors update
+                if (productUpdateDTO.ColorNames != null)
+                {
+                    // الحصول على قائمة الألوان الحالية المرتبطة بالمنتج
+                    var existingColors = product.Colors.ToList();
+
+                    // حذف الألوان التي لم تعد موجودة في القائمة المحددة
+                    foreach (var existingColor in existingColors)
+                    {
+                        if (!productUpdateDTO.ColorNames.Contains(existingColor.Color.Name))
+                        {
+                            product.Colors.Remove(existingColor);
+                        }
+                    }
+
+                    // إضافة الألوان الجديدة
                     foreach (var colorName in productUpdateDTO.ColorNames)
                     {
+                        // التحقق من وجود اللون في قاعدة البيانات
                         var color = await _context.Colors.FirstOrDefaultAsync(c => c.Name == colorName);
 
-                        if (color != null && !existingColorIds.Contains(color.Id))
+                        // إضافة اللون الجديد إذا لم يكن مرتبطًا بالمنتج
+                        if (color != null && !existingColors.Any(pc => pc.ColorId == color.Id))
                         {
                             product.Colors.Add(new ProductColor { ProductId = product.Id, ColorId = color.Id });
                         }
-                        else if (color == null)
-                        {
-                            _logger.LogWarning("Color not found: {ColorName}", colorName);
-                        }
                     }
                 }
+
 
                 await _context.SaveChangesAsync();
 
@@ -607,15 +625,10 @@ namespace ECommerceInfrastructure.Repositories
             catch (InvalidOperationException ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء تحديث المنتج: نوع الملف غير مدعوم.");
-                errors.Add("MainImage", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط." });
+                errors.Add("MainImage", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو webp أو jpeg فقط." });
                 return errors;
             }
-            catch (IOException ex)
-            {
-                _logger.LogError(ex, "حدث خطأ أثناء تحميل ملف المنتج.");
-                errors.Add("MainImage", new[] { "حدث خطأ أثناء تحميل ملف المنتج." });
-                return errors;
-            }
+
             catch (Exception ex)
             {
                 _logger.LogError(ex, "حدث خطأ أثناء تحديث المنتج: {Id}", id);
@@ -735,8 +748,8 @@ namespace ECommerceInfrastructure.Repositories
 
             return products;
         }
-        
-        
+
+
 
     }
 

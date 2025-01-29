@@ -16,12 +16,17 @@ namespace ECommerceCore.Models
         public DateTime orderDate { get; set; }
         public String orderStatus { get; set; }
         public String orderStatusDetails { get; set; }
-
+        [Required(ErrorMessage = "يرجى ادخال الاسم الأول")]
         public string FName { get; set; }
+        [Required(ErrorMessage = "يرجى ادخال الاسم الثاني")]
         public string LName { get; set; }
+        [Required(ErrorMessage = "يرجى ادخال رقم الهاتف")]
         public string Phone { get; set; }
+        [Required(ErrorMessage = "يرجى ادخال اسم المدينة")]
         public string City { get; set; }
+        [Required(ErrorMessage = "يرجى ادخال اسم الشارع")]
         public string Street { get; set; }
+        [Required(ErrorMessage = "يرجى ادخال اسم المنطقة")]
         public string Area { get; set; }
         [Range(0, double.MaxValue, ErrorMessage = "يجب أن يكون السعر قيمة موجبة")]
         [Precision(18, 2)]

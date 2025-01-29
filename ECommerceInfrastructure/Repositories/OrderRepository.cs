@@ -14,6 +14,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using ECommerceCore.DTOs.Color;
 
 namespace ECommerceInfrastructure.Repositories
 {
@@ -143,6 +144,160 @@ namespace ECommerceInfrastructure.Repositories
                 .ToListAsync();
 
             return orders.Any() ? orders : null;
+        }
+        public async Task<ReadOrderDetail> GetOrderDetailsByUserAsync(ClaimsPrincipal userClaims)
+        {
+            var user = await GetUserFromClaimsAsync(userClaims);
+            if (user == null)
+            {
+                _logger.LogWarning("Invalid token provided.");
+                return null; // Or handle the error as needed
+            }
+
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .ThenInclude(p => p.Colors)
+                .ThenInclude(pc => pc.Color)
+                .Where(o => o.UserId == user.Id)
+                .OrderByDescending(o => o.orderDate)
+                .FirstOrDefaultAsync();
+
+            if (order == null)
+            {
+                _logger.LogWarning("No order found for the user.");
+                return null; // Or handle the error as needed
+            }
+
+            var orderDetail = new ReadOrderDetail
+            {
+                OrderId = order.OrderId,
+                orderDate = order.orderDate,
+                orderStatus = order.orderStatus,
+                orderStatusDetails = order.orderStatusDetails,
+                totalPriceBeforeShipping = order.totalPriceBeforeShipping,
+                shippingPrice = order.shippingPrice,
+                totalPrice = order.totalPrice,
+                CustomerName = user.UserName, // Use the UserName property for the full name
+                Phone = order.Phone,
+                City = order.City,
+                Street = order.Street,
+                Area = order.Area,
+                OrderProducts = order.OrderItems.Select(oi => new OrderProducts
+                {
+                    Id = oi.ProductId,
+                    MainImageUrl = oi.OrderItemMainImageUrl,
+                    Name = oi.Product.Name,
+                    Quantity = oi.Quantity,
+                    OnePiecePrice = oi.OrderItemPrice,
+                    totalPricewithQuantit = oi.OrderItemPrice * oi.Quantity,
+                    Color = oi.Product.Colors.Select(pc => new ColorReadDTO
+                    {
+                        Id = pc.Color.Id,
+                        ColorImage = pc.Color.Image,
+                        Name = pc.Color.Name
+                    }).FirstOrDefault()
+                }).ToList()
+            };
+
+            return orderDetail;
+        }
+
+        public async Task<ReadOrderDetail> GetOrderDetailsByIdAsync(int orderId)
+        {
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .ThenInclude(p => p.Colors)
+                .ThenInclude(pc => pc.Color)
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                _logger.LogWarning("Order not found with ID: {OrderId}", orderId);
+                return null; // Or handle the error as needed
+            }
+
+            var user = await _userManager.FindByIdAsync(order.UserId.ToString());
+
+            var orderDetail = new ReadOrderDetail
+            {
+                OrderId = order.OrderId,
+                orderDate = order.orderDate,
+                orderStatus = order.orderStatus,
+                orderStatusDetails = order.orderStatusDetails,
+                totalPriceBeforeShipping = order.totalPriceBeforeShipping,
+                shippingPrice = order.shippingPrice,
+                totalPrice = order.totalPrice,
+                CustomerName = user.UserName, // Use the UserName property for the full name
+                Phone = order.Phone,
+                City = order.City,
+                Street = order.Street,
+                Area = order.Area,
+                OrderProducts = order.OrderItems.Select(oi => new OrderProducts
+                {
+                    Id = oi.ProductId,
+                    MainImageUrl = oi.OrderItemMainImageUrl,
+                    Name = oi.Product.Name,
+                    Quantity = oi.Quantity,
+                    OnePiecePrice = oi.OrderItemPrice,
+                    totalPricewithQuantit = oi.OrderItemPrice * oi.Quantity,
+                    Color = oi.Product.Colors.Select(pc => new ColorReadDTO
+                    {
+                        Id = pc.Color.Id,
+                        ColorImage = pc.Color.Image,
+                        Name = pc.Color.Name
+                    }).FirstOrDefault()
+                }).ToList()
+            };
+
+            return orderDetail;
+        }
+        public async Task<Dictionary<string, string[]>> UpdateOrderStatusByUserAsync(ClaimsPrincipal userClaims, UpdateOrderStatusDTO updateOrderStatusDTO)
+        {
+            var errors = new Dictionary<string, string[]>();
+            var user = await GetUserFromClaimsAsync(userClaims);
+            if (user == null)
+            {
+                errors.Add("User", new[] { "User not found or invalid token." });
+                return errors;
+            }
+
+            var order = await _context.Orders
+                .Where(o => o.UserId == user.Id)
+                .OrderByDescending(o => o.orderDate)
+                .FirstOrDefaultAsync();
+
+            if (order == null)
+            {
+                errors.Add("Order", new[] { "No orders found for the user." });
+                return errors;
+            }
+
+            order.orderStatus = updateOrderStatusDTO.OrderStatus;
+            order.orderStatusDetails = updateOrderStatusDTO.OrderStatusDetails;
+
+            await _context.SaveChangesAsync();
+            return null; // No errors
+        }
+
+        public async Task<Dictionary<string, string[]>> UpdateOrderStatusByIdAsync(int orderId, UpdateOrderStatusDTO updateOrderStatusDTO)
+        {
+            var errors = new Dictionary<string, string[]>();
+            var order = await _context.Orders
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                errors.Add("Order", new[] { "Order not found." });
+                return errors;
+            }
+
+            order.orderStatus = updateOrderStatusDTO.OrderStatus;
+            order.orderStatusDetails = updateOrderStatusDTO.OrderStatusDetails;
+
+            await _context.SaveChangesAsync();
+            return null; // No errors
         }
     }
 }

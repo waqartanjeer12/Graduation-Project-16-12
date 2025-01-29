@@ -2,6 +2,7 @@
 using ECommerceCore.Interfaces;
 using ECommerceCore.Models;
 using ECommerceInfrastructure.Configurations.Data;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -90,7 +91,7 @@ namespace ECommerceInfrastructure.Repositories
                         PhoneNumber = u.PhoneNumber,
                         City = u.City,
                         IsActive = u.IsActive,
-                        createdAt = u.CreatedAt
+                         createdAt = u.CreatedAt.ToString("dd MMMM yyyy، hh:mm tt", new System.Globalization.CultureInfo("ar-PS"))
                     })
                     .ToListAsync();
 

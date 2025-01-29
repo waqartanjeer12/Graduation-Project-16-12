@@ -148,28 +148,27 @@ namespace ECommerceInfrastructure.Repositories
 
         private async Task<string> GenerateTokenAsync(User user)
         {
-            // Determine the role
-            var roles =await _userManager.GetRolesAsync(user);
-            string role = roles.FirstOrDefault() ?? "User";
-
             // Adding essential claims like name, email, and role
-            var claims = new List<Claim>
+            var claims = new List<Claim>()
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email), // Email
                 new Claim(JwtRegisteredClaimNames.Email, user.Email), // Email (duplicate for JWT standard compliance)
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // User ID
                 new Claim("userName", user.UserName), // Username
-                new Claim("role", role) // User's role
             };
-
+            var userRoles = await _userManager.GetRolesAsync(user);
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim("role", role));
+            }
             // Creating the signing key
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("JWT")["Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
             // Creating the token
             var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:Issuer"],
-                audience: _configuration["JWT:Audience"],
+                issuer: _configuration.GetSection("JWT")["Issuer"],
+                audience: _configuration.GetSection("JWT")["Audience"],
                 claims: claims,
                 expires: DateTime.UtcNow.AddDays(14), // Token validity: 14 days
                 signingCredentials: creds
@@ -177,33 +176,51 @@ namespace ECommerceInfrastructure.Repositories
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
       
 
-        public async Task<string> ForgotPasswordAsync(ForgotPasswordDTO forgotPasswordDTO)
+        private string GenerateNumericCode(int length)
         {
-            var user = await _userManager.FindByEmailAsync(forgotPasswordDTO.Email);
-            if (user == null)
+            var random = new Random();
+            var code = new StringBuilder();
+            for (int i = 0; i < length; i++)
             {
-                return "No user associated with this email.";
+                code.Append(random.Next(0, 10));
             }
-
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var resetLink = $"localhost/reset-password?email={Uri.EscapeDataString(forgotPasswordDTO.Email)}&token={Uri.EscapeDataString(token)}";
-
-            var email = new Email
-            {
-                Recivers = forgotPasswordDTO.Email,
-                Subject = "Password Reset",
-                Body = $"Please reset your password by clicking here: <a href='{resetLink}'>link</a>"
-            };
-
-            EmailSettings.SendEmail(email);
-
-            return "Password reset link sent";
+            return code.ToString();
         }
 
-        public async Task<string> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO)
+        public async Task<string> SendResetCodeAsync(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null || !user.IsActive)
+            {
+                return "No active user associated with this email.";
+            }
+
+            // Generate an 8-digit numeric code
+            var numericCode = GenerateNumericCode(8);
+
+            // Generate a token for password reset
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            // Store the numeric code in a user token
+            await _userManager.SetAuthenticationTokenAsync(user, "Default", "PasswordReset", numericCode);
+
+            // Send the code via email
+            var emailMessage = new Email
+            {
+                Recivers = email,
+                Subject = "Password Reset Code",
+                Body = $"Your password reset code is: {numericCode}"
+            };
+
+            EmailSettings.SendEmail(emailMessage);
+
+            // Return the token for testing purposes (in a real application, handle securely)
+            return token;
+        }
+
+        public async Task<string> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO, string token)
         {
             var user = await _userManager.FindByEmailAsync(resetPasswordDTO.Email);
             if (user == null)
@@ -211,11 +228,21 @@ namespace ECommerceInfrastructure.Repositories
                 return "No user associated with this email.";
             }
 
-            var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordDTO.Token, resetPasswordDTO.NewPassword);
+            // Verify the numeric code
+            var storedCode = await _userManager.GetAuthenticationTokenAsync(user, "Default", "PasswordReset");
+            if (storedCode != resetPasswordDTO.Code)
+            {
+                return "Invalid or expired reset code.";
+            }
+
+            var resetPassResult = await _userManager.ResetPasswordAsync(user, token, resetPasswordDTO.NewPassword);
             if (!resetPassResult.Succeeded)
             {
                 return string.Join(", ", resetPassResult.Errors.Select(e => e.Description));
             }
+
+            // Clear the token after successful password reset
+            await _userManager.RemoveAuthenticationTokenAsync(user, "Default", "PasswordReset");
 
             return "Password has been reset successfully.";
         }

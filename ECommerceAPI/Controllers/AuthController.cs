@@ -1,5 +1,6 @@
 ﻿using ECommerceCore.DTOs.User.Account;
 using ECommerceCore.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -73,24 +74,28 @@ namespace ECommerceAPI.Controllers
         }
 
 
-        [HttpPost("forgot-password")]
-        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO forgotPasswordDTO)
+        [HttpPost("send-reset-password-link")]
+        public async Task<IActionResult> SendResetPasswordLink([FromBody] ForgotPasswordDTO forgotPasswordDTO)
         {
-            var result = await _authRepository.ForgotPasswordAsync(forgotPasswordDTO);
-            if (result.Contains("sent"))
-                return Ok(new { message = result });
-            return BadRequest(new { message = result });
-        }
+            var token = await _authRepository.SendResetCodeAsync(forgotPasswordDTO.Email);
+            if (token.Contains("No active user"))
+                return BadRequest(new { message = token });
 
+            // Return the reset token for testing purposes
+            return Ok(new { message = "Password reset code has been sent to your email.", token });
+        }
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO resetPasswordDTO)
         {
-            if (!ModelState.IsValid)
+            if (resetPasswordDTO.NewPassword != resetPasswordDTO.ConfirmPassword)
             {
-                return BadRequest(ModelState);
+                return BadRequest(new { message = "Password and Confirm Password do not match." });
             }
 
-            var result = await _authRepository.ResetPasswordAsync(resetPasswordDTO);
+            // Extract the token from the Authorization header
+            var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+
+            var result = await _authRepository.ResetPasswordAsync(resetPasswordDTO, token);
             if (result.Contains("successfully"))
                 return Ok(new { message = result });
             return BadRequest(new { message = result });
