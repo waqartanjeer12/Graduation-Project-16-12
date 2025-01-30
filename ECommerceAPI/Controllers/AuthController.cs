@@ -70,7 +70,7 @@ namespace ECommerceAPI.Controllers
             }
 
             // Redirect to the specified URL after successful confirmation
-            return Redirect("http://localhost:5173");
+            return Ok(new {Message="تم تأكيد الإيميل بنجاح"});
         }
 
 
@@ -82,14 +82,14 @@ namespace ECommerceAPI.Controllers
                 return BadRequest(new { message = token });
 
             // Return the reset token for testing purposes
-            return Ok(new { message = "Password reset code has been sent to your email.", token });
+            return Ok(new { message = "تم ارسال الكود بنجاح .", token });
         }
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO resetPasswordDTO)
         {
             if (resetPasswordDTO.NewPassword != resetPasswordDTO.ConfirmPassword)
             {
-                return BadRequest(new { message = "Password and Confirm Password do not match." });
+                return BadRequest(new { message = "الباسوورد وتأكيده غير متطابقان." });
             }
 
             // Extract the token from the Authorization header
@@ -99,6 +99,32 @@ namespace ECommerceAPI.Controllers
             if (result.Contains("successfully"))
                 return Ok(new { message = result });
             return BadRequest(new { message = result });
+        }
+        [HttpPost("change-password")]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO changePasswordDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
+            }
+
+            var userClaims = HttpContext.User;
+            var errorsFromService = await _authRepository.ChangePasswordAsync(userClaims, changePasswordDTO);
+
+            if (errorsFromService != null)
+            {
+                return BadRequest(new { errors = errorsFromService });
+            }
+
+            return Ok(new { Message = "تم تغيير كلمة المرور بنجاح." });
         }
     }
 }

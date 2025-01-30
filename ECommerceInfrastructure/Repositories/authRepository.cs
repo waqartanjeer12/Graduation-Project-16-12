@@ -25,7 +25,17 @@ namespace ECommerceInfrastructure.Repositories
             _signInManager = signInManager;
             _configuration = configuration;
         }
+        public async Task<User> GetUserFromClaimsAsync(ClaimsPrincipal userClaims)
+        {
+            var email = userClaims.FindFirstValue(ClaimTypes.Email);
 
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException("Email claim not found");
+            }
+
+            return await _userManager.FindByEmailAsync(email);
+        }
         public async Task<Dictionary<string, string[]>> RegisterAsync(RegisterDTO registerDTO)
         {
             var errors = new Dictionary<string, string[]>();
@@ -244,7 +254,32 @@ namespace ECommerceInfrastructure.Repositories
             // Clear the token after successful password reset
             await _userManager.RemoveAuthenticationTokenAsync(user, "Default", "PasswordReset");
 
-            return "Password has been reset successfully.";
+            return "تم تحديث كلمة المرور بنجاح.";
         }
+       
+            // Change password
+        
+        public async Task<Dictionary<string, string[]>> ChangePasswordAsync(ClaimsPrincipal userClaims, ChangePasswordDTO changePasswordDTO)
+        {
+            var errors = new Dictionary<string, string[]>();
+
+            var user = await GetUserFromClaimsAsync(userClaims);
+            if (user == null)
+            {
+                errors.Add("User", new[] { "User not found." });
+                return errors;
+            }
+
+            // Change password
+            var result = await _userManager.ChangePasswordAsync(user, changePasswordDTO.OldPassword, changePasswordDTO.NewPassword);
+            if (!result.Succeeded)
+            {
+                errors.Add("Password", result.Errors.Select(e => e.Description).ToArray());
+                return errors;
+            }
+
+            return null; // No errors, password change successful
+        }
+
     }
 }

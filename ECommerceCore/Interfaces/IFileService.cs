@@ -28,7 +28,7 @@ namespace ECommerceCore.Interfaces
             var fileExtension = Path.GetExtension(file.FileName).ToLower();
             if (!Array.Exists(AllowedExtensions, ext => ext == fileExtension))
             {
-                throw new InvalidOperationException("يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط");
+                throw new InvalidOperationException("يرجى تحميل صورة بتنسيق JPG أو PNGأو jpegأو webp فقط");
             }
 
             var fileName = $"{Guid.NewGuid()}_{file.FileName}";

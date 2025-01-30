@@ -5,6 +5,7 @@ using ECommerceInfrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -36,6 +37,7 @@ builder.Services.AddSwaggerGen(options =>
             Type = SecuritySchemeType.ApiKey,
             Scheme = "Bearer"
         });
+
 
     // Add a security requirement for the defined Bearer authentication
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -93,25 +95,35 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
     });
 });
+
 // 8. Configure JWT Authentication
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "Bearer";
+    options.DefaultChallengeScheme = "Bearer";
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters()
     {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true, // Validate the token issuer
-            ValidateAudience = true, // Validate the token audience
-            ValidateLifetime = true, // Ensure the token is not expired
-            ValidateIssuerSigningKey = true, // Validate the signing key
-            ValidIssuer = builder.Configuration["JWT:Issuer"], // Load from appsettings.json
-            ValidAudience = builder.Configuration["JWT:Audience"], // Load from appsettings.json
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]) // Load from appsettings.json
-            )
-        };
-    });
+        ValidateIssuer = true, // Validate the token issuer
+        ValidateAudience = true, // Validate the token audience
+        ValidIssuer = builder.Configuration.GetSection("JWT")["Issuer"],
+        ValidAudience = builder.Configuration.GetSection("JWT")["Audience"], // Load from appsettings.json
+
+        ValidateLifetime = true, // Ensure the token is not expired
+                                 //ValidateIssuerSigningKey = true, // Validate the signing key
+
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWT")["Key"]) // Load from appsettings.json
+        )
+    };
+});
+
 
 var app = builder.Build();
+
+
+
 
 // 9. Middleware pipeline
 if (app.Environment.IsDevelopment())
@@ -132,6 +144,12 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     await Authorization.SeedRolesAndAdmin(services);
 }
+// 11. Configure static files
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "files")),
+    RequestPath = "/files"
+});
 
 app.MapControllers();
 app.Run();

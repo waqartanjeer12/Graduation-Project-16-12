@@ -37,8 +37,14 @@ namespace ECommerceInfrastructure.Repositories
 
         public async Task<User> GetUserFromClaimsAsync(ClaimsPrincipal userClaims)
         {
-            var userId = userClaims.FindFirstValue(ClaimTypes.NameIdentifier);
-            return await _userManager.FindByIdAsync(userId);
+            var email = userClaims.FindFirstValue(ClaimTypes.Email);
+
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException("Email claim not found");
+            }
+
+            return await _userManager.FindByEmailAsync(email);
         }
         public async Task<Dictionary<string, string[]>> CreateOrderAsync(CreateOrderDTO createOrderDTO, ClaimsPrincipal userClaims)
         {
@@ -145,63 +151,7 @@ namespace ECommerceInfrastructure.Repositories
 
             return orders.Any() ? orders : null;
         }
-        public async Task<ReadOrderDetail> GetOrderDetailsByUserAsync(ClaimsPrincipal userClaims)
-        {
-            var user = await GetUserFromClaimsAsync(userClaims);
-            if (user == null)
-            {
-                _logger.LogWarning("Invalid token provided.");
-                return null; // Or handle the error as needed
-            }
-
-            var order = await _context.Orders
-                .Include(o => o.OrderItems)
-                .ThenInclude(oi => oi.Product)
-                .ThenInclude(p => p.Colors)
-                .ThenInclude(pc => pc.Color)
-                .Where(o => o.UserId == user.Id)
-                .OrderByDescending(o => o.orderDate)
-                .FirstOrDefaultAsync();
-
-            if (order == null)
-            {
-                _logger.LogWarning("No order found for the user.");
-                return null; // Or handle the error as needed
-            }
-
-            var orderDetail = new ReadOrderDetail
-            {
-                OrderId = order.OrderId,
-                orderDate = order.orderDate,
-                orderStatus = order.orderStatus,
-                orderStatusDetails = order.orderStatusDetails,
-                totalPriceBeforeShipping = order.totalPriceBeforeShipping,
-                shippingPrice = order.shippingPrice,
-                totalPrice = order.totalPrice,
-                CustomerName = user.UserName, // Use the UserName property for the full name
-                Phone = order.Phone,
-                City = order.City,
-                Street = order.Street,
-                Area = order.Area,
-                OrderProducts = order.OrderItems.Select(oi => new OrderProducts
-                {
-                    Id = oi.ProductId,
-                    MainImageUrl = oi.OrderItemMainImageUrl,
-                    Name = oi.Product.Name,
-                    Quantity = oi.Quantity,
-                    OnePiecePrice = oi.OrderItemPrice,
-                    totalPricewithQuantit = oi.OrderItemPrice * oi.Quantity,
-                    Color = oi.Product.Colors.Select(pc => new ColorReadDTO
-                    {
-                        Id = pc.Color.Id,
-                        ColorImage = pc.Color.Image,
-                        Name = pc.Color.Name
-                    }).FirstOrDefault()
-                }).ToList()
-            };
-
-            return orderDetail;
-        }
+      
 
         public async Task<ReadOrderDetail> GetOrderDetailsByIdAsync(int orderId)
         {

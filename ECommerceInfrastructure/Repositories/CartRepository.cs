@@ -28,10 +28,15 @@ namespace ECommerceInfrastructure.Repositories
 
         public async Task<User> GetUserFromClaimsAsync(ClaimsPrincipal userClaims)
         {
-            var userId = userClaims.FindFirstValue(ClaimTypes.NameIdentifier);
-            return await _userManager.FindByIdAsync(userId);
-        }
+            var email = userClaims.FindFirstValue(ClaimTypes.Email);
 
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException("Email claim not found");
+            }
+
+            return await _userManager.FindByEmailAsync(email);
+        }
         public async Task<Dictionary<string, string[]>> AddItemToCartAsync(CartAddItemsToCartDTO createDto, ClaimsPrincipal userClaims)
         {
             var errors = new Dictionary<string, string[]>();

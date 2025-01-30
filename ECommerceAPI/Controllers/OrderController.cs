@@ -65,31 +65,11 @@ namespace ECommerceAPI.Controllers
 
            return Ok(orders); 
         }
-        [HttpGet("user")]
-        [Authorize(Roles = "User")]
-        public async Task<IActionResult> GetOrderDetailsByUser()
-        {
-            var userClaims = HttpContext.User;
-            var orderDetails = await _repository.GetOrderDetailsByUserAsync(userClaims);
-
-            if (orderDetails == null)
-            {
-                ModelState.AddModelError("Orders", "No orders found for the user.");
-                var errors = ModelState
-                    .Where(ms => ms.Value.Errors.Count > 0)
-                    .ToDictionary(
-                        kvp => kvp.Key,
-                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-                    );
-                return BadRequest(errors);
-            }
-
-            return Ok(orderDetails);
-        }
+      
 
         // Endpoint to fetch order details by order ID
         [HttpGet("{orderId}")]
-        [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> GetOrderDetailsById(int orderId)
         {
             var orderDetails = await _repository.GetOrderDetailsByIdAsync(orderId);

@@ -1,0 +1,7 @@
+2025-01-30 00:50:10.641 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-30 02:35:01.970 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-30 02:35:02.136 +02:00 [INF] جارِ جلب جميع الفئات للمشرف.
+2025-01-30 02:47:32.863 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-30 02:47:32.986 +02:00 [INF] جارِ جلب جميع الفئات للمشرف.
+2025-01-30 02:57:20.394 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-30 03:11:29.030 +02:00 [WRN] Failed to determine the https port for redirect.

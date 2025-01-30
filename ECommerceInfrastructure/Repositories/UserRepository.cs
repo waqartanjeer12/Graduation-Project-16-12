@@ -1,4 +1,5 @@
 ﻿using ECommerceCore.DTOs.User;
+using ECommerceCore.DTOs.User.Account;
 using ECommerceCore.Interfaces;
 using ECommerceCore.Models;
 using ECommerceInfrastructure.Configurations.Data;
@@ -32,8 +33,14 @@ namespace ECommerceInfrastructure.Repositories
         }
         public async Task<User> GetUserFromClaimsAsync(ClaimsPrincipal userClaims)
         {
-            var userId = userClaims.FindFirstValue(ClaimTypes.NameIdentifier);
-            return await _userManager.FindByIdAsync(userId);
+            var email = userClaims.FindFirstValue(ClaimTypes.Email);
+
+            if (string.IsNullOrEmpty(email))
+            {
+                throw new ArgumentException("Email claim not found");
+            }
+
+            return await _userManager.FindByEmailAsync(email);
         }
 
         public async Task<GetUserForUserDTO> GetUserByEmailAsync(String email)
@@ -103,61 +110,73 @@ namespace ECommerceInfrastructure.Repositories
                 return null;
             }
         }
-        public async Task<GetUserForUserDTO> UpdateUserAsync(int userId, UpdateUserInformationDTO dto)
+        public async Task<Dictionary<string, string[]>> UpdateUserAsync(ClaimsPrincipal userClaims, UpdateUserInformationDTO dto)
         {
+            var errors = new Dictionary<string, string[]>();
+
             try
             {
-                var user = await _context.Users.FindAsync(userId);
-                if (user == null||user.IsActive==false)
+                var email = userClaims.FindFirstValue(ClaimTypes.Email);
+                if (string.IsNullOrEmpty(email))
                 {
-                    _logger.LogWarning("User not found with ID: {Id}", userId);
-                    return null;
+                    _logger.LogWarning("لم يتم العثور على البريد الإلكتروني في المطالبات.");
+                    errors.Add("Email", new[] { "البريد الالكتروني غير موجود ." });
+                    return errors;
+                }
+
+                var user = await _userManager.FindByEmailAsync(email);
+                if (user == null || user.IsActive == false)
+                {
+                    _logger.LogWarning("لم يتم العثور على المستخدم بالمعرف: {Email}", email);
+                    errors.Add("UserNotFound", new[] { "المستخدم غير موجود" });
+                    return errors;
                 }
 
                 // Update basic properties
-                user.UserName = dto.Name ?? user.UserName;//return left if not null and then right
+                user.UserName = dto.Name ?? user.UserName; // return left if not null and then right
                 user.PhoneNumber = dto.PhoneNumber;
-                user.City = dto.City ;
-                user.Area = dto.Area ;
-                user.Street = dto.Street ;
+                user.City = dto.City;
+                user.Area = dto.Area;
+                user.Street = dto.Street;
 
                 // Handle Img update
                 if (dto.Img != null)
                 {
-                    // Delete the old image if exists
-                    if (!string.IsNullOrEmpty(user.Img))
+                    try
                     {
-                        _fileService.DeleteFile(Path.GetFileName(user.Img), "images");
-                    }
+                        // Delete the old image if exists
+                        if (!string.IsNullOrEmpty(user.Img))
+                        {
+                            _fileService.DeleteFile(Path.GetFileName(user.Img), "images");
+                        }
 
-                    // Upload the new image
-                    var imgFileName = await _fileService.UploadFileAsync(dto.Img, "images");
-                    user.Img = $"/files/images/{imgFileName}";
+                        // Upload the new image
+                        var imgFileName = await _fileService.UploadFileAsync(dto.Img, "images");
+                        user.Img = $"/files/images/{imgFileName}";
+                    }
+                    catch (InvalidOperationException ex)
+                    {
+                        _logger.LogError(ex, "تنسيق الملف غير صالح لتحديث صورة المستخدم.");
+                        errors.Add("Img", new[] { "يرجى تحميل صورة بتنسيق JPG أو PNG أو JPEG أو WEBP فقط" });
+                        return errors;
+                    }
+                  
                 }
 
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
 
-                var updatedUser = new GetUserForUserDTO
-                {
-                    UserId = user.Id,
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    ImgUrl = user.Img,
-                    PhoneNumber = user.PhoneNumber,
-                    City = user.City,
-                    Area = user.Area,
-                    Street = user.Street
-                };
-
-                _logger.LogInformation("User updated successfully with ID: {Id}", userId);
-                return updatedUser;
+                _logger.LogInformation("تم تحديث المستخدم بنجاح بالبريد الإلكتروني: {Email}", email);
+                
             }
+           
             catch (Exception ex)
             {
-                _logger.LogError(ex, "An error occurred while updating the user with ID: {Id}", userId);
-                return null;
+                _logger.LogError(ex, "حدث خطأ أثناء تحديث المستخدم بالبريد الإلكتروني: {Email}");
+                errors.Add("GeneralError", new[] { "حدث خطأ أثناء تحديث المستخدم." });
             }
+
+            return errors;
         }
     }
 }

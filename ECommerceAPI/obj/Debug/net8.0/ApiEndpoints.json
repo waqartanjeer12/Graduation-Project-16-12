@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "ECommerceAPI.Controllers.AuthController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Auth/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changePasswordDTO",
+        "Type": "ECommerceCore.DTOs.User.Account.ChangePasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceAPI.Controllers.AuthController",
     "Method": "ConfirmEmail",
     "RelativePath": "api/Auth/confirm-email",
     "HttpMethod": "GET",
@@ -411,16 +427,6 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ECommerceAPI.Controllers.OrderController",
-    "Method": "GetOrderDetailsByUser",
-    "RelativePath": "api/Order/user",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -853,16 +859,11 @@
   {
     "ContainingType": "ECommerceAPI.Controllers.UserController",
     "Method": "UpdateUser",
-    "RelativePath": "api/User/update/{userId}",
+    "RelativePath": "api/User/update",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
     "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      },
       {
         "Name": "Img",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",

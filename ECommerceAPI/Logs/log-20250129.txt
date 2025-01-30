@@ -343,3 +343,230 @@ System.NullReferenceException: Object reference not set to an instance of an obj
 2025-01-29 05:03:15.303 +02:00 [WRN] Failed to determine the https port for redirect.
 2025-01-29 05:59:41.445 +02:00 [WRN] Failed to determine the https port for redirect.
 2025-01-29 06:12:53.804 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 15:44:04.031 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 15:47:49.557 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentException: task.tanjeer@gmail.com is not a valid value for Int32. (Parameter 'value')
+ ---> System.FormatException: The input string 'task.tanjeer@gmail.com' was not in a correct format.
+   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)
+   at System.Int32.Parse(String s, NumberStyles style, IFormatProvider provider)
+   at System.ComponentModel.Int32Converter.FromString(String value, NumberFormatInfo formatInfo)
+   at System.ComponentModel.BaseNumberConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   --- End of inner exception stack trace ---
+   at System.ComponentModel.BaseNumberConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   at Microsoft.AspNetCore.Identity.UserStoreBase`5.ConvertIdFromString(String id)
+   at Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`9.FindByIdAsync(String userId, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Identity.UserManager`1.FindByIdAsync(String userId)
+   at ECommerceInfrastructure.Repositories.OrderRepository.GetUserFromClaimsAsync(ClaimsPrincipal userClaims) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\OrderRepository.cs:line 41
+   at ECommerceInfrastructure.Repositories.OrderRepository.GetOrderDetailsByUserAsync(ClaimsPrincipal userClaims) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\OrderRepository.cs:line 150
+   at ECommerceAPI.Controllers.OrderController.GetOrderDetailsByUser() in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\OrderController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-01-29 15:49:39.461 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 15:49:39.824 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-29 15:51:38.412 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 15:53:58.909 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 15:54:41.541 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentException: task.tanjeer@gmail.com is not a valid value for Int32. (Parameter 'value')
+ ---> System.FormatException: The input string 'task.tanjeer@gmail.com' was not in a correct format.
+   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)
+   at System.Int32.Parse(String s, NumberStyles style, IFormatProvider provider)
+   at System.ComponentModel.Int32Converter.FromString(String value, NumberFormatInfo formatInfo)
+   at System.ComponentModel.BaseNumberConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   --- End of inner exception stack trace ---
+   at System.ComponentModel.BaseNumberConverter.ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, Object value)
+   at Microsoft.AspNetCore.Identity.UserStoreBase`5.ConvertIdFromString(String id)
+   at Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`9.FindByIdAsync(String userId, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Identity.UserManager`1.FindByIdAsync(String userId)
+   at ECommerceInfrastructure.Repositories.OrderRepository.GetUserFromClaimsAsync(ClaimsPrincipal userClaims) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\OrderRepository.cs:line 41
+   at ECommerceInfrastructure.Repositories.OrderRepository.GetOrderDetailsByUserAsync(ClaimsPrincipal userClaims) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\OrderRepository.cs:line 150
+   at ECommerceAPI.Controllers.OrderController.GetOrderDetailsByUser() in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceAPI\Controllers\OrderController.cs:line 73
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-01-29 16:00:59.519 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 16:00:59.927 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-29 18:02:14.281 +02:00 [ERR] An error occurred using the connection to database 'GraduationProject' on server 'localhost'.
+2025-01-29 18:02:14.537 +02:00 [ERR] An exception occurred while iterating over the results of a query for context type 'ECommerceInfrastructure.Configurations.Data.ApplicationDbContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "GraduationProject" requested by the login. The login failed.
+Login failed for user 'DESKTOP-G2ROET4\XPRISTO'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:ca44728e-6607-4d27-ae62-11a927da5a8c
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure' to the 'UseSqlServer' call.
+ ---> Microsoft.Data.SqlClient.SqlException (0x80131904): Cannot open database "GraduationProject" requested by the login. The login failed.
+Login failed for user 'DESKTOP-G2ROET4\XPRISTO'.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at Microsoft.Data.SqlClient.TdsParser.Run(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.CompleteLogin(Boolean enlistOK)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+ClientConnectionId:ca44728e-6607-4d27-ae62-11a927da5a8c
+Error Number:4060,State:1,Class:11
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2025-01-29 18:53:35.600 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 18:56:58.044 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 18:58:57.533 +02:00 [INF] بداية إنشاء فئة جديدة
+2025-01-29 18:58:57.601 +02:00 [INF] تم إنشاء الفئة بنجاح بالاسم: gchdfhdf
+2025-01-29 18:59:13.672 +02:00 [INF] بداية إنشاء فئة جديدة
+2025-01-29 18:59:13.687 +02:00 [INF] تم إنشاء الفئة بنجاح بالاسم: كنب
+2025-01-29 18:59:29.994 +02:00 [INF] بداية إنشاء فئة جديدة
+2025-01-29 18:59:30.006 +02:00 [INF] تم إنشاء الفئة بنجاح بالاسم: غرفة نوم
+2025-01-29 19:00:06.485 +02:00 [INF] البدء بالتعديل باستخدام المعرف: 1
+2025-01-29 19:00:06.510 +02:00 [INF] حذف الصورة القديمة حسب المعرف: 1
+2025-01-29 19:00:06.529 +02:00 [INF] تم التعديل على الفئة بنجاح: 1
+2025-01-29 19:09:36.821 +02:00 [INF] بداية إضافة لون جديد
+2025-01-29 19:09:36.905 +02:00 [INF] تم اضافة اللون بنجاح 
+2025-01-29 19:09:47.379 +02:00 [INF] بداية إضافة لون جديد
+2025-01-29 19:09:47.397 +02:00 [INF] تم اضافة اللون بنجاح 
+2025-01-29 19:09:52.894 +02:00 [INF] بداية إضافة لون جديد
+2025-01-29 19:09:52.899 +02:00 [WRN] اسم اللون موجود بالفعل: احمر
+2025-01-29 19:09:59.326 +02:00 [INF] بداية إضافة لون جديد
+2025-01-29 19:09:59.337 +02:00 [INF] تم اضافة اللون بنجاح 
+2025-01-29 19:10:09.291 +02:00 [INF] بداية إضافة لون جديد
+2025-01-29 19:10:09.303 +02:00 [INF] تم اضافة اللون بنجاح 
+2025-01-29 19:10:41.539 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-29 19:10:41.709 +02:00 [INF] تم إضافة المنتج بنجاح : كنبيات
+2025-01-29 19:11:30.143 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-29 19:11:30.154 +02:00 [WRN] الفئة غير موجودة يرجى البحث عن فئة أخرى
+2025-01-29 19:11:49.712 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.
+2025-01-29 19:12:08.570 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-29 19:12:08.598 +02:00 [INF] تم إضافة المنتج بنجاح : كنبيات
+2025-01-29 19:12:18.920 +02:00 [INF] بداية إضافة منتج جديد
+2025-01-29 19:12:18.939 +02:00 [INF] تم إضافة المنتج بنجاح : كنبيات
+2025-01-29 19:14:55.893 +02:00 [WRN] No items found in cart for user ID: 4 matching the specified item IDs.
+2025-01-29 19:15:02.307 +02:00 [INF] Removing 1 items from cart for user ID: 4.
+2025-01-29 19:15:02.330 +02:00 [INF] Successfully cleared specified items from cart for user ID: 4.
+2025-01-29 19:15:07.310 +02:00 [INF] Removing 1 items from cart for user ID: 4.
+2025-01-29 19:15:07.315 +02:00 [INF] Successfully cleared specified items from cart for user ID: 4.
+2025-01-29 19:15:39.412 +02:00 [WRN] Cart containing item with ID: 0 not found.
+2025-01-29 19:16:13.334 +02:00 [WRN] Cart containing item with ID: 0 not found.
+2025-01-29 19:17:45.933 +02:00 [INF] Successfully removed item with ID: 3 from the cart.
+2025-01-29 19:17:48.750 +02:00 [WRN] Cart containing item with ID: 3 not found.
+2025-01-29 19:18:09.064 +02:00 [WRN] Cart containing item with ID: 3 not found.
+2025-01-29 19:18:11.684 +02:00 [WRN] Cart containing item with ID: 3 not found.
+2025-01-29 19:18:18.073 +02:00 [INF] Successfully removed item with ID: 2 from the cart.
+2025-01-29 19:20:03.403 +02:00 [INF] Increasing quantity for item ID: 1
+2025-01-29 19:20:03.433 +02:00 [INF] Successfully increased quantity for item ID: 1
+2025-01-29 19:20:06.931 +02:00 [INF] Increasing quantity for item ID: 1
+2025-01-29 19:20:06.949 +02:00 [INF] Successfully increased quantity for item ID: 1
+2025-01-29 19:20:07.950 +02:00 [INF] Increasing quantity for item ID: 1
+2025-01-29 19:20:07.962 +02:00 [INF] Successfully increased quantity for item ID: 1
+2025-01-29 19:20:08.992 +02:00 [INF] Increasing quantity for item ID: 1
+2025-01-29 19:20:09.005 +02:00 [INF] Successfully increased quantity for item ID: 1
+2025-01-29 19:20:09.798 +02:00 [INF] Increasing quantity for item ID: 1
+2025-01-29 19:20:09.818 +02:00 [INF] Successfully increased quantity for item ID: 1
+2025-01-29 19:20:10.733 +02:00 [INF] Increasing quantity for item ID: 1
+2025-01-29 19:20:10.743 +02:00 [INF] Successfully increased quantity for item ID: 1
+2025-01-29 19:20:11.602 +02:00 [INF] Increasing quantity for item ID: 1
+2025-01-29 19:20:11.614 +02:00 [INF] Successfully increased quantity for item ID: 1
+2025-01-29 19:20:24.717 +02:00 [INF] Increasing quantity for item ID: 1
+2025-01-29 19:20:24.733 +02:00 [INF] Successfully increased quantity for item ID: 1
+2025-01-29 19:22:23.632 +02:00 [INF] Starting order creation process.
+2025-01-29 19:22:23.732 +02:00 [INF] Total price before shipping: 210000.00
+2025-01-29 19:22:23.885 +02:00 [INF] Order created successfully with ID: 1
+2025-01-29 19:22:23.894 +02:00 [INF] Order creation process completed successfully, and cart items cleared.
+2025-01-29 19:28:51.482 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 19:28:51.923 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-29 19:28:51.961 +02:00 [WRN] Order not found with ID: 0
+2025-01-29 19:30:06.942 +02:00 [WRN] Order not found with ID: 0
+2025-01-29 19:30:11.738 +02:00 [WRN] Order not found with ID: 0
+2025-01-29 19:30:15.369 +02:00 [WRN] Order not found with ID: 0
+2025-01-29 19:52:43.409 +02:00 [WRN] Order not found with ID: 0
+2025-01-29 20:48:40.899 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 20:50:17.693 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-29 21:01:13.388 +02:00 [INF] جارِ جلب المستخدم بالمعرف: task.tanjeer@gmail.com
+2025-01-29 21:01:52.664 +02:00 [INF] جارِ جلب جميع المستخدمين
+2025-01-29 21:02:31.083 +02:00 [ERR] An error occurred while updating the user with ID: 1
+System.InvalidOperationException: يرجى تحميل صورة بتنسيق JPG أو PNG أو webp فقط
+   at ECommerceCore.Interfaces.FileService.UploadFileAsync(IFormFile file, String folderName) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\Interfaces\IFileService.cs:line 31
+   at ECommerceInfrastructure.Repositories.UserRepository.UpdateUserAsync(Int32 userId, UpdateUserInformationDTO dto) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\UserRepository.cs:line 134
+2025-01-29 21:02:43.168 +02:00 [INF] User updated successfully with ID: 1
+2025-01-29 21:41:16.933 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 21:43:22.541 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 21:44:20.191 +02:00 [INF] تم تحديث المستخدم بنجاح بالمعرف: 1
+2025-01-29 21:44:33.006 +02:00 [WRN] لم يتم العثور على المستخدم بالمعرف: 2
+2025-01-29 21:53:45.473 +02:00 [ERR] تنسيق الملف غير صالح لتحديث صورة المستخدم.
+System.InvalidOperationException: يرجى تحميل صورة بتنسيق JPG أو PNGأو jpegأو webp فقط
+   at ECommerceCore.Interfaces.FileService.UploadFileAsync(IFormFile file, String folderName) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\Interfaces\IFileService.cs:line 31
+   at ECommerceInfrastructure.Repositories.UserRepository.UpdateUserAsync(Int32 userId, UpdateUserInformationDTO dto) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\UserRepository.cs:line 139
+2025-01-29 21:53:53.990 +02:00 [INF] تم تحديث المستخدم بنجاح بالمعرف: 3
+2025-01-29 22:35:55.621 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 22:36:40.981 +02:00 [INF] تم تحديث المستخدم بنجاح بالبريد الإلكتروني: task.tanjeer@gmail.com
+2025-01-29 22:39:30.076 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 22:42:34.865 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-29 22:43:10.146 +02:00 [ERR] تنسيق الملف غير صالح لتحديث صورة المستخدم.
+System.InvalidOperationException: يرجى تحميل صورة بتنسيق JPG أو PNGأو jpegأو webp فقط
+   at ECommerceCore.Interfaces.FileService.UploadFileAsync(IFormFile file, String folderName) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceCore\Interfaces\IFileService.cs:line 31
+   at ECommerceInfrastructure.Repositories.UserRepository.UpdateUserAsync(ClaimsPrincipal userClaims, UpdateUserInformationDTO dto) in C:\Users\XPRISTO\source\repos\Graduation Project\ECommerceInfrastructure\Repositories\UserRepository.cs:line 154
+2025-01-29 22:43:41.290 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-29 22:45:52.478 +02:00 [INF] جارِ جلب جميع الفئات للمستخدم.
+2025-01-29 23:07:55.113 +02:00 [WRN] Failed to determine the https port for redirect.
