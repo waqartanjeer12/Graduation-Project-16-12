@@ -132,27 +132,7 @@ namespace ECommerceInfrastructure.Repositories
 
        
 
-        public async Task<ReadUserOrders> GetUserOrdersByIdAsync(int orderId)
-        {
-            var order = await _context.Orders
-                .FirstOrDefaultAsync(o => o.OrderId == orderId);
-
-            if (order == null)
-            {
-                return null;
-            }
-
-            var userOrders = new ReadUserOrders
-            {
-                OrderNumber = 123456 + order.OrderId, // Sequential number starting from 123456
-                orderDate = order.orderDate,
-                orderStatus = order.orderStatus,
-                orderStatusDetails = order.orderStatusDetails,
-                orderTotalPrice = order.totalPrice
-            };
-
-            return userOrders;
-        }
+      
 
         public async Task<ReadOrderDetail> GetOrderDetailsByIdAsync(int orderId)
         {

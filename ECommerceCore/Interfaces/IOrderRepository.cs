@@ -9,7 +9,7 @@ namespace ECommerceInfrastructure.Repositories
     {
         Task<Dictionary<string, string[]>> CreateOrderAsync(CreateOrderDTO createOrderDTO, ClaimsPrincipal userClaims);
         
-        Task<ReadUserOrders> GetUserOrdersByIdAsync(int orderId);
+        
         Task<ReadOrderDetail> GetOrderDetailsByIdAsync(int orderId);
         Task<Dictionary<string, string[]>> UpdateOrderStatusByIdAsync(int orderId, UpdateOrderStatusDTO updateOrderStatusDTO);
         Task<List<ReadUserOrders>> GetUserOrdersByUserIdAsync(int userId);

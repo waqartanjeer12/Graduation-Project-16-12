@@ -370,22 +370,6 @@
   },
   {
     "ContainingType": "ECommerceAPI.Controllers.OrderController",
-    "Method": "GetUserOrdersById",
-    "RelativePath": "api/Order/{orderId}/user-orders",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "orderId",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ECommerceAPI.Controllers.OrderController",
     "Method": "GetOrderDetailsForAdminById",
     "RelativePath": "api/Order/admin/{orderId}/order-details",
     "HttpMethod": "GET",
@@ -404,16 +388,6 @@
     "ContainingType": "ECommerceAPI.Controllers.OrderController",
     "Method": "GetAllUserOrdersForAdmin",
     "RelativePath": "api/Order/admin/all-user-orders",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "ECommerceAPI.Controllers.OrderController",
-    "Method": "GetAllOrdersForAdmin",
-    "RelativePath": "api/Order/all-orders",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

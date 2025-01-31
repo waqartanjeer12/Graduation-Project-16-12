@@ -46,27 +46,7 @@ namespace ECommerceAPI.Controllers
 
        
 
-        [HttpGet("{orderId}/user-orders")]
-        [Authorize(Roles = "User")]
-        public async Task<IActionResult> GetUserOrdersById(int orderId)
-        {
-            var order = await _repository.GetUserOrdersByIdAsync(orderId);
-
-            if (order == null)
-            {
-                ModelState.AddModelError("Order", "Order not found.");
-                var errors = ModelState
-                    .Where(ms => ms.Value.Errors.Count > 0)
-                    .ToDictionary(
-                        kvp => kvp.Key,
-                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-                    );
-
-                return BadRequest(new { errors });
-            }
-
-            return Ok(order);
-        }
+   
 
         [HttpGet("{orderId}/order-details")]
         [Authorize(Roles = "User")]
