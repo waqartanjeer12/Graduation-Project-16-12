@@ -8,17 +8,19 @@ using System.Threading.Tasks;
 
 namespace ECommerceCore.DTOs.Order
 {
-    public class ReadOrderDetail
+    public class ReadOrderDetailsForAdmin
     {
         [Required(ErrorMessage = " رقم الطلب مطلوب")]
-        public int OrderNumber { get; set; }  // Updated property name to OrderId
+        public int OrderNumber { get; set; }
+        [Required(ErrorMessage = "يرجى ارجاع اسم المستخدم")]
+        public string UserName { get; set; }
         [Required(ErrorMessage = "يرجى ارحاع تاريخ الطلب ")]
         public DateTime orderDate { get; set; }
         [Required(ErrorMessage = "يرجى ارجاع حالة الطلب")]
         public String orderStatus { get; set; }
-        
-       
-       
+
+
+
         [Required(ErrorMessage = "يرجى ارجاع المنتجات")]
         public List<OrderProducts> OrderProducts { get; set; }
 
@@ -47,7 +49,5 @@ namespace ECommerceCore.DTOs.Order
         public string Street { get; set; }
         [Required(ErrorMessage = "يرجى ارجاع المنطقة")]
         public string Area { get; set; }
-
-
     }
 }

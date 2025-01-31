@@ -12,7 +12,7 @@ namespace ECommerceCore.Interfaces
 
         Task<string> LoginAsync(LoginDTO loginDTO);
         Task<string> SendResetCodeAsync(string email);
-        Task<string> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO,string token);
+        Task<Dictionary<string, string[]>> ResetPasswordAsync(ResetPasswordDTO resetPasswordDTO, string token);
         Task<Dictionary<string, string[]>> ChangePasswordAsync(ClaimsPrincipal userClaims, ChangePasswordDTO changePasswordDTO);
     }
 }

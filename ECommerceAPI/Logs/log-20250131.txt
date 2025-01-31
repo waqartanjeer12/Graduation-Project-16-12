@@ -1,0 +1,22 @@
+2025-01-31 03:08:47.147 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-31 03:09:57.475 +02:00 [INF] Starting order creation process.
+2025-01-31 03:09:57.627 +02:00 [WRN] No cart items found for the provided IDs.
+2025-01-31 03:10:23.182 +02:00 [INF] Starting order creation process.
+2025-01-31 03:10:23.199 +02:00 [WRN] No cart items found for the provided IDs.
+2025-01-31 03:10:27.001 +02:00 [INF] Starting order creation process.
+2025-01-31 03:10:27.020 +02:00 [WRN] No cart items found for the provided IDs.
+2025-01-31 03:11:08.079 +02:00 [INF] Starting order creation process.
+2025-01-31 03:11:08.196 +02:00 [INF] Total price before shipping: 200000.00
+2025-01-31 03:11:08.702 +02:00 [INF] Order created successfully with ID: 2
+2025-01-31 03:11:08.779 +02:00 [INF] Order creation process completed successfully, and cart items cleared.
+2025-01-31 03:13:14.439 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-31 03:13:38.332 +02:00 [INF] Starting order creation process.
+2025-01-31 03:13:38.492 +02:00 [WRN] No cart items found for the provided IDs.
+2025-01-31 03:14:38.238 +02:00 [INF] Starting order creation process.
+2025-01-31 03:14:38.275 +02:00 [INF] Total price before shipping: 200000.00
+2025-01-31 03:14:38.381 +02:00 [INF] Order created successfully with ID: 3
+2025-01-31 03:14:38.399 +02:00 [INF] Order creation process completed successfully, and cart items cleared.
+2025-01-31 04:31:31.792 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-31 04:35:33.217 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2025-01-31 04:58:55.244 +02:00 [WRN] Failed to determine the https port for redirect.
+2025-01-31 04:59:36.585 +02:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.

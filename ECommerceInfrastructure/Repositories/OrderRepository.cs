@@ -5,15 +5,11 @@ using ECommerceInfrastructure.Configurations.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using ECommerceCore.DTOs.Color;
 
 namespace ECommerceInfrastructure.Repositories
@@ -23,17 +19,13 @@ namespace ECommerceInfrastructure.Repositories
         private readonly ApplicationDbContext _context;
         private readonly ILogger<OrderRepository> _logger;
         private readonly UserManager<User> _userManager;
-        private readonly IConfiguration _configuration;
 
-        public OrderRepository(ApplicationDbContext context, ILogger<OrderRepository> logger, UserManager<User> userManager, IConfiguration configuration)
+        public OrderRepository(ApplicationDbContext context, ILogger<OrderRepository> logger, UserManager<User> userManager)
         {
             _context = context;
             _logger = logger;
             _userManager = userManager;
-            
         }
-
-
 
         public async Task<User> GetUserFromClaimsAsync(ClaimsPrincipal userClaims)
         {
@@ -46,6 +38,7 @@ namespace ECommerceInfrastructure.Repositories
 
             return await _userManager.FindByEmailAsync(email);
         }
+
         public async Task<Dictionary<string, string[]>> CreateOrderAsync(CreateOrderDTO createOrderDTO, ClaimsPrincipal userClaims)
         {
             var errors = new Dictionary<string, string[]>();
@@ -136,22 +129,30 @@ namespace ECommerceInfrastructure.Repositories
             // Return minimal response
             return null; // No errors
         }
-        public async Task<List<GetAllOrdersForAdmin>> GetAllOrdersForAdminAsync()
-        {
-            var orders = await _context.Orders
-                .Select(o => new GetAllOrdersForAdmin
-                {
-                    OrderId = o.OrderId,
-                    orderDate = o.orderDate,
-                    orderStatus = o.orderStatus,
-                    orderStatusDetails = o.orderStatusDetails,
-                    totalPrice = o.totalPrice
-                })
-                .ToListAsync();
 
-            return orders.Any() ? orders : null;
+       
+
+        public async Task<ReadUserOrders> GetUserOrdersByIdAsync(int orderId)
+        {
+            var order = await _context.Orders
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                return null;
+            }
+
+            var userOrders = new ReadUserOrders
+            {
+                OrderNumber = 123456 + order.OrderId, // Sequential number starting from 123456
+                orderDate = order.orderDate,
+                orderStatus = order.orderStatus,
+                orderStatusDetails = order.orderStatusDetails,
+                orderTotalPrice = order.totalPrice
+            };
+
+            return userOrders;
         }
-      
 
         public async Task<ReadOrderDetail> GetOrderDetailsByIdAsync(int orderId)
         {
@@ -164,22 +165,20 @@ namespace ECommerceInfrastructure.Repositories
 
             if (order == null)
             {
-                _logger.LogWarning("Order not found with ID: {OrderId}", orderId);
-                return null; // Or handle the error as needed
+                return null;
             }
 
             var user = await _userManager.FindByIdAsync(order.UserId.ToString());
 
             var orderDetail = new ReadOrderDetail
             {
-                OrderId = order.OrderId,
+                OrderNumber = 123456 + order.OrderId, // Sequential number starting from 123456
                 orderDate = order.orderDate,
                 orderStatus = order.orderStatus,
-                orderStatusDetails = order.orderStatusDetails,
                 totalPriceBeforeShipping = order.totalPriceBeforeShipping,
                 shippingPrice = order.shippingPrice,
                 totalPrice = order.totalPrice,
-                CustomerName = user.UserName, // Use the UserName property for the full name
+                CustomerName = $"{order.FName} {order.LName}", // Combine first name and last name
                 Phone = order.Phone,
                 City = order.City,
                 Street = order.Street,
@@ -203,33 +202,6 @@ namespace ECommerceInfrastructure.Repositories
 
             return orderDetail;
         }
-        public async Task<Dictionary<string, string[]>> UpdateOrderStatusByUserAsync(ClaimsPrincipal userClaims, UpdateOrderStatusDTO updateOrderStatusDTO)
-        {
-            var errors = new Dictionary<string, string[]>();
-            var user = await GetUserFromClaimsAsync(userClaims);
-            if (user == null)
-            {
-                errors.Add("User", new[] { "User not found or invalid token." });
-                return errors;
-            }
-
-            var order = await _context.Orders
-                .Where(o => o.UserId == user.Id)
-                .OrderByDescending(o => o.orderDate)
-                .FirstOrDefaultAsync();
-
-            if (order == null)
-            {
-                errors.Add("Order", new[] { "No orders found for the user." });
-                return errors;
-            }
-
-            order.orderStatus = updateOrderStatusDTO.OrderStatus;
-            order.orderStatusDetails = updateOrderStatusDTO.OrderStatusDetails;
-
-            await _context.SaveChangesAsync();
-            return null; // No errors
-        }
 
         public async Task<Dictionary<string, string[]>> UpdateOrderStatusByIdAsync(int orderId, UpdateOrderStatusDTO updateOrderStatusDTO)
         {
@@ -248,6 +220,90 @@ namespace ECommerceInfrastructure.Repositories
 
             await _context.SaveChangesAsync();
             return null; // No errors
+        }
+
+        public async Task<List<ReadUserOrders>> GetUserOrdersByUserIdAsync(int userId)
+        {
+            var orders = await _context.Orders
+                .Where(o => o.UserId == userId)
+                .Select(o => new ReadUserOrders
+                {
+                    OrderNumber = 123456 + o.OrderId, // Sequential number starting from 123456
+                    orderDate = o.orderDate,
+                    orderStatus = o.orderStatus,
+                    orderStatusDetails = o.orderStatusDetails,
+                    orderTotalPrice = o.totalPrice
+                })
+                .ToListAsync();
+
+            return orders;
+        }
+
+        public async Task<List<ReadUserOrdersForAdmin>> GetAllUserOrdersForAdminAsync()
+        {
+            var orders = await _context.Orders
+                .Include(o => o.User)
+                .Select(o => new ReadUserOrdersForAdmin
+                {
+                    OrderNumber = 123456 + o.OrderId, // Sequential number starting from 123456
+                    UserName = o.User.UserName,
+                    orderDate = o.orderDate,
+                    orderStatus = o.orderStatus,
+                    orderStatusDetails = o.orderStatusDetails,
+                    orderTotalPrice = o.totalPrice
+                })
+                .ToListAsync();
+
+            return orders;
+        }
+
+        public async Task<ReadOrderDetailsForAdmin> GetOrderDetailsForAdminByIdAsync(int orderId)
+        {
+            var order = await _context.Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Product)
+                .ThenInclude(p => p.Colors)
+                .ThenInclude(pc => pc.Color)
+                .Include(o => o.User)
+                .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                return null;
+            }
+
+            var orderDetail = new ReadOrderDetailsForAdmin
+            {
+                OrderNumber = 123456 + order.OrderId, // Sequential number starting from 123456
+                UserName = order.User.UserName, // UserName from User entity
+                orderDate = order.orderDate,
+                orderStatus = order.orderStatus,
+                totalPriceBeforeShipping = order.totalPriceBeforeShipping,
+                shippingPrice = order.shippingPrice,
+                totalPrice = order.totalPrice,
+                CustomerName = $"{order.FName} {order.LName}", // Combine first name and last name
+                Phone = order.Phone,
+                City = order.City,
+                Street = order.Street,
+                Area = order.Area,
+                OrderProducts = order.OrderItems.Select(oi => new OrderProducts
+                {
+                    Id = oi.ProductId,
+                    MainImageUrl = oi.OrderItemMainImageUrl,
+                    Name = oi.Product.Name,
+                    Quantity = oi.Quantity,
+                    OnePiecePrice = oi.OrderItemPrice,
+                    totalPricewithQuantit = oi.OrderItemPrice * oi.Quantity,
+                    Color = oi.Product.Colors.Select(pc => new ColorReadDTO
+                    {
+                        Id = pc.Color.Id,
+                        ColorImage = pc.Color.Image,
+                        Name = pc.Color.Name
+                    }).FirstOrDefault()
+                }).ToList()
+            };
+
+            return orderDetail;
         }
     }
 }

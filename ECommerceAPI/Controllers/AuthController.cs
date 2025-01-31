@@ -39,7 +39,7 @@ namespace ECommerceAPI.Controllers
                 return BadRequest(new { errors = errorsFromService });
             }
 
-            return Ok(new { Message = "تم التسجيل بنجاح! يرجى التحقق من بريدك الإلكتروني لتأكيد حسابك." });
+            return Ok(new { Message = "تم التسجيل بنجاح! يرجى التحقق من بريدك الإلكتروني لتأكيد حسابك." });
         }
 
         [HttpPost("login")]
@@ -59,7 +59,7 @@ namespace ECommerceAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-         [HttpGet("confirm-email")]
+        [HttpGet("confirm-email")]
         public async Task<IActionResult> ConfirmEmail(string email, string token)
         {
             var result = await _authRepository.ConfirmEmailAsync(email, token);
@@ -70,36 +70,52 @@ namespace ECommerceAPI.Controllers
             }
 
             // Redirect to the specified URL after successful confirmation
-            return Ok(new {Message="تم تأكيد الإيميل بنجاح"});
+            return Ok(new { Message = "تم تأكيد الإيميل بنجاح" });
         }
-
 
         [HttpPost("send-reset-password-link")]
         public async Task<IActionResult> SendResetPasswordLink([FromBody] ForgotPasswordDTO forgotPasswordDTO)
         {
-            var token = await _authRepository.SendResetCodeAsync(forgotPasswordDTO.Email);
-            if (token.Contains("No active user"))
-                return BadRequest(new { message = token });
+            var response = await _authRepository.SendResetCodeAsync(forgotPasswordDTO.Email);
 
-            // Return the reset token for testing purposes
-            return Ok(new { message = "تم ارسال الكود بنجاح .", token });
+            if (response == "Email does not exist." || response == "Your account is not activated. Please check your email.")
+            {
+                return BadRequest(new { message = response });
+            }
+
+
+            // If everything is fine, return success message
+            return Ok(new { message = "The code has been sent successfully.", token = response });
         }
+
+
         [HttpPost("reset-password")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO resetPasswordDTO)
         {
+            // تحقق من تطابق كلمة المرور الجديدة مع تأكيد كلمة المرور
             if (resetPasswordDTO.NewPassword != resetPasswordDTO.ConfirmPassword)
             {
-                return BadRequest(new { message = "الباسوورد وتأكيده غير متطابقان." });
+                return BadRequest(new { errors = new { ConfirmPassword = new[] { "كلمة المرور وتأكيدها غير متطابقين." } } });
             }
 
-            // Extract the token from the Authorization header
+            // استخراج الرمز من الهيدر
             var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
 
+            // استدعاء دالة ResetPasswordAsync
             var result = await _authRepository.ResetPasswordAsync(resetPasswordDTO, token);
-            if (result.Contains("successfully"))
-                return Ok(new { message = result });
-            return BadRequest(new { message = result });
+
+            // إذا كانت النتيجة تحتوي على أخطاء
+            if (result != null)
+            {
+                return BadRequest(new { errors = result });
+            }
+
+            // إذا كانت العملية ناجحة
+            return Ok(new { message = "تم تحديث كلمة المرور بنجاح." });
         }
+
+
+
         [HttpPost("change-password")]
         [Authorize]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO changePasswordDTO)

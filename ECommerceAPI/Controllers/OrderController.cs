@@ -20,7 +20,6 @@ namespace ECommerceAPI.Controllers
 
         [HttpPost("create")]
         [Authorize(Roles = "User")]
-        
         public async Task<IActionResult> CreateOrder([FromForm] CreateOrderDTO createOrderDTO)
         {
             if (!ModelState.IsValid)
@@ -44,11 +43,80 @@ namespace ECommerceAPI.Controllers
 
             return Ok(new { message = "تم انشاء الطلب بنجاح" });
         }
-        [HttpGet("all-orders")]
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> GetAllOrdersForAdmin()
+
+       
+
+        [HttpGet("{orderId}/user-orders")]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> GetUserOrdersById(int orderId)
         {
-            var orders = await _repository.GetAllOrdersForAdminAsync();
+            var order = await _repository.GetUserOrdersByIdAsync(orderId);
+
+            if (order == null)
+            {
+                ModelState.AddModelError("Order", "Order not found.");
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
+            }
+
+            return Ok(order);
+        }
+
+        [HttpGet("{orderId}/order-details")]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> GetOrderDetailsById(int orderId)
+        {
+            var orderDetail = await _repository.GetOrderDetailsByIdAsync(orderId);
+
+            if (orderDetail == null)
+            {
+                ModelState.AddModelError("Order", "Order not found.");
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
+            }
+
+            return Ok(orderDetail);
+        }
+
+        [HttpGet("user/{userId}/orders")]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> GetUserOrdersByUserId(int userId)
+        {
+            var orders = await _repository.GetUserOrdersByUserIdAsync(userId);
+
+            if (orders == null || !orders.Any())
+            {
+                ModelState.AddModelError("Orders", "No orders found for this user.");
+                var errors = ModelState
+                    .Where(ms => ms.Value.Errors.Count > 0)
+                    .ToDictionary(
+                        kvp => kvp.Key,
+                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
+                    );
+
+                return BadRequest(new { errors });
+            }
+
+            return Ok(orders);
+        }
+
+        [HttpGet("admin/all-user-orders")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAllUserOrdersForAdmin()
+        {
+            var orders = await _repository.GetAllUserOrdersForAdminAsync();
 
             if (orders == null || !orders.Any())
             {
@@ -63,18 +131,16 @@ namespace ECommerceAPI.Controllers
                 return BadRequest(new { errors });
             }
 
-           return Ok(orders); 
+            return Ok(orders);
         }
-      
 
-        // Endpoint to fetch order details by order ID
-        [HttpGet("{orderId}")]
-        [Authorize(Roles = "User")]
-        public async Task<IActionResult> GetOrderDetailsById(int orderId)
+        [HttpGet("admin/{orderId}/order-details")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetOrderDetailsForAdminById(int orderId)
         {
-            var orderDetails = await _repository.GetOrderDetailsByIdAsync(orderId);
+            var orderDetail = await _repository.GetOrderDetailsForAdminByIdAsync(orderId);
 
-            if (orderDetails == null)
+            if (orderDetail == null)
             {
                 ModelState.AddModelError("Order", "Order not found.");
                 var errors = ModelState
@@ -83,40 +149,15 @@ namespace ECommerceAPI.Controllers
                         kvp => kvp.Key,
                         kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
                     );
-                return BadRequest(errors);
+
+                return BadRequest(new { errors });
             }
 
-            return Ok(orderDetails);
-        }
-
-
-        [HttpPut("user/status")]
-        [Authorize(Roles ="Admin")]
-        public async Task<IActionResult> UpdateOrderStatusByUser([FromBody] UpdateOrderStatusDTO updateOrderStatusDTO)
-        {
-            var userClaims = HttpContext.User;
-            var result = await _repository.UpdateOrderStatusByUserAsync(userClaims, updateOrderStatusDTO);
-
-            if (result != null)
-            {
-                foreach (var error in result)
-                {
-                    ModelState.AddModelError(error.Key, string.Join(", ", error.Value));
-                }
-                var errorsDict = ModelState
-                    .Where(ms => ms.Value.Errors.Count > 0)
-                    .ToDictionary(
-                        kvp => kvp.Key,
-                        kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
-                    );
-                return BadRequest(errorsDict);
-            }
-
-           return Ok(new { Message = "تم تحديث حالة الطلب بنجاح." }); ; // Success with no content
+            return Ok(orderDetail);
         }
 
         [HttpPut("{orderId}/status")]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateOrderStatusById(int orderId, [FromBody] UpdateOrderStatusDTO updateOrderStatusDTO)
         {
             var result = await _repository.UpdateOrderStatusByIdAsync(orderId, updateOrderStatusDTO);
@@ -136,7 +177,7 @@ namespace ECommerceAPI.Controllers
                 return BadRequest(errorsDict);
             }
 
-            return Ok(new { Message = "تم تحديث حالة الطلب بنجاح" }); // Success with no content
+            return Ok(new { Message = "تم تحديث حالة الطلب بنجاح" });
         }
     }
 }
