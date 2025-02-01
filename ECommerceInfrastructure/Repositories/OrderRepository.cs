@@ -11,6 +11,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerceCore.DTOs.Color;
+using MailKit.Search;
 
 namespace ECommerceInfrastructure.Repositories
 {
@@ -89,13 +90,19 @@ namespace ECommerceInfrastructure.Repositories
             var totalPriceBeforeShipping = cartItems.Sum(ci => ci.Product.Price * ci.Quantity);
             _logger.LogInformation("Total price before shipping: {TotalPriceBeforeShipping}", totalPriceBeforeShipping);
 
+            // العثور على المنطقة الزمنية لفلسطين
+            var palestinianTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Gaza");
+
+            // تحويل الوقت الحالي إلى توقيت فلسطين
+            var currentPalestinianTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, palestinianTimeZone);
+
             // Create the Order entity
             var order = new Order
             {
                 UserId = user.Id,
-                orderDate = DateTime.Now,
-                orderStatus = "Pending",
-                orderStatusDetails = "Order created",
+                orderDate = currentPalestinianTime,
+                orderStatus = "تم الاستلام",
+                orderStatusDetails = "تم استلام طلبك بنجاح. سيتم تجهيزه قريبًا.",
                 FName = createOrderDTO.FName,
                 LName = createOrderDTO.LName,
                 Phone = createOrderDTO.Phone,
@@ -130,9 +137,9 @@ namespace ECommerceInfrastructure.Repositories
             return null; // No errors
         }
 
-       
 
-      
+
+
 
         public async Task<ReadOrderDetail> GetOrderDetailsByIdAsync(int orderId)
         {
@@ -153,7 +160,7 @@ namespace ECommerceInfrastructure.Repositories
             var orderDetail = new ReadOrderDetail
             {
                 OrderNumber = 123456 + order.OrderId, // Sequential number starting from 123456
-                orderDate = order.orderDate,
+                orderDate = order.orderDate.ToString("dd MMMM yyyy، hh:mm tt", new System.Globalization.CultureInfo("ar-PS")),
                 orderStatus = order.orderStatus,
                 totalPriceBeforeShipping = order.totalPriceBeforeShipping,
                 shippingPrice = order.shippingPrice,
@@ -202,14 +209,25 @@ namespace ECommerceInfrastructure.Repositories
             return null; // No errors
         }
 
-        public async Task<List<ReadUserOrders>> GetUserOrdersByUserIdAsync(int userId)
+        public async Task<List<ReadUserOrders>> GetUserOrdersByEmailAsync(string email)
         {
+            // البحث عن UserId باستخدام الـ email
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+            if (user == null)
+            {
+                // في حالة لم يتم العثور على المستخدم باستخدام الـ email
+                throw new Exception("User not found.");
+            }
+
+            // استخدام الـ userId للبحث عن الطلبات
             var orders = await _context.Orders
-                .Where(o => o.UserId == userId)
+                .Where(o => o.UserId == user.UserId)
                 .Select(o => new ReadUserOrders
                 {
+                    OrderId = o.OrderId,
                     OrderNumber = 123456 + o.OrderId, // Sequential number starting from 123456
-                    orderDate = o.orderDate,
+                    orderDate = o.orderDate.ToString("dd MMMM yyyy، hh:mm tt", new System.Globalization.CultureInfo("ar-PS")),
                     orderStatus = o.orderStatus,
                     orderStatusDetails = o.orderStatusDetails,
                     orderTotalPrice = o.totalPrice
@@ -225,17 +243,18 @@ namespace ECommerceInfrastructure.Repositories
                 .Include(o => o.User)
                 .Select(o => new ReadUserOrdersForAdmin
                 {
+                    OrderId = o.OrderId,
                     OrderNumber = 123456 + o.OrderId, // Sequential number starting from 123456
                     UserName = o.User.UserName,
-                    orderDate = o.orderDate,
+                    orderDate = o.orderDate.ToString("dd MMMM yyyy، hh:mm tt", new System.Globalization.CultureInfo("ar-PS")),
                     orderStatus = o.orderStatus,
-                    orderStatusDetails = o.orderStatusDetails,
                     orderTotalPrice = o.totalPrice
                 })
                 .ToListAsync();
 
             return orders;
         }
+
 
         public async Task<ReadOrderDetailsForAdmin> GetOrderDetailsForAdminByIdAsync(int orderId)
         {
@@ -256,7 +275,7 @@ namespace ECommerceInfrastructure.Repositories
             {
                 OrderNumber = 123456 + order.OrderId, // Sequential number starting from 123456
                 UserName = order.User.UserName, // UserName from User entity
-                orderDate = order.orderDate,
+                orderDate = order.orderDate.ToString("dd MMMM yyyy، hh:mm tt", new System.Globalization.CultureInfo("ar-PS")),  // تنسيق تاريخ الطلب,
                 orderStatus = order.orderStatus,
                 totalPriceBeforeShipping = order.totalPriceBeforeShipping,
                 shippingPrice = order.shippingPrice,
@@ -285,5 +304,29 @@ namespace ECommerceInfrastructure.Repositories
 
             return orderDetail;
         }
+
+        public async Task<Dictionary<string, string[]>> DeleteOrderByIdAsync(int orderId)
+        {
+            var errors = new Dictionary<string, string[]>();
+            var order = await _context.Orders.FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                errors.Add("Order", new[] { "Order not found." });
+                return errors;
+            }
+
+            // حذف العناصر المرتبطة بالطلب (إن وجد)
+            var orderItems = await _context.OrderItems.Where(oi => oi.OrderId == orderId).ToListAsync();
+            _context.OrderItems.RemoveRange(orderItems);
+
+            // حذف الطلب
+            _context.Orders.Remove(order);
+            await _context.SaveChangesAsync();
+
+            return null; // No errors
+        }
     }
+
+
 }

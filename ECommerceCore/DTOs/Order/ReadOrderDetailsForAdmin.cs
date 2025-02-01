@@ -15,7 +15,7 @@ namespace ECommerceCore.DTOs.Order
         [Required(ErrorMessage = "يرجى ارجاع اسم المستخدم")]
         public string UserName { get; set; }
         [Required(ErrorMessage = "يرجى ارحاع تاريخ الطلب ")]
-        public DateTime orderDate { get; set; }
+        public String orderDate { get; set; }
         [Required(ErrorMessage = "يرجى ارجاع حالة الطلب")]
         public String orderStatus { get; set; }
 

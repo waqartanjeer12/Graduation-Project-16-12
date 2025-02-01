@@ -4,7 +4,7 @@ public class RegisterDTO
 {
     [Required(ErrorMessage = "الاسم الكامل مطلوب.")]
     [StringLength(100, ErrorMessage = "الاسم الكامل يجب ألا يتجاوز 100 حرف.")]
-    [RegularExpression(@"^[\p{L}0-9]+([\s_\-][\p{L}0-9]+)*$", ErrorMessage = "Name must consist of letters, numbers, and optionally one of '-', '_', or space between words without repetition.")]
+    [RegularExpression(@"^[\p{L}0-9]+([\s_\-][\p{L}0-9]+)*$", ErrorMessage = "يجب أن يتكون الاسم من حروف وأرقام، مع السماح باستخدام المسافات أو \"-_\" للفصل بين الكلمات.")]
     public string Name { get; set; }
 
     [Required(ErrorMessage = "البريد الإلكتروني مطلوب.")]

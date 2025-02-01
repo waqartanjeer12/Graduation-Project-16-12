@@ -731,6 +731,7 @@ namespace ECommerceInfrastructure.Repositories
                 .Where(p => words.Any(word => p.Name.Contains(word)) || words.Any(word => p.Description.Contains(word)))
                 .Select(p => new ProductReadForSearchDTO
                 {
+                    ProductId = p.Id,
                     Name = p.Name,
                     Description = p.Description,
                     CategoryName = p.Category.Name,
@@ -738,8 +739,10 @@ namespace ECommerceInfrastructure.Repositories
                     AdditionalImageUrls = p.AdditionalImages.Select(ai => ai.ImageUrl).ToList(),
                     Price = p.Price,
                     OriginalPrice = p.OriginalPrice,
-                    ColorDetails = p.Colors.Select(c => new ColorReadForUserDTO
+                    Inventory = p.Inventory,
+                    ColorDetails = p.Colors.Select(c => new ColorReadDTO
                     {
+                        Id = c.Color.Id,
                         Name = c.Color.Name,
                         ColorImage = c.Color.Image
                     }).ToList()

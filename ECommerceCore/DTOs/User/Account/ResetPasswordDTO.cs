@@ -6,16 +6,17 @@ namespace ECommerceCore.DTOs.User.Account
     {
         [Required]
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "يرجى إدخال كود التحقق المرسل إلى بريدك الإلكتروني.")]
         public string Code { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "يرجى إدخال كلمة المرور الجديدة.")]
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "يجب أن تتراوح كلمة المرور بين 6 و100 حرف.")]
         [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "يرجى تأكيد كلمة المرور.")]
         [DataType(DataType.Password)]
-        [Compare("NewPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "كلمة المرور وتأكيدها غير متطابقين.")]
         public string ConfirmPassword { get; set; }
     }
 }

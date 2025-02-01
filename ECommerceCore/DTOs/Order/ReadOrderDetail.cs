@@ -13,12 +13,12 @@ namespace ECommerceCore.DTOs.Order
         [Required(ErrorMessage = " رقم الطلب مطلوب")]
         public int OrderNumber { get; set; }  // Updated property name to OrderId
         [Required(ErrorMessage = "يرجى ارحاع تاريخ الطلب ")]
-        public DateTime orderDate { get; set; }
+        public String orderDate { get; set; }
         [Required(ErrorMessage = "يرجى ارجاع حالة الطلب")]
         public String orderStatus { get; set; }
-        
-       
-       
+
+
+
         [Required(ErrorMessage = "يرجى ارجاع المنتجات")]
         public List<OrderProducts> OrderProducts { get; set; }
 

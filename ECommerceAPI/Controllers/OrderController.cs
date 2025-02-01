@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ECommerceCore.DTOs.Order;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace ECommerceAPI.Controllers
 {
@@ -17,6 +18,8 @@ namespace ECommerceAPI.Controllers
         {
             _repository = repository;
         }
+
+
 
         [HttpPost("create")]
         [Authorize(Roles = "User")]
@@ -44,9 +47,9 @@ namespace ECommerceAPI.Controllers
             return Ok(new { message = "تم انشاء الطلب بنجاح" });
         }
 
-       
 
-   
+
+
 
         [HttpGet("{orderId}/order-details")]
         [Authorize(Roles = "User")]
@@ -69,12 +72,20 @@ namespace ECommerceAPI.Controllers
 
             return Ok(orderDetail);
         }
-
-        [HttpGet("user/{userId}/orders")]
+        [HttpGet("orders")]
         [Authorize(Roles = "User")]
-        public async Task<IActionResult> GetUserOrdersByUserId(int userId)
+        public async Task<IActionResult> GetUserOrdersByEmail()
         {
-            var orders = await _repository.GetUserOrdersByUserIdAsync(userId);
+            // الحصول على الـ email من Claims في التوكن
+            var email = User.FindFirst(ClaimTypes.Email)?.Value;
+
+            if (email == null)
+            {
+                return Unauthorized(new { message = "Email not found in token." });
+            }
+
+            // استرجاع الطلبات باستخدام الـ email من التوكن
+            var orders = await _repository.GetUserOrdersByEmailAsync(email);
 
             if (orders == null || !orders.Any())
             {
@@ -91,6 +102,8 @@ namespace ECommerceAPI.Controllers
 
             return Ok(orders);
         }
+
+
 
         [HttpGet("admin/all-user-orders")]
         [Authorize(Roles = "Admin")]
@@ -159,5 +172,25 @@ namespace ECommerceAPI.Controllers
 
             return Ok(new { Message = "تم تحديث حالة الطلب بنجاح" });
         }
+
+        [HttpDelete("api/order/{orderId}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteOrder(int orderId)
+        {
+            var result = await _repository.DeleteOrderByIdAsync(orderId);
+
+            if (result != null)
+            {
+                return BadRequest(result); // في حال حدوث أخطاء أثناء الحذف
+            }
+
+            return NoContent(); // إذا تم الحذف بنجاح
+        }
+
+
     }
+
+
+
+
 }

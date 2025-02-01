@@ -10,10 +10,12 @@ namespace ECommerceCore.DTOs.Order
 {
     public class ReadUserOrders
     {
+        public int OrderId { get; set; }
+
         [Required(ErrorMessage = " رقم الطلب مطلوب")]
         public int OrderNumber { get; set; }  // Updated property name to OrderId
         [Required(ErrorMessage = "يرجى ارحاع تاريخ الطلب ")]
-        public DateTime orderDate { get; set; }
+        public String orderDate { get; set; }
         [Required(ErrorMessage = "يرجى ارجاع حالة الطلب")]
         public String orderStatus { get; set; }
         [Required(ErrorMessage = "يرجى ارجاع تفاصيل حالة الطلب")]
@@ -22,6 +24,6 @@ namespace ECommerceCore.DTOs.Order
         [Precision(18, 2)]
         [Required(ErrorMessage = "  يرجى ارجاع السعر الكلي للطلب")]
         public decimal orderTotalPrice { get; set; }
-       
+
     }
 }

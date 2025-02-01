@@ -8,12 +8,15 @@ namespace ECommerceInfrastructure.Repositories
     public interface IOrderRepository
     {
         Task<Dictionary<string, string[]>> CreateOrderAsync(CreateOrderDTO createOrderDTO, ClaimsPrincipal userClaims);
-        
-        
+
+
         Task<ReadOrderDetail> GetOrderDetailsByIdAsync(int orderId);
         Task<Dictionary<string, string[]>> UpdateOrderStatusByIdAsync(int orderId, UpdateOrderStatusDTO updateOrderStatusDTO);
-        Task<List<ReadUserOrders>> GetUserOrdersByUserIdAsync(int userId);
+        Task<List<ReadUserOrders>> GetUserOrdersByEmailAsync(string email);
         Task<List<ReadUserOrdersForAdmin>> GetAllUserOrdersForAdminAsync(); // New method
         Task<ReadOrderDetailsForAdmin> GetOrderDetailsForAdminByIdAsync(int orderId); // New method
+
+        Task<Dictionary<string, string[]>> DeleteOrderByIdAsync(int orderId); // New method
+
     }
 }
